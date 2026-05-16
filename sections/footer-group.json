@@ -1,1 +1,348 @@
-{"type":"footer","name":"t:names.footer","sections":{"footer":{"type":"footer","blocks":{"text_brand_tagline":{"type":"text","name":"t:names.text","settings":{"text":"<h5>Pankui</h5><p>Considered storage for the everyday kitchen. Designed in Bengaluru, built to outlast the trend cycle.</p>","width":"100%","max_width":"normal","alignment":"left","type_preset":"custom","font":"var(--font-heading--family)","font_size":"1rem","line_height":"loose","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"menu_hBUfAA":{"type":"menu","name":"t:names.menu","settings":{"menu":"footer","heading":"Shop","menu_spacing":12,"show_as_accordion":false,"accordion_icon":"caret","accordion_dividers":false,"inherit_color_scheme":true,"color_scheme":"","heading_preset":"h5","link_preset":"paragraph","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"text_help":{"type":"text","name":"t:names.text","settings":{"text":"<h5>Help</h5><p>Shipping &amp; returns<br>Care &amp; cleaning<br>Track your order<br>Contact us</p>","width":"100%","max_width":"normal","alignment":"left","type_preset":"paragraph","font":"var(--font-body--family)","font_size":"0.875rem","line_height":"loose","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"email_signup_YEP4UY":{"type":"email-signup","name":"t:names.email_signup","settings":{"width":"fill","custom_width":100,"inherit_color_scheme":true,"color_scheme":"","heading":"Join the Pankui kitchen list","heading_preset":"h5","border_style":"bottom","border_width":1,"border_radius":0,"input_type_preset":"paragraph","style_class":"link","display_type":"text","label":"Subscribe","integrated_button":true,"button_type_preset":"h5","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["text_brand_tagline","menu_hBUfAA","text_help","email_signup_YEP4UY"],"name":"t:names.footer","settings":{"section_width":"page-width","gap":32,"color_scheme":"scheme-1","padding-block-start":80,"padding-block-end":48}},"utilities":{"type":"footer-utilities","blocks":{"footer_copyright_YdKQ3x":{"type":"footer-copyright","name":"t:names.copyright","settings":{"show_powered_by":false,"font_size":"0.75rem","case":"none"},"blocks":{}},"footer_policy_list_ErQM9U":{"type":"footer-policy-list","name":"t:names.policy_list","settings":{"font_size":"0.75rem","case":"none"},"blocks":{}},"social_links_W6LiWP":{"type":"social-links","name":"t:names.social_media_links","settings":{"facebook_url":"","instagram_url":"https:\/\/www.instagram.com","youtube_url":"","tiktok_url":"","twitter_url":"","threads_url":"","linkedin_url":"","bluesky_url":"","snapchat_url":"","pinterest_url":"","tumblr_url":"","vimeo_url":"","custom_url":""},"blocks":{}}},"block_order":["footer_copyright_YdKQ3x","footer_policy_list_ErQM9U","social_links_W6LiWP"],"settings":{"section_width":"page-width","gap":24,"divider_thickness":1,"color_scheme":"scheme-1","padding-block-start":16,"padding-block-end":24}}},"order":["footer","utilities"]}
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "newsletter_cta": {
+      "type": "section",
+      "blocks": {
+        "newsletter_eyebrow": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<h5>Stay close</h5>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.6875rem",
+            "line_height": "loose",
+            "letter_spacing": "loose",
+            "case": "uppercase",
+            "wrap": "pretty",
+            "color": "var(--color-primary)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "newsletter_heading": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<h3>Join the Pankui list</h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.5rem",
+            "line_height": "tight",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "balance",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "newsletter_subhead": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>New arrivals, restocks, and the occasional shelf-styling tip. No spam, just kitchen things.</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "0.8125rem",
+            "line_height": "loose",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "newsletter_signup": {
+          "type": "email-signup",
+          "name": "t:names.email_signup",
+          "settings": {
+            "width": "custom",
+            "custom_width": 30,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "heading": "",
+            "heading_preset": "h5",
+            "border_style": "all",
+            "border_width": 1,
+            "border_radius": 0,
+            "input_type_preset": "paragraph",
+            "style_class": "button",
+            "display_type": "text",
+            "label": "Subscribe",
+            "integrated_button": true,
+            "button_type_preset": "h5",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["newsletter_eyebrow", "newsletter_heading", "newsletter_subhead", "newsletter_signup"],
+      "name": "Newsletter",
+      "settings": {
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height_custom": 40,
+        "color_scheme": "scheme-4",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "col_purchase_guide": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<h5>Purchase guide</h5><p><a href=\"/pages/faq\">FAQ</a><br><a href=\"/account/orders\">Track order</a><br><a href=\"/policies/refund-policy\">Return policy</a><br><a href=\"/pages/care\">Care guides</a><br><a href=\"/policies/shipping-policy\">Shipping policy</a></p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.8125rem",
+            "line_height": "loose",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "col_company_info": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<h5>Company info</h5><p><a href=\"/pages/about\">About us</a><br><a href=\"/policies/terms-of-service\">Terms of service</a><br><a href=\"/policies/privacy-policy\">Privacy policy</a><br><a href=\"/blogs/news\">News</a><br><a href=\"/pages/contact\">Contact us</a></p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.8125rem",
+            "line_height": "loose",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "col_contact": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<h5>Contact</h5><p>+91 63529 06701<br>hello@pankui.in<br>BTM Layout, Bengaluru<br>Karnataka, India</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.8125rem",
+            "line_height": "loose",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "col_follow": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 16,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "follow_heading": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h5>Follow</h5>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.6875rem",
+                "line_height": "loose",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "follow_social": {
+              "type": "social-links",
+              "name": "t:names.social_media_links",
+              "settings": {
+                "facebook_url": "",
+                "instagram_url": "https://www.instagram.com",
+                "youtube_url": "",
+                "tiktok_url": "",
+                "twitter_url": "",
+                "threads_url": "",
+                "linkedin_url": "",
+                "bluesky_url": "",
+                "snapchat_url": "",
+                "pinterest_url": "https://www.pinterest.com",
+                "tumblr_url": "",
+                "vimeo_url": "",
+                "custom_url": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["follow_heading", "follow_social"]
+        }
+      },
+      "block_order": ["col_purchase_guide", "col_company_info", "col_contact", "col_follow"],
+      "name": "t:names.footer",
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+        "padding-block-start": 54,
+        "padding-block-end": 32
+      }
+    },
+    "utilities": {
+      "type": "footer-utilities",
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright",
+          "name": "t:names.copyright",
+          "settings": {
+            "show_powered_by": false,
+            "font_size": "0.6875rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "policy_list": {
+          "type": "footer-policy-list",
+          "name": "t:names.policy_list",
+          "settings": {
+            "font_size": "0.6875rem",
+            "case": "none"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["copyright", "policy_list"],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "divider_thickness": 1,
+        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+        "padding-block-start": 20,
+        "padding-block-end": 28
+      }
+    }
+  },
+  "order": ["newsletter_cta", "footer", "utilities"]
+}

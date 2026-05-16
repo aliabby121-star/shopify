@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" fill="#EAE0CB"/>
+  <g transform="translate(400 400) scale(5.2) translate(-55 -62)" stroke="#1A1A1A" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="20" y="34" width="20" height="60" stroke-width="1.5"/>
+    <rect x="45" y="30" width="20" height="64" stroke-width="1.5"/>
+    <rect x="70" y="36" width="20" height="58" stroke-width="1.5"/>
+    <rect x="19" y="30" width="22" height="6" fill="#1A1A1A" stroke="none"/>
+    <rect x="44" y="26" width="22" height="6" fill="#1A1A1A" stroke="none"/>
+    <rect x="69" y="32" width="22" height="6" fill="#1A1A1A" stroke="none"/>
+    <text x="30" y="68" font-family="Georgia, serif" font-size="6" fill="#1A1A1A" text-anchor="middle" font-style="italic" stroke="none">TEA</text>
+    <text x="55" y="68" font-family="Georgia, serif" font-size="6" fill="#1A1A1A" text-anchor="middle" font-style="italic" stroke="none">SUGAR</text>
+    <text x="80" y="68" font-family="Georgia, serif" font-size="5" fill="#1A1A1A" text-anchor="middle" font-style="italic" stroke="none">COFFEE</text>
+  </g>
+</svg>
