@@ -39,7 +39,7 @@
         "c2": { "type": "card", "settings": { "title": "FRIDGE CONTAINERS", "shape": "wide-jar", "link": "shopify://collections/fridge-containers" } },
         "c3": { "type": "card", "settings": { "title": "STORAGE SETS", "shape": "canister", "link": "shopify://collections/storage-sets" } },
         "c4": { "type": "card", "settings": { "title": "MODULAR CONTAINERS", "shape": "wide-jar", "link": "shopify://collections/modular-containers" } },
-        "c5": { "type": "card", "settings": { "title": "TEA, COFFEE & SUGAR SETS", "shape": "canister", "link": "shopify://collections/tea-sugar-coffee" } },
+        "c5": { "type": "card", "settings": { "title": "HOME & KITCHEN", "shape": "canister", "link": "shopify://collections/all" } },
         "c6": { "type": "card", "settings": { "title": "KITCHEN ORGANIZERS", "shape": "spice-rack", "link": "shopify://collections/organisers" } }
       },
       "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],

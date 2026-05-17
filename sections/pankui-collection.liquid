@@ -1,14 +1,23 @@
 {{ 'pankui.css' | asset_url | stylesheet_tag }}
 
-{%- assign products = 'canister|Tea Canister – Small|TEA|₹599,canister|Tea Canister – Large|TEA|₹699,canister|Sugar Canister|SUGAR|₹649,canister|Coffee Canister|COFFEE|₹699,canister|Masala Chai Jar|CHAI|₹549,wide-jar|Tea, sugar & coffee set||₹1,799' | split: ',' -%}
+{%- liquid
+  assign coll = collection
+  assign coll_title = coll.title | default: 'Home & Kitchen'
+  assign coll_desc = coll.description | default: 'Premium airtight containers and kitchen organizers designed for everyday Indian homes.'
+  assign coll_handle = coll.handle | default: 'all'
+-%}
+
+{%- assign placeholder_products = 'wide-jar|Air-Tight Storage Containers Set||₹499,wide-jar|Fridge Containers (6 Pack)||₹699,canister|Glass Tea & Sugar Canisters||₹349,spice-rack|Bamboo Chopping Board||₹349,canister|Ceramic Spice Jars||₹249,wide-jar|Modular Pantry Set||₹899' | split: ',' -%}
 
 <section class="pk pk-page">
   <div class="pk-wrap">
-    <nav class="pk-breadcrumb"><a href="/">Home</a> / <a href="/collections">Shop</a> / Tea, Sugar &amp; Coffee</nav>
+    <nav class="pk-breadcrumb">
+      <a href="/">Home</a> / <a href="/collections">Shop</a> / {{ coll_title }}
+    </nav>
 
     <header class="pk-coll-head">
-      <h1>Tea, Sugar &amp; Coffee</h1>
-      <p>Beautifully crafted containers to keep your tea, sugar, coffee and more fresh, organized and easy to reach.</p>
+      <h1>{{ coll_title }}</h1>
+      <p>{{ coll_desc }}</p>
     </header>
 
     <div class="pk-coll-toolbar">
@@ -17,14 +26,28 @@
     </div>
 
     <div class="pk-product-grid">
-      {%- for entry in products -%}
-        {%- assign parts = entry | split: '|' -%}
-        <a href="/products/sample" class="pk-product-card">
-          {%- render 'pankui-placeholder', shape: parts[0], label: parts[2] -%}
-          <span class="pk-product-card__title">{{ parts[1] }}</span>
-          <span class="pk-product-card__price">{{ parts[3] }}</span>
-        </a>
-      {%- endfor -%}
+      {%- if coll.products.size > 0 -%}
+        {%- for product in coll.products -%}
+          <a href="{{ product.url }}" class="pk-product-card">
+            {%- if product.featured_image -%}
+              <div class="pk-placeholder"><img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:cover"></div>
+            {%- else -%}
+              {%- render 'pankui-placeholder', shape: 'canister' -%}
+            {%- endif -%}
+            <span class="pk-product-card__title">{{ product.title }}</span>
+            <span class="pk-product-card__price">{{ product.price | money }}</span>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for entry in placeholder_products -%}
+          {%- assign parts = entry | split: '|' -%}
+          <a href="/collections/all" class="pk-product-card">
+            {%- render 'pankui-placeholder', shape: parts[0] -%}
+            <span class="pk-product-card__title">{{ parts[1] }}</span>
+            <span class="pk-product-card__price">{{ parts[3] }}</span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 </section>
