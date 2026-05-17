@@ -8,10 +8,9 @@
 <header class="pk pk-topnav">
   <div class="pk-topnav__row">
     <div class="pk-topnav__left">
-      {%- comment -%} Hamburger button — visible only on mobile (CSS handles it) {%- endcomment -%}
-      <button type="button" class="pk-topnav__icon" aria-label="Open menu" aria-controls="pk-drawer" data-pk-drawer-open>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
+      <a href="/search" class="pk-topnav__icon" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
     </div>
 
     <a href="/" class="pk-topnav__center" aria-label="{{ shop.name }}">
@@ -34,9 +33,9 @@
 </header>
 
 {%- comment -%}
-  Inline nav row (desktop only — hidden on mobile via CSS).
-  Source order: Shopify navigation menu (Admin → Online Store → Navigation) when present;
-  otherwise falls back to the section blocks below so it still renders before setup.
+  Full navigation menu — always visible on desktop AND mobile (no hamburger).
+  Source: Shopify navigation menu (Admin → Online Store → Navigation) when present;
+  falls back to the section blocks below.
 {%- endcomment -%}
 <nav class="pk pk-topnav__menu" aria-label="Primary">
   <div class="pk-topnav__menu-row">
@@ -65,74 +64,6 @@
     {%- endif -%}
   </div>
 </nav>
-
-{%- comment -%} Off-canvas drawer (mobile menu — triggered by hamburger) {%- endcomment -%}
-<div id="pk-drawer" class="pk-drawer pk" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
-  <div class="pk-drawer__overlay" data-pk-drawer-close></div>
-  <aside class="pk-drawer__panel">
-    <div class="pk-drawer__head">
-      <span class="pk-drawer__brand">{{ section.settings.brand }}</span>
-      <button type="button" class="pk-drawer__close" aria-label="Close menu" data-pk-drawer-close>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-
-    <ul class="pk-drawer__nav">
-      {%- if menu and menu.links.size > 0 -%}
-        {%- for link in menu.links -%}
-          <li>
-            <a href="{{ link.url }}" class="{% if link.active %}is-active{% endif %}">{{ link.title }}</a>
-          </li>
-        {%- endfor -%}
-      {%- else -%}
-        {%- for block in section.blocks -%}
-          {%- assign tab_link = block.settings.link | default: '/' -%}
-          {%- assign is_active = false -%}
-          {%- if tab_link == '/' and current_path == '/' -%}
-            {%- assign is_active = true -%}
-          {%- elsif tab_link != '/' and current_path contains tab_link -%}
-            {%- assign is_active = true -%}
-          {%- endif -%}
-          <li>
-            <a href="{{ tab_link }}" class="{% if is_active %}is-active{% endif %}">{{ block.settings.label }}</a>
-          </li>
-        {%- endfor -%}
-      {%- endif -%}
-      <li><a href="{{ routes.account_url }}">My Account</a></li>
-      <li><a href="/cart">Cart</a></li>
-    </ul>
-
-    <div class="pk-drawer__foot">
-      Need help? <a href="mailto:hello@pankui.in">hello@pankui.in</a>
-    </div>
-  </aside>
-</div>
-
-<script>
-  (function () {
-    var drawer = document.getElementById('pk-drawer');
-    if (!drawer) return;
-    var openBtns = document.querySelectorAll('[data-pk-drawer-open]');
-    var closeEls = drawer.querySelectorAll('[data-pk-drawer-close]');
-
-    function openDrawer() {
-      drawer.classList.add('is-open');
-      drawer.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('pk-drawer-open');
-    }
-    function closeDrawer() {
-      drawer.classList.remove('is-open');
-      drawer.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('pk-drawer-open');
-    }
-
-    openBtns.forEach(function (b) { b.addEventListener('click', openDrawer); });
-    closeEls.forEach(function (b) { b.addEventListener('click', closeDrawer); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
-    });
-  })();
-</script>
 
 {% schema %}
 {

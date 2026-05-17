@@ -706,16 +706,21 @@ body.pk-drawer-open { overflow: hidden; }
   .pk-coll-filters { background: var(--pk-bg-soft); padding: 18px; border-radius: 6px; }
 }
 
-/* ----- Header: hamburger only on mobile, inline menu only on desktop ----- */
-@media (min-width: 901px) {
-  /* Desktop: hide hamburger button entirely */
-  [data-pk-drawer-open] { display: none; }
-}
+/* ----- Header: nav always visible (no hamburger), horizontal scroll on small screens ----- */
 @media (max-width: 900px) {
-  /* Mobile: hide the inline horizontal menu row, hamburger drawer takes over */
-  .pk-topnav__menu { display: none; }
-  /* Tighten header padding on small screens */
   .pk-topnav { padding-inline: 18px; }
   .pk-topnav__brand { font-size: 1.5rem; }
   .pk-topnav__tagline { font-size: 0.5625rem; }
+  .pk-topnav__menu { padding: 12px 16px 16px; }
+  .pk-topnav__menu-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 24px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pk-topnav__menu-row::-webkit-scrollbar { display: none; }
+  .pk-topnav__tab { white-space: nowrap; font-size: 0.875rem; flex-shrink: 0; }
 }
