@@ -1,7 +1,7 @@
 {{ 'pankui.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%} Default placeholder products if no blocks configured {%- endcomment -%}
-{%- assign defaults = 'canister|Universal Wall Phone Holder|199|299|wide-jar|Air-Tight Storage Containers Set|499|799|spice-rack|Bamboo Chopping Board|349|549|wide-jar|Fridge Containers (6 Pack)|699|1199|spice-rack|Stainless Steel Masala Box|449|699|canister|Glass Tea & Sugar Canisters|349|499|wide-jar|Modular Pantry Set|899|1299|canister|Ceramic Spice Jars|249|399' | split: ',' -%}
+{%- assign defaults = 'wide-jar|Air-Tight Storage Containers Set|499|799,wide-jar|Fridge Containers (6 Pack)|699|1199,canister|Glass Tea & Sugar Canisters|349|499' | split: ',' -%}
 
 <section class="pk pk-products">
   <div class="pk-products__head">
@@ -9,7 +9,7 @@
     <h2 class="pk-products__title">{{ section.settings.heading }}</h2>
   </div>
 
-  <div class="pk-products__grid">
+  <div class="pk-products__grid pk-products__grid--3">
     {%- if section.blocks.size > 0 -%}
       {%- for block in section.blocks -%}
         <a href="{{ block.settings.link | default: '#' }}" class="pk-pcard" {{ block.shopify_attributes }}>
