@@ -1,0 +1,43 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign breakdown = '5|92,4|6,3|1,2|1,1|0' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <h1 class="pk-account__title" style="margin-bottom:28px;">Customer reviews</h1>
+
+    <div class="pk-reviews">
+      <div>
+        <div class="pk-reviews__score">4.9</div>
+        <div class="pk-reviews__stars">★★★★★</div>
+        <div class="pk-reviews__count">from 142 reviews</div>
+        <button type="button" class="pk-btn pk-btn--tan pk-reviews__cta">Write a review</button>
+      </div>
+
+      <div class="pk-reviews__bars">
+        {%- for row in breakdown -%}
+          {%- assign parts = row | split: '|' -%}
+          <div class="pk-reviews__bar">
+            <span>{{ parts[0] }} ★</span>
+            <span class="pk-reviews__bar-track"><span class="pk-reviews__bar-fill" style="width: {{ parts[1] }}%;"></span></span>
+            <span>{{ parts[1] }}%</span>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="pk-reviews__list">
+        <article class="pk-review">
+          <div class="pk-review__head">
+            <span><strong class="pk-review__name">Priya M.</strong> &middot; Verified buyer</span>
+            <span>May 11 2025</span>
+          </div>
+          <p class="pk-review__body">&ldquo;Finally, a spice rack that doesn't look like it belongs in a hostel.&rdquo;</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui reviews", "settings": [], "presets": [{ "name": "Pankui reviews" }] }
+{% endschema %}

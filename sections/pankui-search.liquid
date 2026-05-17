@@ -1,0 +1,34 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign query = 'spice container' -%}
+{%- assign products = 'spice-rack|4-Section spice container|From ₹1,169,spice-rack|8-Section spice container|From ₹1,349,canister|Round spice container|From ₹899,canister|Spice canister – Small|From ₹399,canister|Spice canister – Tall|From ₹499,wide-jar|Spice tray set|From ₹1,199' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <nav class="pk-breadcrumb"><a href="/">Home</a> / Search results for &ldquo;{{ query }}&rdquo;</nav>
+
+    <header class="pk-search-head">
+      <h1>Search results for &ldquo;{{ query }}&rdquo;</h1>
+    </header>
+
+    <div class="pk-coll-toolbar">
+      <button class="pk-chip" type="button">Sort by: Featured ▾</button>
+      <button class="pk-chip" type="button">Filter ⌄</button>
+    </div>
+
+    <div class="pk-product-grid">
+      {%- for entry in products -%}
+        {%- assign parts = entry | split: '|' -%}
+        <a href="/products/sample" class="pk-product-card">
+          {%- render 'pankui-placeholder', shape: parts[0] -%}
+          <span class="pk-product-card__title">{{ parts[1] }}</span>
+          <span class="pk-product-card__price">{{ parts[2] }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui search", "settings": [], "presets": [{ "name": "Pankui search" }] }
+{% endschema %}

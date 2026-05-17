@@ -1,0 +1,70 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign items = 'spice-rack|4-Section spice container|1169,canister|Tea Canister – Large|699|TEA,wide-jar|6-Piece fridge storage set|1349' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <div class="pk-cart__head">
+      <h1>Your cart</h1>
+      <span class="pk-cart__count">(3)</span>
+    </div>
+
+    <table class="pk-cart__table">
+      <thead>
+        <tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        {%- assign subtotal = 0 -%}
+        {%- for entry in items -%}
+          {%- assign parts = entry | split: '|' -%}
+          {%- assign price = parts[2] | times: 1 -%}
+          {%- assign subtotal = subtotal | plus: price -%}
+          <tr>
+            <td>
+              <div class="pk-cart__product">
+                <div class="pk-cart__thumb">{%- render 'pankui-placeholder', shape: parts[0], label: parts[3] -%}</div>
+                <span>{{ parts[1] }}</span>
+              </div>
+            </td>
+            <td>₹{{ price }}</td>
+            <td>
+              <div class="pk-product__qty" style="margin: 0;">
+                <button type="button" data-step="-1">−</button>
+                <input type="text" value="1" inputmode="numeric">
+                <button type="button" data-step="1">+</button>
+              </div>
+            </td>
+            <td>₹{{ price }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    <div class="pk-cart__summary">
+      <div class="pk-cart__subtotal"><span>Subtotal</span><strong>₹{{ subtotal }}</strong></div>
+      <p class="pk-cart__note">Shipping and taxes calculated at checkout</p>
+    </div>
+
+    <div class="pk-cart__actions">
+      <a href="/collections/all" class="pk-link">← Continue shopping</a>
+      <a href="/pages/checkout" class="pk-btn pk-btn--tan">Proceed to checkout</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.pk-product__qty').forEach(function (group) {
+    var input = group.querySelector('input');
+    group.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = parseInt(input.value, 10) || 1;
+        v += parseInt(b.dataset.step, 10);
+        input.value = Math.max(1, v);
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{ "name": "Pankui cart", "settings": [], "presets": [{ "name": "Pankui cart" }] }
+{% endschema %}

@@ -1,73 +1,53 @@
-{% comment %} Pankui — customer login / create account {% endcomment %}
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
 
-<div class="pankui-auth page-width">
-  <div class="pankui-auth__panel">
-    <h1 class="pankui-auth__title">Login</h1>
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <div class="pk-auth">
+      <div class="pk-auth__panel">
+        <h1>Login</h1>
+        {%- form 'customer_login', class: 'pk-auth__form' -%}
+          {%- if form.errors -%}
+            <p class="pk-auth__hint" style="color:#b3261e;">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+          <div class="pk-field">
+            <label for="LoginEmail">Email address</label>
+            <input class="pk-input" id="LoginEmail" type="email" name="customer[email]" autocomplete="email" required>
+          </div>
+          <div class="pk-field">
+            <label for="LoginPassword">Password</label>
+            <input class="pk-input" id="LoginPassword" type="password" name="customer[password]" autocomplete="current-password" required>
+          </div>
+          <a class="pk-auth__forgot" href="{{ routes.account_recover_url }}">Forgot password?</a>
+          <button type="submit" class="pk-btn pk-btn--primary pk-btn--block">Login</button>
+        {%- endform -%}
 
-    {%- form 'customer_login', class: 'pankui-auth__form' -%}
-      {%- if form.errors -%}
-        <div class="pankui-auth__errors">{{ form.errors | default_errors }}</div>
-      {%- endif -%}
+        <div class="pk-auth__divider"><span>or</span></div>
+        <button type="button" class="pk-auth__social">G &nbsp; Continue with Google</button>
+        <button type="button" class="pk-auth__social"> &nbsp; Continue with Apple</button>
+      </div>
 
-      <label for="CustomerEmail">Email address</label>
-      <input type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" required>
-
-      <label for="CustomerPassword">Password</label>
-      <input type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password" required>
-
-      <a class="pankui-auth__link" href="{{ routes.account_recover_url }}">Forgot password?</a>
-
-      <button type="submit" class="button pankui-auth__submit">Login</button>
-    {%- endform -%}
-
-    <p class="pankui-auth__divider"><span>or</span></p>
-
-    {% comment %} Shopify renders Shop Pay / social auth via theme settings; these are visual placeholders matching the mockup. {% endcomment %}
-    <button type="button" class="button button--secondary pankui-auth__social" disabled>Continue with Google</button>
-    <button type="button" class="button button--secondary pankui-auth__social" disabled>Continue with Apple</button>
+      <div class="pk-auth__panel">
+        <h1>Create account</h1>
+        {%- form 'create_customer', class: 'pk-auth__form' -%}
+          {%- if form.errors -%}
+            <p class="pk-auth__hint" style="color:#b3261e;">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+          <div class="pk-field">
+            <label for="RegName">Full name</label>
+            <input class="pk-input" id="RegName" type="text" name="customer[first_name]" autocomplete="name" required>
+          </div>
+          <div class="pk-field">
+            <label for="RegEmail">Email address</label>
+            <input class="pk-input" id="RegEmail" type="email" name="customer[email]" autocomplete="email" required>
+          </div>
+          <div class="pk-field">
+            <label for="RegPassword">Password</label>
+            <input class="pk-input" id="RegPassword" type="password" name="customer[password]" autocomplete="new-password" required>
+          </div>
+          <button type="submit" class="pk-btn pk-btn--primary pk-btn--block">Sign up</button>
+        {%- endform -%}
+        <p class="pk-auth__hint">Already have an account? <a href="#LoginEmail">Login</a></p>
+      </div>
+    </div>
   </div>
-
-  <div class="pankui-auth__panel">
-    <h2 class="pankui-auth__title">Create account</h2>
-
-    {%- form 'create_customer', class: 'pankui-auth__form' -%}
-      {%- if form.errors -%}
-        <div class="pankui-auth__errors">{{ form.errors | default_errors }}</div>
-      {%- endif -%}
-
-      <label for="RegisterFirstName">Full name</label>
-      <input type="text" name="customer[first_name]" id="RegisterFirstName" autocomplete="name" required>
-
-      <label for="RegisterEmail">Email address</label>
-      <input type="email" name="customer[email]" id="RegisterEmail" autocomplete="email" required>
-
-      <label for="RegisterPassword">Password</label>
-      <input type="password" name="customer[password]" id="RegisterPassword" autocomplete="new-password" required>
-
-      <button type="submit" class="button pankui-auth__submit">Sign up</button>
-    {%- endform -%}
-
-    <p class="pankui-auth__hint">Already have an account? <a href="#CustomerEmail">Login</a></p>
-  </div>
-</div>
-
-<style>
-  .pankui-auth {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    padding-block: 4rem;
-  }
-  .pankui-auth__panel { display: flex; flex-direction: column; gap: 0.75rem; }
-  .pankui-auth__title { font-size: 1.5rem; margin: 0 0 1rem; }
-  .pankui-auth__form { display: flex; flex-direction: column; gap: 0.75rem; }
-  .pankui-auth__form label { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; }
-  .pankui-auth__form input { padding: 0.75rem; border: 1px solid rgba(0,0,0,0.15); background: transparent; }
-  .pankui-auth__link { font-size: 0.75rem; align-self: flex-end; }
-  .pankui-auth__submit { margin-top: 0.5rem; }
-  .pankui-auth__divider { text-align: center; margin: 1.5rem 0; opacity: 0.6; font-size: 0.8125rem; }
-  .pankui-auth__social { margin-bottom: 0.5rem; }
-  .pankui-auth__hint { font-size: 0.8125rem; margin-top: 1rem; }
-  .pankui-auth__errors { color: #b3261e; font-size: 0.8125rem; }
-  @media (max-width: 749px) { .pankui-auth { grid-template-columns: 1fr; gap: 2rem; } }
-</style>
+</section>

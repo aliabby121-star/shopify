@@ -1,0 +1,37 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign topics = 'Orders & Shipping|/policies/shipping-policy,Returns & Refunds|/policies/refund-policy,Products & Care|/pages/about,Payments|/pages/contact,Account & Profile|/account' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <header class="pk-faq__head">
+      <h1>How can we help?</h1>
+    </header>
+
+    <div class="pk-faq__search">
+      <input class="pk-input" type="search" placeholder="Search for answers">
+    </div>
+
+    <div class="pk-faq__body">
+      <div class="pk-faq__topics">
+        <h3>Popular topics</h3>
+        <ul>
+          {%- for entry in topics -%}
+            {%- assign parts = entry | split: '|' -%}
+            <li><a href="{{ parts[1] }}">{{ parts[0] }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <aside class="pk-faq__help">
+        <h3 style="color: var(--pk-ink);">Still need help?</h3>
+        <p>Email us at <a href="mailto:hello@pankui.in">hello@pankui.in</a></p>
+        <p>We usually respond within 24 hours.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui FAQ", "settings": [], "presets": [{ "name": "Pankui FAQ" }] }
+{% endschema %}

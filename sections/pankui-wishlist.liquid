@@ -1,0 +1,52 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign items = 'canister|Tea Canister – Large|699|TEA,spice-rack|4-Section spice container|1169|,spice-rack|8-Section spice container|1349|,canister|Storage jar – Medium|599|' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap" style="max-width: 880px;">
+    <div class="pk-wishlist__head">
+      <h1>My wishlist</h1>
+      <span class="pk-cart__count">({{ items.size }})</span>
+    </div>
+
+    <div data-pk-wishlist>
+      {%- for entry in items -%}
+        {%- assign parts = entry | split: '|' -%}
+        <div class="pk-wishlist__row">
+          <div class="pk-cart__thumb">{%- render 'pankui-placeholder', shape: parts[0], label: parts[3] -%}</div>
+          <div>
+            <div class="pk-wishlist__title">{{ parts[1] }}</div>
+            <div class="pk-wishlist__price">₹{{ parts[2] }}</div>
+          </div>
+          <button type="button" class="pk-btn pk-btn--tan" data-add>Add to cart</button>
+          <span aria-hidden="true">♥</span>
+          <button type="button" class="pk-wishlist__remove" data-remove aria-label="Remove">✕</button>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var KEY = 'pankui:wishlist';
+    function getCount() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '[]').length; } catch (e) { return 0; }
+    }
+    document.querySelectorAll('[data-pk-wishlist] [data-remove]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.closest('.pk-wishlist__row').remove();
+      });
+    });
+    document.querySelectorAll('[data-pk-wishlist] [data-add]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.textContent = 'Added ✓';
+        setTimeout(function () { btn.textContent = 'Add to cart'; }, 1600);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{ "name": "Pankui wishlist", "settings": [], "presets": [{ "name": "Pankui wishlist" }] }
+{% endschema %}

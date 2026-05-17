@@ -1,0 +1,27 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<section class="pk pk-hero">
+  <div class="pk-hero__inner">
+    <p class="pk-eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1 class="pk-hero__brand">{{ section.settings.brand }}</h1>
+    <span class="pk-hero__rule" aria-hidden="true"></span>
+    <p class="pk-hero__tagline">{{ section.settings.tagline }}</p>
+    {%- if section.settings.cta_label != blank -%}
+      <a class="pk-btn pk-btn--primary pk-hero__cta" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pankui hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "a small studio for the Indian kitchen" },
+    { "type": "text", "id": "brand", "label": "Brand", "default": "pankui" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Quiet order for everyday kitchens. Crafted containers designed in Bengaluru, built to last a lifetime." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop the collection" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Pankui hero" }]
+}
+{% endschema %}

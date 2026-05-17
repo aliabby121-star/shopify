@@ -1,0 +1,45 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign categories = 'All Products,Spice Containers,Tea, Sugar & Coffee,Storage Sets,Jars & Canisters,Organisers,New Arrivals,Sale' | split: ',' -%}
+{%- assign products = 'spice-rack|4-Section spice container|From ₹1,169,canister|Tea, sugar & coffee canisters|From ₹1,179,wide-jar|6-Piece fridge storage set|From ₹1,349,canister|Round spice container|From ₹899,wide-jar|Glass storage jar|From ₹449,canister|Sugar canister|From ₹649' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <nav class="pk-breadcrumb"><a href="/">Home</a> / <a href="/collections">Shop</a></nav>
+    <h1 class="pk-shop-all__title">Shop all</h1>
+
+    <div class="pk-shop-all">
+      <aside class="pk-sidebar">
+        <h5>Categories</h5>
+        <ul>
+          {%- for cat in categories -%}
+            {%- assign slug = cat | strip | handle -%}
+            <li><a href="/collections/{{ slug }}" {% if forloop.first %}class="is-active"{% endif %}>{{ cat | strip }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </aside>
+
+      <div>
+        <div class="pk-shop-all__toolbar">
+          <button class="pk-chip" type="button">Sort by: Featured ▾</button>
+          <button class="pk-chip" type="button">Filter ⌄</button>
+        </div>
+
+        <div class="pk-product-grid">
+          {%- for entry in products -%}
+            {%- assign parts = entry | split: '|' -%}
+            <a href="/collections/all" class="pk-product-card">
+              {%- render 'pankui-placeholder', shape: parts[0] -%}
+              <span class="pk-product-card__title">{{ parts[1] }}</span>
+              <span class="pk-product-card__price">{{ parts[2] }}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui shop all", "settings": [], "presets": [{ "name": "Pankui shop all" }] }
+{% endschema %}

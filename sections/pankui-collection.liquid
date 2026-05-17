@@ -1,0 +1,34 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign products = 'canister|Tea Canister – Small|TEA|₹599,canister|Tea Canister – Large|TEA|₹699,canister|Sugar Canister|SUGAR|₹649,canister|Coffee Canister|COFFEE|₹699,canister|Masala Chai Jar|CHAI|₹549,wide-jar|Tea, sugar & coffee set||₹1,799' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <nav class="pk-breadcrumb"><a href="/">Home</a> / <a href="/collections">Shop</a> / Tea, Sugar &amp; Coffee</nav>
+
+    <header class="pk-coll-head">
+      <h1>Tea, Sugar &amp; Coffee</h1>
+      <p>Beautifully crafted containers to keep your tea, sugar, coffee and more fresh, organized and easy to reach.</p>
+    </header>
+
+    <div class="pk-coll-toolbar">
+      <button class="pk-chip" type="button">Sort by: Featured ▾</button>
+      <button class="pk-chip" type="button">Filter ⌄</button>
+    </div>
+
+    <div class="pk-product-grid">
+      {%- for entry in products -%}
+        {%- assign parts = entry | split: '|' -%}
+        <a href="/products/sample" class="pk-product-card">
+          {%- render 'pankui-placeholder', shape: parts[0], label: parts[2] -%}
+          <span class="pk-product-card__title">{{ parts[1] }}</span>
+          <span class="pk-product-card__price">{{ parts[3] }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui collection", "settings": [], "presets": [{ "name": "Pankui collection" }] }
+{% endschema %}

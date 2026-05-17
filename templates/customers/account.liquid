@@ -1,84 +1,48 @@
-{% comment %} Pankui — account dashboard {% endcomment %}
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
 
-<div class="pankui-account page-width">
-  <aside class="pankui-account__nav">
-    <h5 class="pankui-account__nav-heading">My account</h5>
-    <ul>
-      <li><a href="{{ routes.account_url }}" aria-current="page">Dashboard</a></li>
-      <li><a href="{{ routes.account_url }}/orders">Orders</a></li>
-      <li><a href="/pages/wishlist">Wishlist</a></li>
-      <li><a href="{{ routes.account_addresses_url }}">Addresses</a></li>
-      <li><a href="{{ routes.account_url }}">Account details</a></li>
-      <li><a href="{{ routes.account_logout_url }}">Logout</a></li>
-    </ul>
-  </aside>
+{%- assign orders = 'PKU1024|May 10, 2025|Delivered|2268,PKU0987|Apr 28, 2025|Delivered|1749,PKU0955|Apr 15, 2025|Delivered|699' | split: ',' -%}
 
-  <main class="pankui-account__main">
-    <h1 class="pankui-account__title">Welcome back, {{ customer.first_name | default: customer.name }} &#128075;</h1>
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <div class="pk-account">
+      <aside class="pk-account__nav">
+        <h5>My account</h5>
+        <ul>
+          <li><a href="{{ routes.account_url }}" class="is-active">Dashboard</a></li>
+          <li><a href="{{ routes.account_url }}/orders">Orders</a></li>
+          <li><a href="/pages/wishlist">Wishlist</a></li>
+          <li><a href="{{ routes.account_addresses_url }}">Addresses</a></li>
+          <li><a href="{{ routes.account_url }}">Account details</a></li>
+          <li><a href="{{ routes.account_logout_url }}">Logout</a></li>
+        </ul>
+      </aside>
 
-    <section class="pankui-account__section">
-      <header>
-        <h2>From your orders</h2>
-        <a href="{{ routes.account_url }}/orders" class="pankui-account__link">View all orders</a>
-      </header>
+      <main>
+        <h1 class="pk-account__title">Dashboard</h1>
+        <p class="pk-account__welcome">Welcome back, {{ customer.first_name | default: 'Ananya' }} 👋</p>
 
-      {% paginate customer.orders by 5 %}
-        {%- if customer.orders.size > 0 -%}
-          <table class="pankui-account__orders">
-            <thead>
+        <div class="pk-account__section-head">
+          <h3>From your orders</h3>
+          <a href="{{ routes.account_url }}/orders" class="pk-link" style="font-size:0.75rem;">View all orders</a>
+        </div>
+
+        <table class="pk-account__orders">
+          <tbody>
+            {%- for entry in orders -%}
+              {%- assign parts = entry | split: '|' -%}
               <tr>
-                <th>Order</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Total</th>
+                <td><div class="pk-account__order-thumb">{%- render 'pankui-placeholder', shape: 'canister' -%}</div></td>
+                <td>
+                  <div>Order #{{ parts[0] }}</div>
+                  <small>{{ parts[1] }}</small>
+                </td>
+                <td class="pk-account__status">{{ parts[2] }}</td>
+                <td><strong>₹{{ parts[3] }}</strong></td>
               </tr>
-            </thead>
-            <tbody>
-              {%- for order in customer.orders -%}
-                <tr>
-                  <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
-                  <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
-                  <td>{{ order.fulfillment_status_label }}</td>
-                  <td>{{ order.total_price | money }}</td>
-                </tr>
-              {%- endfor -%}
-            </tbody>
-          </table>
-        {%- else -%}
-          <p class="pankui-account__empty">You haven't placed any orders yet. <a href="/collections/all">Start shopping</a>.</p>
-        {%- endif -%}
-
-        {%- if paginate.pages > 1 -%}
-          <nav class="pankui-account__pagination">{{ paginate | default_pagination }}</nav>
-        {%- endif -%}
-      {% endpaginate %}
-    </section>
-
-    <section class="pankui-account__section">
-      <header><h2>Default address</h2></header>
-      {%- if customer.default_address -%}
-        <address>{{ customer.default_address | format_address }}</address>
-      {%- else -%}
-        <p class="pankui-account__empty">No address on file. <a href="{{ routes.account_addresses_url }}">Add an address</a>.</p>
-      {%- endif -%}
-    </section>
-  </main>
-</div>
-
-<style>
-  .pankui-account { display: grid; grid-template-columns: 220px 1fr; gap: 3rem; padding-block: 3rem; }
-  .pankui-account__nav-heading { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 1rem; }
-  .pankui-account__nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-  .pankui-account__nav a { font-size: 0.875rem; text-decoration: none; }
-  .pankui-account__nav a[aria-current="page"] { font-weight: 600; }
-  .pankui-account__title { font-size: 1.5rem; margin: 0 0 2rem; }
-  .pankui-account__section { margin-bottom: 2.5rem; }
-  .pankui-account__section header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
-  .pankui-account__section h2 { font-size: 1rem; margin: 0; }
-  .pankui-account__link { font-size: 0.75rem; }
-  .pankui-account__orders { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
-  .pankui-account__orders th, .pankui-account__orders td { text-align: left; padding: 0.75rem 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
-  .pankui-account__orders th { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
-  .pankui-account__empty { font-size: 0.875rem; opacity: 0.8; }
-  @media (max-width: 749px) { .pankui-account { grid-template-columns: 1fr; gap: 2rem; } }
-</style>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </div>
+</section>

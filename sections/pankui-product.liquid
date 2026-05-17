@@ -1,0 +1,89 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <nav class="pk-breadcrumb">
+      <a href="/">Home</a> / <a href="/collections">Shop</a> / <a href="/collections/tea-sugar-coffee">Tea, Sugar &amp; Coffee</a> / Tea Canister – Large
+    </nav>
+
+    <div class="pk-product">
+      <div class="pk-product__media">
+        {%- render 'pankui-placeholder', label: 'TEA' -%}
+      </div>
+
+      <div class="pk-product__details">
+        <h1 class="pk-product__title">Tea Canister – Large</h1>
+        <p class="pk-product__price">₹699</p>
+        <p class="pk-product__rating"><span class="pk-stars">★★★★☆</span> 4.0 (16) reviews</p>
+
+        <p class="pk-product__desc">Minimal, airtight and beautifully designed to keep your tea fresher for longer &mdash; easy to clean, easy to love.</p>
+
+        <ul class="pk-product__bullets">
+          <li>High quality ceramic</li>
+          <li>Airtight wooden lid</li>
+          <li>Food safe</li>
+          <li>Easy to clean</li>
+        </ul>
+
+        <div class="pk-product__qty" role="group" aria-label="Quantity">
+          <button type="button" data-step="-1" aria-label="Decrease">−</button>
+          <input type="text" value="1" inputmode="numeric" aria-label="Quantity">
+          <button type="button" data-step="1" aria-label="Increase">+</button>
+        </div>
+
+        <div class="pk-product__buttons">
+          <button type="button" class="pk-btn pk-btn--tan pk-btn--block">Add to cart</button>
+          <button type="button" class="pk-btn pk-btn--primary pk-btn--block">Buy now</button>
+        </div>
+
+        <div class="pk-product__tabs">
+          <div class="pk-product__tabs-nav" role="tablist">
+            <button class="is-active" type="button" data-tab="details">Details</button>
+            <button type="button" data-tab="care">Care</button>
+            <button type="button" data-tab="shipping">Shipping &amp; Returns</button>
+          </div>
+          <div class="pk-product__tab-body" data-tab-body="details">
+            <p>• Dimensions: 10cm x 10cm x 14cm</p>
+            <p>• Capacity: 850 ml</p>
+          </div>
+          <div class="pk-product__tab-body" data-tab-body="care" hidden>
+            <p>Hand wash with a soft cloth and mild soap. Dry the wooden lid separately; avoid prolonged soaking.</p>
+          </div>
+          <div class="pk-product__tab-body" data-tab-body="shipping" hidden>
+            <p>Ships free across India in 3–5 business days. Easy 14-day returns on unopened pieces.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    document.querySelectorAll('.pk-product__qty').forEach(function (group) {
+      var input = group.querySelector('input');
+      group.querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var v = parseInt(input.value, 10) || 1;
+          v += parseInt(b.dataset.step, 10);
+          input.value = Math.max(1, v);
+        });
+      });
+    });
+    document.querySelectorAll('.pk-product__tabs').forEach(function (tabs) {
+      var nav = tabs.querySelectorAll('.pk-product__tabs-nav button');
+      var bodies = tabs.querySelectorAll('[data-tab-body]');
+      nav.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          nav.forEach(function (n) { n.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          bodies.forEach(function (body) { body.hidden = body.dataset.tabBody !== btn.dataset.tab; });
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{ "name": "Pankui product", "settings": [], "presets": [{ "name": "Pankui product" }] }
+{% endschema %}

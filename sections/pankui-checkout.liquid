@@ -1,0 +1,70 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <div class="pk-checkout__steps">
+      <span>1. Cart</span>
+      <span class="is-active">2. Information</span>
+      <span>3. Shipping</span>
+      <span>4. Payment</span>
+    </div>
+
+    <div class="pk-checkout">
+      <form class="pk-checkout__form" onsubmit="return false">
+        <h2>Contact information</h2>
+        <div class="pk-checkout__fields">
+          <div class="pk-field">
+            <label for="ck_email">Email address</label>
+            <input class="pk-input" id="ck_email" type="email" placeholder="Email address">
+          </div>
+          <label class="pk-checkout__check">
+            <input type="checkbox" checked>
+            Email me with news and offers
+          </label>
+        </div>
+
+        <h2 style="margin-top:32px;">Shipping address</h2>
+        <div class="pk-checkout__fields">
+          <div class="pk-field"><label for="ck_name">Full name</label><input class="pk-input" id="ck_name" type="text" placeholder="Full name"></div>
+          <div class="pk-field"><label for="ck_addr">Address</label><input class="pk-input" id="ck_addr" type="text" placeholder="Address"></div>
+          <div class="pk-field"><label for="ck_apt">Apartment, suite, etc. (optional)</label><input class="pk-input" id="ck_apt" type="text" placeholder="Apartment, suite, etc. (optional)"></div>
+          <div class="pk-checkout__row">
+            <div class="pk-field"><label for="ck_city">City</label><input class="pk-input" id="ck_city" type="text" placeholder="City"></div>
+            <div class="pk-field"><label for="ck_pin">Pincode</label><input class="pk-input" id="ck_pin" type="text" placeholder="Pincode"></div>
+          </div>
+          <div class="pk-field"><label for="ck_phone">Phone number</label><input class="pk-input" id="ck_phone" type="tel" placeholder="Phone number"></div>
+        </div>
+
+        <button type="submit" class="pk-btn pk-btn--tan pk-btn--block" style="margin-top:24px;">Continue to shipping</button>
+      </form>
+
+      <aside class="pk-summary">
+        <div class="pk-summary__row">
+          <div class="pk-cart__thumb">{%- render 'pankui-placeholder', shape: 'spice-rack' -%}</div>
+          <div class="pk-summary__info">4-Section spice container</div>
+          <div class="pk-summary__price">₹1,169</div>
+        </div>
+        <div class="pk-summary__row">
+          <div class="pk-cart__thumb">{%- render 'pankui-placeholder', shape: 'canister', label: 'TEA' -%}</div>
+          <div class="pk-summary__info">Tea Canister – Large</div>
+          <div class="pk-summary__price">₹699</div>
+        </div>
+        <div class="pk-summary__row">
+          <div class="pk-cart__thumb">{%- render 'pankui-placeholder', shape: 'wide-jar' -%}</div>
+          <div class="pk-summary__info">6-Piece fridge storage set</div>
+          <div class="pk-summary__price">₹1,349</div>
+        </div>
+
+        <div class="pk-summary__totals">
+          <div><span>Subtotal</span><span>₹3,217</span></div>
+          <div><span>Shipping</span><span>₹99</span></div>
+          <div class="pk-summary__total"><strong>Total</strong><strong>₹3,316</strong></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui checkout", "settings": [], "presets": [{ "name": "Pankui checkout" }] }
+{% endschema %}

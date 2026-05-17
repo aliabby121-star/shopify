@@ -1,0 +1,352 @@
+/* ============================================================
+   Pankui — site-wide custom styles (mockup-faithful build)
+   ============================================================ */
+
+:root {
+  --pk-bg: #f7f1e7;
+  --pk-bg-card: #ece2cf;
+  --pk-bg-soft: #f4ecdf;
+  --pk-ink: #2a2522;
+  --pk-ink-soft: #6b5f54;
+  --pk-line: rgba(42, 37, 34, 0.12);
+  --pk-line-strong: rgba(42, 37, 34, 0.25);
+  --pk-accent: #b8956a;
+  --pk-accent-deep: #8a6a44;
+  --pk-black: #111;
+  --pk-white: #fff;
+  --pk-radius: 4px;
+  --pk-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  --pk-font-heading: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --pk-font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pk-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ----- Resets that scope to pankui pages ----- */
+.pk { color: var(--pk-ink); font-family: var(--pk-font-body); font-size: 14px; line-height: 1.6; }
+.pk *, .pk *::before, .pk *::after { box-sizing: border-box; }
+.pk a { color: inherit; text-decoration: none; }
+.pk a:hover { text-decoration: underline; }
+.pk h1, .pk h2, .pk h3, .pk h4 { font-family: var(--pk-font-heading); font-weight: 400; letter-spacing: -0.005em; margin: 0; }
+.pk h1 { font-size: 1.875rem; }
+.pk h2 { font-size: 1.5rem; }
+.pk h3 { font-size: 1.125rem; }
+.pk h4 { font-size: 0.9375rem; }
+.pk p { margin: 0; }
+.pk small { font-size: 0.75rem; color: var(--pk-ink-soft); }
+.pk em { font-style: italic; }
+
+/* ----- Layout primitives ----- */
+.pk-page { background: var(--pk-bg); padding-block: 36px 64px; }
+.pk-wrap { max-width: 1140px; margin: 0 auto; padding-inline: 32px; }
+.pk-eyebrow { font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pk-ink-soft); }
+.pk-breadcrumb { font-size: 0.75rem; color: var(--pk-ink-soft); margin-bottom: 24px; }
+.pk-breadcrumb a { color: inherit; }
+.pk-breadcrumb a:hover { color: var(--pk-ink); }
+.pk-divider { height: 1px; background: var(--pk-line); margin-block: 24px; }
+.pk-stack > * + * { margin-top: var(--gap, 16px); }
+
+/* ----- Buttons ----- */
+.pk-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font: inherit; cursor: pointer; border: 1px solid transparent;
+  padding: 12px 24px; border-radius: var(--pk-radius);
+  font-size: 0.8125rem; letter-spacing: 0.02em;
+  transition: opacity .15s ease, background .15s ease;
+}
+.pk-btn--primary { background: var(--pk-black); color: var(--pk-white); }
+.pk-btn--primary:hover { opacity: 0.88; }
+.pk-btn--tan { background: var(--pk-accent); color: var(--pk-white); }
+.pk-btn--tan:hover { background: var(--pk-accent-deep); }
+.pk-btn--ghost { background: transparent; border-color: var(--pk-line-strong); color: var(--pk-ink); }
+.pk-btn--ghost:hover { background: rgba(0,0,0,0.04); }
+.pk-btn--block { width: 100%; }
+
+/* ----- Inputs ----- */
+.pk-field { display: flex; flex-direction: column; gap: 6px; }
+.pk-field label { font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pk-ink-soft); }
+.pk-input, .pk-select {
+  font: inherit; padding: 12px 14px; border: 1px solid var(--pk-line-strong);
+  background: var(--pk-white); border-radius: var(--pk-radius); color: var(--pk-ink);
+  width: 100%;
+}
+.pk-input:focus, .pk-select:focus { outline: 2px solid var(--pk-accent); outline-offset: -1px; }
+
+/* ----- Placeholder image (tan canister) ----- */
+.pk-placeholder {
+  aspect-ratio: 1 / 1; background: var(--pk-bg-card); display: grid; place-items: center;
+  border-radius: 2px; overflow: hidden; position: relative;
+}
+.pk-placeholder svg { width: 55%; height: 55%; }
+.pk-placeholder--portrait { aspect-ratio: 3 / 4; }
+.pk-placeholder--wide { aspect-ratio: 4 / 3; }
+
+/* ============================================================
+   01. Hero (homepage)
+   ============================================================ */
+.pk-hero { background: var(--pk-bg-card); padding-block: 88px; text-align: center; }
+.pk-hero__inner { max-width: 520px; margin: 0 auto; padding-inline: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.pk-hero__brand { font-family: var(--pk-font-heading); font-size: 4.75rem; line-height: 1; font-style: italic; letter-spacing: -0.02em; margin: 4px 0; }
+.pk-hero__rule { width: 80px; height: 1px; background: var(--pk-accent); margin-block: 6px; }
+.pk-hero__tagline { font-size: 0.875rem; color: var(--pk-ink-soft); max-width: 360px; }
+.pk-hero__cta { margin-top: 10px; }
+
+/* ============================================================
+   01b. Collection cards row (homepage)
+   ============================================================ */
+.pk-collections { padding-block: 64px 32px; text-align: center; }
+.pk-collections__head { display: flex; flex-direction: column; gap: 6px; align-items: center; margin-bottom: 28px; }
+.pk-collections__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.pk-collection-card { background: var(--pk-bg-card); aspect-ratio: 3 / 4; padding: 22px; display: flex; flex-direction: column; justify-content: flex-end; text-align: left; color: inherit; transition: transform .2s ease; }
+.pk-collection-card:hover { transform: translateY(-2px); text-decoration: none; }
+.pk-collection-card__index { font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.7; }
+.pk-collection-card__title { font-family: var(--pk-font-heading); font-size: 1.125rem; margin-top: 4px; }
+
+/* ============================================================
+   02. Shop all (category listing)
+   ============================================================ */
+.pk-shop-all { display: grid; grid-template-columns: 200px 1fr; gap: 48px; }
+.pk-shop-all__title { text-align: center; font-size: 1.5rem; margin-bottom: 32px; }
+.pk-shop-all__toolbar { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 24px; }
+.pk-sidebar h5 { font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 16px; color: var(--pk-ink-soft); }
+.pk-sidebar ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.pk-sidebar a { font-size: 0.875rem; color: var(--pk-ink); }
+.pk-sidebar a.is-active { font-weight: 600; }
+
+/* ----- Product grid + cards (reused on 02, 03, 05) ----- */
+.pk-product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 20px; }
+.pk-product-card { display: flex; flex-direction: column; gap: 8px; color: inherit; }
+.pk-product-card:hover { text-decoration: none; }
+.pk-product-card:hover .pk-placeholder { background: #e6dac3; }
+.pk-product-card__title { font-size: 0.8125rem; color: var(--pk-ink); }
+.pk-product-card__price { font-size: 0.75rem; color: var(--pk-ink-soft); }
+
+/* ============================================================
+   03. Collection / Subcategory
+   ============================================================ */
+.pk-coll-head { text-align: center; max-width: 540px; margin: 0 auto 32px; }
+.pk-coll-head h1 { font-size: 1.5rem; margin-bottom: 8px; }
+.pk-coll-head p { font-size: 0.8125rem; color: var(--pk-ink-soft); }
+.pk-coll-toolbar { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 24px; }
+
+/* ----- Pill / chip ----- */
+.pk-chip { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--pk-line-strong); border-radius: 999px; font-size: 0.75rem; background: var(--pk-white); cursor: pointer; }
+
+/* ============================================================
+   04. Product details
+   ============================================================ */
+.pk-product { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; }
+.pk-product__media .pk-placeholder { aspect-ratio: 1 / 1; }
+.pk-product__title { font-size: 1.5rem; }
+.pk-product__price { font-size: 1rem; margin-top: 8px; }
+.pk-product__rating { font-size: 0.75rem; color: var(--pk-ink-soft); margin-top: 6px; }
+.pk-product__rating .pk-stars { color: var(--pk-accent); letter-spacing: 0.08em; margin-right: 6px; }
+.pk-product__desc { margin-top: 18px; font-size: 0.8125rem; color: var(--pk-ink-soft); }
+.pk-product__bullets { margin-top: 14px; padding-left: 18px; font-size: 0.8125rem; }
+.pk-product__bullets li { margin-bottom: 4px; }
+.pk-product__qty { display: inline-flex; align-items: center; border: 1px solid var(--pk-line-strong); border-radius: var(--pk-radius); overflow: hidden; margin-top: 22px; }
+.pk-product__qty button { background: transparent; border: 0; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; }
+.pk-product__qty input { border: 0; width: 40px; height: 36px; text-align: center; font: inherit; background: transparent; }
+.pk-product__buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; max-width: 320px; }
+.pk-product__tabs { margin-top: 36px; border-top: 1px solid var(--pk-line); padding-top: 18px; }
+.pk-product__tabs-nav { display: flex; gap: 28px; margin-bottom: 16px; }
+.pk-product__tabs-nav button { background: 0; border: 0; font: inherit; padding: 0 0 6px; cursor: pointer; font-size: 0.8125rem; color: var(--pk-ink-soft); border-bottom: 2px solid transparent; }
+.pk-product__tabs-nav button.is-active { color: var(--pk-ink); border-bottom-color: var(--pk-ink); }
+.pk-product__tab-body { font-size: 0.8125rem; color: var(--pk-ink-soft); }
+.pk-product__tab-body p { margin: 4px 0; }
+
+/* ============================================================
+   05. Search results
+   ============================================================ */
+.pk-search-head { margin-bottom: 28px; }
+.pk-search-head h1 { font-size: 1.5rem; }
+
+/* ============================================================
+   06. Cart
+   ============================================================ */
+.pk-cart__head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 28px; }
+.pk-cart__head h1 { font-size: 1.5rem; }
+.pk-cart__count { font-size: 0.875rem; color: var(--pk-ink-soft); }
+.pk-cart__table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.pk-cart__table thead th { text-align: left; font-weight: 500; font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pk-ink-soft); padding-bottom: 14px; border-bottom: 1px solid var(--pk-line); }
+.pk-cart__table thead th:nth-child(2), .pk-cart__table thead th:nth-child(4) { text-align: right; }
+.pk-cart__table thead th:nth-child(3) { text-align: center; }
+.pk-cart__table tbody td { padding: 18px 0; border-bottom: 1px solid var(--pk-line); vertical-align: middle; }
+.pk-cart__table tbody td:nth-child(2), .pk-cart__table tbody td:nth-child(4) { text-align: right; }
+.pk-cart__table tbody td:nth-child(3) { text-align: center; }
+.pk-cart__product { display: flex; align-items: center; gap: 14px; }
+.pk-cart__thumb { width: 56px; height: 56px; flex-shrink: 0; }
+.pk-cart__summary { margin-top: 28px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.pk-cart__subtotal { display: flex; gap: 80px; font-size: 0.875rem; }
+.pk-cart__subtotal strong { font-weight: 500; }
+.pk-cart__note { font-size: 0.75rem; color: var(--pk-ink-soft); }
+.pk-cart__actions { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+.pk-cart__actions .pk-link { font-size: 0.8125rem; color: var(--pk-ink-soft); }
+
+/* ============================================================
+   07. Checkout
+   ============================================================ */
+.pk-checkout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; }
+.pk-checkout__steps { display: flex; gap: 12px; font-size: 0.75rem; color: var(--pk-ink-soft); margin-bottom: 24px; }
+.pk-checkout__steps span { display: inline-flex; gap: 6px; }
+.pk-checkout__steps span.is-active { color: var(--pk-ink); font-weight: 500; }
+.pk-checkout__steps span + span::before { content: "›"; margin-right: 8px; color: var(--pk-ink-soft); }
+.pk-checkout h2 { font-size: 1rem; margin-bottom: 16px; }
+.pk-checkout__fields { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.pk-checkout__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pk-checkout__check { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; color: var(--pk-ink-soft); }
+.pk-summary { background: var(--pk-bg-soft); padding: 24px; border-radius: var(--pk-radius); }
+.pk-summary__row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--pk-line); }
+.pk-summary__row:last-of-type { border: 0; }
+.pk-summary__row .pk-cart__thumb { width: 44px; height: 44px; }
+.pk-summary__info { flex: 1; font-size: 0.8125rem; }
+.pk-summary__price { font-size: 0.8125rem; }
+.pk-summary__totals { margin-top: 14px; font-size: 0.8125rem; }
+.pk-summary__totals div { display: flex; justify-content: space-between; padding: 4px 0; }
+.pk-summary__totals .pk-summary__total { font-size: 0.9375rem; margin-top: 6px; border-top: 1px solid var(--pk-line); padding-top: 10px; }
+
+/* ============================================================
+   08. Wishlist
+   ============================================================ */
+.pk-wishlist__head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 28px; }
+.pk-wishlist__head h1 { font-size: 1.5rem; }
+.pk-wishlist__row { display: grid; grid-template-columns: 56px 1fr auto auto 24px; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--pk-line); }
+.pk-wishlist__title { font-size: 0.875rem; }
+.pk-wishlist__price { font-size: 0.8125rem; color: var(--pk-ink-soft); }
+.pk-wishlist__remove { background: 0; border: 0; cursor: pointer; color: var(--pk-ink-soft); font-size: 1rem; }
+.pk-wishlist__remove:hover { color: var(--pk-ink); }
+
+/* ============================================================
+   09. Login / Sign up
+   ============================================================ */
+.pk-auth { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 880px; margin: 0 auto; }
+.pk-auth__panel h1 { font-size: 1.5rem; margin-bottom: 24px; }
+.pk-auth__form { display: flex; flex-direction: column; gap: 14px; }
+.pk-auth__forgot { font-size: 0.75rem; align-self: flex-end; color: var(--pk-ink-soft); }
+.pk-auth__divider { display: flex; align-items: center; gap: 10px; margin: 20px 0 14px; color: var(--pk-ink-soft); font-size: 0.75rem; }
+.pk-auth__divider::before, .pk-auth__divider::after { content: ""; flex: 1; height: 1px; background: var(--pk-line); }
+.pk-auth__social { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border: 1px solid var(--pk-line-strong); border-radius: var(--pk-radius); font-size: 0.8125rem; background: var(--pk-white); cursor: pointer; }
+.pk-auth__social + .pk-auth__social { margin-top: 10px; }
+.pk-auth__hint { font-size: 0.8125rem; color: var(--pk-ink-soft); margin-top: 16px; }
+
+/* ============================================================
+   10. My account
+   ============================================================ */
+.pk-account { display: grid; grid-template-columns: 220px 1fr; gap: 48px; }
+.pk-account__nav h5 { font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 16px; color: var(--pk-ink-soft); }
+.pk-account__nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.pk-account__nav a { font-size: 0.875rem; }
+.pk-account__nav a.is-active { font-weight: 600; }
+.pk-account__title { font-size: 1.5rem; margin-bottom: 4px; }
+.pk-account__welcome { font-size: 1.125rem; margin-bottom: 28px; font-family: var(--pk-font-heading); }
+.pk-account__section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.pk-account__section-head h3 { font-size: 0.9375rem; }
+.pk-account__orders { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.pk-account__orders td { padding: 14px 0; border-bottom: 1px solid var(--pk-line); }
+.pk-account__order-thumb { width: 40px; height: 40px; }
+.pk-account__status { color: var(--pk-ink-soft); }
+
+/* ============================================================
+   11. Order tracking
+   ============================================================ */
+.pk-tracking__title { font-size: 1.5rem; }
+.pk-tracking__meta { font-size: 0.8125rem; color: var(--pk-ink-soft); margin-top: 4px; }
+.pk-tracking__timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 36px 0; position: relative; }
+.pk-tracking__timeline::before { content: ""; position: absolute; top: 22px; left: 8%; right: 8%; height: 1px; background: var(--pk-line); }
+.pk-tracking__step { text-align: center; position: relative; z-index: 1; }
+.pk-tracking__dot { width: 44px; height: 44px; border-radius: 999px; background: var(--pk-bg-card); border: 1px solid var(--pk-line-strong); display: inline-grid; place-items: center; }
+.pk-tracking__step.is-done .pk-tracking__dot { background: var(--pk-accent); border-color: var(--pk-accent); color: var(--pk-white); }
+.pk-tracking__label { display: block; font-size: 0.8125rem; margin-top: 8px; }
+.pk-tracking__date { display: block; font-size: 0.6875rem; color: var(--pk-ink-soft); }
+.pk-tracking__details { border-top: 1px solid var(--pk-line); padding-top: 22px; margin-top: 24px; }
+.pk-tracking__details h3 { font-size: 0.9375rem; margin-bottom: 16px; }
+.pk-tracking__item { display: grid; grid-template-columns: 56px 1fr auto; gap: 16px; align-items: center; }
+.pk-tracking__item-name { font-size: 0.875rem; }
+.pk-tracking__item-qty { font-size: 0.75rem; color: var(--pk-ink-soft); }
+
+/* ============================================================
+   12. About / Our story
+   ============================================================ */
+.pk-about__hero { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.pk-about__quote { font-family: var(--pk-font-heading); font-size: 1.5rem; font-style: italic; line-height: 1.4; margin-bottom: 18px; }
+.pk-about__body { font-size: 0.875rem; color: var(--pk-ink-soft); }
+.pk-about__media { aspect-ratio: 4 / 3; }
+.pk-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--pk-line); text-align: center; }
+.pk-pillar__icon { width: 36px; height: 36px; margin: 0 auto 10px; color: var(--pk-accent); }
+.pk-pillar__title { font-size: 0.8125rem; margin-bottom: 4px; }
+.pk-pillar__desc { font-size: 0.75rem; color: var(--pk-ink-soft); }
+
+/* ============================================================
+   13. Reviews
+   ============================================================ */
+.pk-reviews { display: grid; grid-template-columns: 280px 1fr; gap: 48px; }
+.pk-reviews__score { font-family: var(--pk-font-heading); font-size: 3rem; line-height: 1; }
+.pk-reviews__stars { color: var(--pk-accent); margin-top: 4px; letter-spacing: 0.1em; }
+.pk-reviews__count { font-size: 0.75rem; color: var(--pk-ink-soft); margin-top: 4px; }
+.pk-reviews__cta { margin-top: 18px; }
+.pk-reviews__bars { display: flex; flex-direction: column; gap: 8px; }
+.pk-reviews__bar { display: grid; grid-template-columns: 22px 1fr 32px; align-items: center; gap: 8px; font-size: 0.75rem; }
+.pk-reviews__bar-track { height: 6px; background: var(--pk-bg-card); border-radius: 999px; overflow: hidden; }
+.pk-reviews__bar-fill { height: 100%; background: var(--pk-accent); }
+.pk-reviews__list { margin-top: 36px; border-top: 1px solid var(--pk-line); padding-top: 24px; grid-column: 1 / -1; }
+.pk-review { padding: 18px 0; border-bottom: 1px solid var(--pk-line); }
+.pk-review__head { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.75rem; color: var(--pk-ink-soft); margin-bottom: 6px; }
+.pk-review__name { font-weight: 500; color: var(--pk-ink); }
+.pk-review__body { font-style: italic; font-family: var(--pk-font-heading); font-size: 1rem; }
+
+/* ============================================================
+   14. Store locator
+   ============================================================ */
+.pk-locator__head { text-align: center; margin-bottom: 28px; }
+.pk-locator__head h1 { font-size: 1.5rem; }
+.pk-locator__head p { font-size: 0.8125rem; color: var(--pk-ink-soft); margin-top: 4px; }
+.pk-locator__search { max-width: 540px; margin: 0 auto 36px; }
+.pk-locator__body { display: grid; grid-template-columns: 360px 1fr; gap: 32px; align-items: start; }
+.pk-store-card { padding: 18px 0; border-bottom: 1px solid var(--pk-line); }
+.pk-store-card h4 { font-size: 0.9375rem; margin-bottom: 6px; }
+.pk-store-card p { font-size: 0.8125rem; color: var(--pk-ink-soft); }
+.pk-locator__map { background: var(--pk-bg-soft); aspect-ratio: 4 / 3; border-radius: var(--pk-radius); position: relative; overflow: hidden; display: grid; place-items: center; color: var(--pk-ink-soft); font-size: 0.75rem; }
+
+/* ============================================================
+   15. FAQ
+   ============================================================ */
+.pk-faq__head { text-align: center; margin-bottom: 28px; }
+.pk-faq__head h1 { font-size: 1.5rem; }
+.pk-faq__search { max-width: 540px; margin: 0 auto 36px; }
+.pk-faq__body { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: start; }
+.pk-faq__topics h3, .pk-faq__help h3 { font-size: 0.9375rem; margin-bottom: 14px; }
+.pk-faq__topics ul { list-style: none; padding: 0; margin: 0; }
+.pk-faq__topics li { padding: 14px 0; border-bottom: 1px solid var(--pk-line); font-size: 0.875rem; display: flex; justify-content: space-between; align-items: center; }
+.pk-faq__topics li::after { content: "›"; color: var(--pk-ink-soft); }
+.pk-faq__help { background: var(--pk-bg-soft); padding: 24px; border-radius: var(--pk-radius); font-size: 0.8125rem; color: var(--pk-ink-soft); }
+.pk-faq__help p { margin-bottom: 12px; }
+
+/* ============================================================
+   Responsive: stack everything below 900px
+   ============================================================ */
+@media (max-width: 900px) {
+  .pk-wrap { padding-inline: 20px; }
+  .pk-collections__grid,
+  .pk-product-grid { grid-template-columns: repeat(2, 1fr); }
+  .pk-shop-all,
+  .pk-product,
+  .pk-checkout,
+  .pk-about__hero,
+  .pk-reviews,
+  .pk-locator__body,
+  .pk-faq__body,
+  .pk-account,
+  .pk-auth { grid-template-columns: 1fr; gap: 32px; }
+  .pk-pillars { grid-template-columns: repeat(2, 1fr); }
+  .pk-tracking__timeline { grid-template-columns: repeat(2, 1fr); }
+  .pk-tracking__timeline::before { display: none; }
+  .pk-cart__table thead { display: none; }
+  .pk-cart__table tbody td { display: block; text-align: left !important; padding: 6px 0; border: 0; }
+  .pk-cart__table tbody tr { display: block; padding: 16px 0; border-bottom: 1px solid var(--pk-line); }
+}
+@media (max-width: 600px) {
+  .pk-collections__grid,
+  .pk-product-grid { grid-template-columns: 1fr; }
+  .pk-pillars { grid-template-columns: 1fr; }
+  .pk-tracking__timeline { grid-template-columns: 1fr; }
+  .pk-hero__brand { font-size: 3.5rem; }
+}

@@ -1,0 +1,45 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+{%- assign stores = 'Bengaluru (HQ)|BTM Layout, Bengaluru|Karnataka 560076,Mumbai|Lower Parel, Mumbai|Maharashtra 400013,Pune|Koregaon Park, Pune|Maharashtra 411001' | split: ',' -%}
+
+<section class="pk pk-page">
+  <div class="pk-wrap">
+    <header class="pk-locator__head">
+      <h1>Find us in store</h1>
+      <p>We're based in Bengaluru and ship across India.</p>
+    </header>
+
+    <div class="pk-locator__search">
+      <input class="pk-input" type="search" placeholder="Search for city or pincode">
+    </div>
+
+    <div class="pk-locator__body">
+      <div>
+        {%- for entry in stores -%}
+          {%- assign parts = entry | split: '|' -%}
+          <article class="pk-store-card">
+            <h4>{{ parts[0] }}</h4>
+            <p>{{ parts[1] }}<br>{{ parts[2] }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      <div class="pk-locator__map" aria-hidden="true">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+          <rect width="400" height="300" fill="#f4ecdf"/>
+          <path d="M0 180 Q100 150 200 180 T400 170 L400 300 L0 300 Z" fill="#e6dac3"/>
+          <path d="M0 80 Q140 60 240 90 T400 100" stroke="#cdbb9a" stroke-width="2" fill="none"/>
+          <path d="M40 200 Q160 230 280 210 T400 220" stroke="#cdbb9a" stroke-width="2" fill="none"/>
+          <circle cx="120" cy="160" r="6" fill="#b8956a"/>
+          <circle cx="220" cy="110" r="6" fill="#b8956a"/>
+          <circle cx="280" cy="200" r="6" fill="#b8956a"/>
+          <text x="200" y="290" text-anchor="middle" fill="#8a6a44" font-family="Inter, sans-serif" font-size="10">map preview · static</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui store locator", "settings": [], "presets": [{ "name": "Pankui store locator" }] }
+{% endschema %}
