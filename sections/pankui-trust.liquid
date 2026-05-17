@@ -1,0 +1,27 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<section class="pk pk-trust">
+  <div class="pk-trust__inner">
+    <p class="pk-trust__title">
+      {{ section.settings.text_before }}
+      <strong>{{ section.settings.highlight }}</strong>
+      {{ section.settings.text_after }}
+      {%- if section.settings.show_heart -%}
+        <span class="pk-trust__heart" aria-hidden="true">&nbsp;♥</span>
+      {%- endif -%}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pankui trust counter",
+  "settings": [
+    { "type": "text", "id": "text_before", "label": "Text before", "default": "Trusted by" },
+    { "type": "text", "id": "highlight", "label": "Highlight (e.g. number)", "default": "90,000+" },
+    { "type": "text", "id": "text_after", "label": "Text after", "default": "Customers across India" },
+    { "type": "checkbox", "id": "show_heart", "label": "Show heart icon", "default": true }
+  ],
+  "presets": [{ "name": "Pankui trust counter" }]
+}
+{% endschema %}

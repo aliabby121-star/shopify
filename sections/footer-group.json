@@ -225,7 +225,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h5>Contact</h5><p>hello@pankui.in<br>+91 63529 06701<br><br>BTM Layout, Bengaluru<br>Karnataka, India</p>",
+            "text": "<h5>Need Help?</h5><p><strong>WhatsApp:</strong> <a href=\"https://wa.me/918826456887\">+91 88264 56887</a> (no calls)<br><strong>Email:</strong> <a href=\"mailto:hello@pankui.in\">hello@pankui.in</a><br><strong>Hours:</strong> Mon – Sat, 10AM to 6PM<br><br>BTM Layout, Bengaluru<br>Karnataka 560076, India</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",

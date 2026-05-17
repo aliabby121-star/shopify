@@ -1,0 +1,23 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<section class="pk pk-mission">
+  <div class="pk-mission__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="pk-mission__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 class="pk-mission__title">{{ section.settings.heading }}</h2>
+    <p class="pk-mission__body">{{ section.settings.body }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pankui mission",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHO WE ARE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Mission" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Pankui is a brand that offers a wide range of high-quality, innovative and beautifully crafted products for everyday use. We believe in making our products accessible and convenient for every Indian kitchen — so you can cook, store and live with quiet calm." }
+  ],
+  "presets": [{ "name": "Pankui mission" }]
+}
+{% endschema %}

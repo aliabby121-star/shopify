@@ -404,6 +404,109 @@
 .pk-announcement { background: #0f0f0f; color: rgba(245,239,227,0.85); }
 .pk-announcement__item + .pk-announcement__item::before { background: rgba(255,255,255,0.18); }
 
+/* ----- Social icons in header ----- */
+.pk-topnav__social { display: inline-flex; align-items: center; gap: 4px; margin-right: 4px; }
+.pk-topnav__social .pk-topnav__icon { width: 32px; height: 32px; }
+.pk-topnav__social .pk-topnav__icon svg { width: 16px; height: 16px; }
+
+/* ============================================================
+   activlife-parity sections
+   ============================================================ */
+
+/* ----- Featured / Bestsellers product grid ----- */
+.pk-products { background: var(--pk-bg); padding: 72px 32px; }
+.pk-products__head { max-width: 1280px; margin: 0 auto 36px; text-align: center; }
+.pk-products__eyebrow { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pk-ink-soft); }
+.pk-products__title { font-family: var(--pk-font-heading); font-style: italic; font-size: 2.25rem; line-height: 1.1; color: var(--pk-ink); margin: 4px 0 6px; }
+.pk-products__grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 18px;
+}
+.pk-products__grid--3 { grid-template-columns: repeat(3, 1fr); max-width: 1000px; }
+.pk-pcard {
+  background: var(--pk-white); border-radius: 6px; overflow: hidden; color: var(--pk-ink);
+  display: flex; flex-direction: column; transition: transform .2s ease, box-shadow .2s ease;
+  text-decoration: none; position: relative;
+}
+.pk-pcard:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); text-decoration: none; }
+.pk-pcard__media { aspect-ratio: 1 / 1; background: var(--pk-bg-soft); position: relative; overflow: hidden; }
+.pk-pcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pk-pcard__media .pk-placeholder { width: 100%; height: 100%; }
+.pk-pcard__badge {
+  position: absolute; top: 10px; left: 10px;
+  background: #d9534f; color: #fff; font-size: 0.6875rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 3px;
+}
+.pk-pcard__body { padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+.pk-pcard__title { font-size: 0.875rem; color: var(--pk-ink); line-height: 1.4; }
+.pk-pcard__prices { display: flex; align-items: baseline; gap: 8px; }
+.pk-pcard__price { font-size: 0.9375rem; font-weight: 600; color: var(--pk-ink); }
+.pk-pcard__compare { font-size: 0.8125rem; color: var(--pk-ink-soft); text-decoration: line-through; }
+.pk-products__more { text-align: center; margin-top: 36px; }
+
+/* ----- Mission section ----- */
+.pk-mission { background: var(--pk-bg-card); padding: 80px 32px; text-align: center; }
+.pk-mission__inner { max-width: 760px; margin: 0 auto; }
+.pk-mission__eyebrow { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pk-olive); margin-bottom: 12px; }
+.pk-mission__title { font-family: var(--pk-font-heading); font-size: 2.25rem; line-height: 1.15; color: var(--pk-ink); margin-bottom: 22px; }
+.pk-mission__body { font-size: 0.9375rem; line-height: 1.8; color: var(--pk-ink-soft); }
+
+/* ----- Why Choose Us ----- */
+.pk-why { background: var(--pk-bg); padding: 72px 32px; }
+.pk-why__inner { max-width: 1100px; margin: 0 auto; }
+.pk-why__head { text-align: center; margin-bottom: 40px; }
+.pk-why__title { font-family: var(--pk-font-heading); font-style: italic; font-size: 2rem; color: var(--pk-ink); }
+.pk-why__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.pk-why__card {
+  background: var(--pk-white); border: 1px solid var(--pk-line); border-radius: 6px;
+  padding: 28px 18px; text-align: center; transition: box-shadow .2s ease, transform .2s ease;
+}
+.pk-why__card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.05); transform: translateY(-2px); }
+.pk-why__icon {
+  width: 56px; height: 56px; margin: 0 auto 14px;
+  display: grid; place-items: center; background: var(--pk-bg-soft);
+  border-radius: 50%; color: var(--pk-olive);
+}
+.pk-why__icon svg { width: 28px; height: 28px; }
+.pk-why__name { font-size: 0.9375rem; font-weight: 600; color: var(--pk-ink); margin-bottom: 4px; }
+.pk-why__desc { font-size: 0.8125rem; color: var(--pk-ink-soft); line-height: 1.5; }
+
+/* ----- Trust counter ----- */
+.pk-trust { background: var(--pk-olive); color: #f5efe3; padding: 36px 32px; text-align: center; }
+.pk-trust__inner { max-width: 760px; margin: 0 auto; }
+.pk-trust__title { font-family: var(--pk-font-heading); font-size: 1.5rem; }
+.pk-trust__title strong { color: #fff; }
+.pk-trust__heart { color: #ffb3b3; }
+
+/* ----- WhatsApp floating button ----- */
+.pk-wa {
+  position: fixed; bottom: 22px; right: 22px; z-index: 60;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25d366; color: #fff;
+  display: grid; place-items: center;
+  box-shadow: 0 6px 18px rgba(37,211,102,0.45);
+  transition: transform .2s ease;
+  text-decoration: none;
+}
+.pk-wa:hover { transform: scale(1.06); text-decoration: none; }
+.pk-wa svg { width: 28px; height: 28px; }
+
+/* ----- Footer Need Help column (text wrap inside existing footer block) ----- */
+.pk-need-help-row { display: flex; gap: 12px; margin-top: 8px; }
+.pk-need-help-row a { color: inherit; text-decoration: underline; }
+
+@media (max-width: 1100px) {
+  .pk-products__grid { grid-template-columns: repeat(3, 1fr); }
+  .pk-why__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .pk-products__grid { grid-template-columns: repeat(2, 1fr); }
+  .pk-products__grid--3 { grid-template-columns: 1fr; }
+  .pk-mission { padding: 60px 24px; }
+  .pk-mission__title { font-size: 1.75rem; }
+  .pk-trust__title { font-size: 1.125rem; }
+}
+
 /* ----- Hero v2 ----- */
 .pk-hero2 { background: linear-gradient(180deg, #efe6d5 0%, #e9dec9 100%); padding-block: 56px; position: relative; overflow: hidden; }
 .pk-hero2__inner { max-width: 1280px; margin: 0 auto; padding-inline: 48px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; position: relative; }

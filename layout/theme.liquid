@@ -129,6 +129,9 @@
       {% sections 'footer-group' %}
     </footer>
 
+    {{ 'pankui.css' | asset_url | stylesheet_tag }}
+    {% render 'pankui-whatsapp' %}
+
     {% render 'search-modal' %}
 
     {% if settings.quick_add or settings.mobile_quick_add %}
