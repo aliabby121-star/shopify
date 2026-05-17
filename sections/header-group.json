@@ -46,13 +46,9 @@
     "header_section": {
       "type": "pankui-header",
       "blocks": {
-        "t1": { "type": "tab", "settings": { "label": "Home", "link": "/" } },
-        "t2": { "type": "tab", "settings": { "label": "New Arrivals", "link": "/collections/new-arrivals" } },
-        "t3": { "type": "tab", "settings": { "label": "Home & Kitchen", "link": "/collections/all" } },
-        "t4": { "type": "tab", "settings": { "label": "About Us", "link": "/pages/about" } },
-        "t5": { "type": "tab", "settings": { "label": "Contact Us", "link": "/pages/contact" } }
+        "t3": { "type": "tab", "settings": { "label": "Home & Kitchen", "link": "/collections/all" } }
       },
-      "block_order": ["t1", "t2", "t3", "t4", "t5"],
+      "block_order": ["t3"],
       "settings": {
         "brand": "pankui",
         "tagline": "A SMALL STUDIO FOR THE INDIAN KITCHEN"
