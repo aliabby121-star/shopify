@@ -1,6 +1,6 @@
 {{ 'pankui.css' | asset_url | stylesheet_tag }}
 
-{%- assign categories = 'All Products,Spice Containers,Tea, Sugar & Coffee,Storage Sets,Jars & Canisters,Organisers,New Arrivals,Sale' | split: ',' -%}
+{%- assign categories = 'All Products;Home & Kitchen;New Arrivals;Sale' | split: ';' -%}
 {%- assign products = 'spice-rack|4-Section spice container|From ₹1,169,canister|Tea, sugar & coffee canisters|From ₹1,179,wide-jar|6-Piece fridge storage set|From ₹1,349,canister|Round spice container|From ₹899,wide-jar|Glass storage jar|From ₹449,canister|Sugar canister|From ₹649' | split: ',' -%}
 
 <section class="pk pk-page">
