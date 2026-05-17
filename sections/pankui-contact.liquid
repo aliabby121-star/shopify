@@ -1,0 +1,83 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<section class="pk pk-page">
+  <div class="pk-wrap" style="max-width: 1080px;">
+    <div class="pk-contact">
+      <div class="pk-contact__info">
+        <h1>Contact Us</h1>
+        <div class="pk-contact__info-block">
+          {%- if section.settings.trade_name != blank -%}
+            <p><strong>Trade name</strong> {{ section.settings.trade_name }}</p>
+          {%- endif -%}
+          <p><strong>Email</strong> <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+          <p><strong>Phone</strong> <a href="tel:{{ section.settings.phone | replace: ' ', '' | replace: '-', '' }}">{{ section.settings.phone }}</a></p>
+          <p><strong>Hours</strong> {{ section.settings.hours }}</p>
+          <p style="margin-top:14px;"><strong style="display:block; min-width:auto; margin-bottom:4px;">Address</strong>{{ section.settings.address }}</p>
+        </div>
+      </div>
+
+      <div class="pk-contact__form-wrap">
+        {%- form 'contact', class: 'pk-contact__form' -%}
+          <h2>Get in touch</h2>
+
+          {%- if form.posted_successfully? -%}
+            <p style="color: var(--pk-olive); font-size: 0.875rem;">Thanks &mdash; your message has been sent. We'll get back to you within 24 hours.</p>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <p style="color: #b3261e; font-size: 0.8125rem;">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+
+          <div class="pk-field">
+            <label for="ContactName">Name</label>
+            <input class="pk-input" id="ContactName" type="text" name="contact[name]" autocomplete="name">
+          </div>
+
+          <div class="pk-field">
+            <label for="ContactEmail">Email <span style="color:#b3261e;">*</span></label>
+            <input class="pk-input" id="ContactEmail" type="email" name="contact[email]" autocomplete="email" required>
+          </div>
+
+          <div class="pk-field">
+            <label for="ContactPhone">Phone number</label>
+            <input class="pk-input" id="ContactPhone" type="tel" name="contact[phone]" autocomplete="tel">
+          </div>
+
+          <div class="pk-field">
+            <label for="ContactBody">Comment</label>
+            <textarea id="ContactBody" name="contact[body]"></textarea>
+          </div>
+
+          <button type="submit" class="pk-btn pk-btn--primary">Send</button>
+        {%- endform -%}
+
+        {%- if section.settings.show_newsletter -%}
+          <div class="pk-newsletter">
+            <h3>Subscribe to our emails</h3>
+            <p>Join our email list for exclusive offers and the latest news.</p>
+            {%- form 'customer' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input type="email" name="contact[email]" placeholder="Email" class="pk-input" required>
+              <button type="submit" class="pk-btn pk-btn--tan">Subscribe</button>
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pankui contact",
+  "settings": [
+    { "type": "text", "id": "trade_name", "label": "Trade name", "default": "Pankui Home Pvt. Ltd." },
+    { "type": "text", "id": "email", "label": "Email", "default": "hello@pankui.in" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "+91 88264 56887" },
+    { "type": "text", "id": "hours", "label": "Business hours", "default": "Mon – Sat, 10AM to 6PM" },
+    { "type": "textarea", "id": "address", "label": "Address", "default": "BTM Layout, Bengaluru, Karnataka 560076, India" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show newsletter subscription block", "default": true }
+  ],
+  "presets": [{ "name": "Pankui contact" }]
+}
+{% endschema %}

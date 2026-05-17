@@ -1,15 +1,19 @@
 {{ 'pankui.css' | asset_url | stylesheet_tag }}
 
 <section class="pk pk-page">
-  <div class="pk-wrap">
-    <p class="pk-eyebrow" style="text-align:center; margin-bottom:18px;">Our story</p>
+  <div class="pk-wrap" style="max-width: 880px;">
+    <h1 style="font-family: var(--pk-font-heading); font-size: 2.25rem; text-align: center; margin: 0 0 36px; color: var(--pk-ink);">About Us</h1>
 
-    <div class="pk-about__hero">
-      <div>
-        <p class="pk-about__quote">&ldquo;We make the containers we wished existed for our own kitchens.&rdquo;</p>
-        <p class="pk-about__body">Pankui was started in 2025 by a design-led team in Bengaluru, tired of choosing between cheap and ugly or expensive and imported. Every piece is built for Indian kitchens, Indian humidity, Indian pantries.</p>
-      </div>
-      <div class="pk-about__media">{%- render 'pankui-placeholder', shape: 'spice-rack' -%}</div>
+    <div class="pk-about__story">
+      <p>In Indian homes, the kitchen isn't just a room. It's the heart of the house &mdash; where the day begins with the first cup of chai, where families gather, where stories simmer along with the daal.</p>
+
+      <p>Yet for too long, our kitchens have been the most neglected space in our homes. Cluttered shelves, mismatched containers, jars without lids &mdash; the soul of the home, left chaotic and disconnected from the way we want to live.</p>
+
+      <p>That is why we started <strong>Pankui in 2025</strong>. From a small studio in Bengaluru, we began by asking a simple question: what if Indian kitchens looked as considered as the food we make in them? What if every canister, every jar, every drawer organiser was designed with the same love we put into our cooking?</p>
+
+      <p>Today, more than <strong>90,000 families across India</strong> have welcomed Pankui into their homes &mdash; from Mumbai apartments to ancestral houses in Kerala, from working couples in Bengaluru to joint families in Lucknow.</p>
+
+      <p>Every piece we make is built for our humidity, our spices, our chaiwala-sized portions. Pankui exists to honour the emotions, the memories and the meals that happen in the rooms we cook in.</p>
     </div>
 
     <div class="pk-pillars">
@@ -33,6 +37,11 @@
         <p class="pk-pillar__title">Built to last</p>
         <p class="pk-pillar__desc">Make it once, keep it for a lifetime.</p>
       </div>
+    </div>
+
+    <div class="pk-about__mission">
+      <h2>Our Mission</h2>
+      <p>Pankui is a brand that offers a wide range of high-quality, innovative and beautifully crafted products for everyday use. We believe in making our products accessible and convenient for every Indian kitchen &mdash; so you can cook, store and live with quiet calm.</p>
     </div>
   </div>
 </section>
