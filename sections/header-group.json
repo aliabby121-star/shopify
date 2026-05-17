@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "t:names.header",
@@ -5,11 +14,33 @@
     "announcement_section": {
       "type": "pankui-announcement",
       "blocks": {
-        "i1": { "type": "item", "settings": { "icon": "truck", "text": "Free shipping on orders above ₹999" } },
-        "i2": { "type": "item", "settings": { "icon": "shield", "text": "COD Available" } },
-        "i3": { "type": "item", "settings": { "icon": "returns", "text": "Easy Returns" } }
+        "i1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping on orders above ₹999"
+          }
+        },
+        "i2": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "COD Available"
+          }
+        },
+        "i3": {
+          "type": "item",
+          "settings": {
+            "icon": "returns",
+            "text": "Easy Returns"
+          }
+        }
       },
-      "block_order": ["i1", "i2", "i3"],
+      "block_order": [
+        "i1",
+        "i2",
+        "i3"
+      ],
       "settings": {}
     },
     "header_section": {
@@ -26,7 +57,69 @@
         "brand": "pankui",
         "tagline": "A SMALL STUDIO FOR THE INDIAN KITCHEN"
       }
+    },
+    "pankui_hero_zkymz9": {
+      "type": "pankui-hero",
+      "blocks": {
+        "feature_4jyVqG": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "BPA FREE",
+            "sub": "Safe for your family"
+          }
+        },
+        "feature_L4fWL3": {
+          "type": "feature",
+          "settings": {
+            "icon": "lock",
+            "title": "AIRTIGHT SEAL",
+            "sub": "Keeps food fresh"
+          }
+        },
+        "feature_eQGwRN": {
+          "type": "feature",
+          "settings": {
+            "icon": "stack",
+            "title": "SPACE SAVING",
+            "sub": "Neat & organized"
+          }
+        },
+        "feature_KWXFcX": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "DURABLE",
+            "sub": "Built to last"
+          }
+        }
+      },
+      "block_order": [
+        "feature_4jyVqG",
+        "feature_L4fWL3",
+        "feature_eQGwRN",
+        "feature_KWXFcX"
+      ],
+      "name": "Pankui hero",
+      "settings": {
+        "pill": "SMART STORAGE FOR MODERN INDIAN KITCHENS",
+        "headline_line1": "Organize Better.",
+        "headline_line2": "Store Fresher.",
+        "headline_accent": "Live Smarter.",
+        "sub": "Premium airtight containers and kitchen organizers designed for everyday homes.",
+        "cta_primary_label": "Shop Collection",
+        "cta_primary_link": "",
+        "cta_secondary_label": "Best Sellers",
+        "cta_secondary_link": "",
+        "image": "shopify://shop_images/WhatsAppImage2026-04-24at12.16.03PM.jpg",
+        "badge_pre": "DESIGNED FOR EVERYDAY",
+        "badge_text": "INDIAN KITCHENS"
+      }
     }
   },
-  "order": ["announcement_section", "header_section"]
+  "order": [
+    "announcement_section",
+    "header_section",
+    "pankui_hero_zkymz9"
+  ]
 }
