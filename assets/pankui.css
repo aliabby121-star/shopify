@@ -409,6 +409,65 @@
 .pk-topnav__social .pk-topnav__icon { width: 32px; height: 32px; }
 .pk-topnav__social .pk-topnav__icon svg { width: 16px; height: 16px; }
 
+/* ----- Slide-in drawer (hamburger menu) ----- */
+.pk-drawer {
+  position: fixed; inset: 0; z-index: 80;
+  pointer-events: none;
+  visibility: hidden;
+}
+.pk-drawer.is-open { pointer-events: auto; visibility: visible; }
+.pk-drawer__overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.45);
+  opacity: 0; transition: opacity .25s ease;
+}
+.pk-drawer.is-open .pk-drawer__overlay { opacity: 1; }
+.pk-drawer__panel {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: min(360px, 86vw);
+  background: #1a1a1a; color: #f5efe3;
+  transform: translateX(-100%);
+  transition: transform .28s cubic-bezier(.2,.7,.2,1);
+  display: flex; flex-direction: column;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.25);
+}
+.pk-drawer.is-open .pk-drawer__panel { transform: translateX(0); }
+.pk-drawer__head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.pk-drawer__brand {
+  font-family: var(--pk-font-heading); font-style: italic; font-size: 1.5rem;
+  line-height: 1; color: #f5efe3;
+}
+.pk-drawer__close {
+  background: 0; border: 0; color: #f5efe3; cursor: pointer;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  transition: background .15s ease;
+}
+.pk-drawer__close:hover { background: rgba(255,255,255,0.08); }
+.pk-drawer__close svg { width: 20px; height: 20px; }
+.pk-drawer__nav { list-style: none; padding: 12px 0; margin: 0; flex: 1; overflow-y: auto; }
+.pk-drawer__nav li { margin: 0; }
+.pk-drawer__nav a {
+  display: block; padding: 14px 22px; font-size: 0.9375rem;
+  color: #f5efe3; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background .15s ease;
+}
+.pk-drawer__nav a:hover { background: rgba(255,255,255,0.06); text-decoration: none; }
+.pk-drawer__nav a.is-active { color: #fff; background: rgba(255,255,255,0.05); font-weight: 600; }
+.pk-drawer__foot {
+  padding: 18px 22px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.75rem; color: rgba(245,239,227,0.6);
+}
+.pk-drawer__foot a { color: #f5efe3; text-decoration: underline; }
+
+/* Lock scroll when drawer is open */
+body.pk-drawer-open { overflow: hidden; }
+
 /* ============================================================
    activlife-parity sections
    ============================================================ */
