@@ -2,25 +2,41 @@
   "sections": {
     "hero": {
       "type": "pankui-hero",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "leaf", "title": "BPA FREE", "sub": "Safe for your family" } },
+        "f2": { "type": "feature", "settings": { "icon": "lock", "title": "AIRTIGHT SEAL", "sub": "Keeps food fresh" } },
+        "f3": { "type": "feature", "settings": { "icon": "stack", "title": "SPACE SAVING", "sub": "Neat & organized" } },
+        "f4": { "type": "feature", "settings": { "icon": "shield", "title": "DURABLE", "sub": "Built to last" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
       "settings": {
-        "eyebrow": "a small studio for the Indian kitchen",
-        "brand": "pankui",
-        "tagline": "Quiet order for everyday kitchens. Crafted containers designed in Bengaluru, built to last a lifetime.",
-        "cta_label": "Shop the collection",
-        "cta_link": "shopify://collections/all"
+        "pill": "SMART STORAGE FOR MODERN INDIAN KITCHENS",
+        "headline_line1": "Organize Better.",
+        "headline_line2": "Store Fresher.",
+        "headline_accent": "Live Smarter.",
+        "sub": "Premium airtight containers and kitchen organizers designed for everyday homes.",
+        "cta_primary_label": "Shop Collection",
+        "cta_primary_link": "shopify://collections/all",
+        "cta_secondary_label": "Best Sellers",
+        "cta_secondary_link": "shopify://collections/bestsellers",
+        "badge_pre": "DESIGNED FOR EVERYDAY",
+        "badge_text": "INDIAN KITCHENS"
       }
     },
     "collections": {
       "type": "pankui-collection-cards",
       "blocks": {
-        "c1": { "type": "card", "settings": { "index": "01 · Spice", "title": "For seasoning", "shape": "spice-rack", "link": "shopify://collections/all" } },
-        "c2": { "type": "card", "settings": { "index": "02 · Pantry", "title": "For staples", "shape": "canister", "link": "shopify://collections/all" } },
-        "c3": { "type": "card", "settings": { "index": "03 · Fridge", "title": "For produce", "shape": "wide-jar", "link": "shopify://collections/all" } }
+        "c1": { "type": "card", "settings": { "title": "AIRTIGHT CONTAINERS", "shape": "canister", "link": "shopify://collections/airtight-containers" } },
+        "c2": { "type": "card", "settings": { "title": "FRIDGE CONTAINERS", "shape": "wide-jar", "link": "shopify://collections/fridge-containers" } },
+        "c3": { "type": "card", "settings": { "title": "STORAGE SETS", "shape": "canister", "link": "shopify://collections/storage-sets" } },
+        "c4": { "type": "card", "settings": { "title": "MODULAR CONTAINERS", "shape": "wide-jar", "link": "shopify://collections/modular-containers" } },
+        "c5": { "type": "card", "settings": { "title": "TEA, COFFEE & SUGAR SETS", "shape": "canister", "link": "shopify://collections/tea-sugar-coffee" } },
+        "c6": { "type": "card", "settings": { "title": "KITCHEN ORGANIZERS", "shape": "spice-rack", "link": "shopify://collections/organisers" } }
       },
-      "block_order": ["c1", "c2", "c3"],
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "settings": {
-        "eyebrow": "Curated for you",
-        "heading": "Shop by collection"
+        "eyebrow": "EXPLORE OUR RANGE",
+        "heading": "Shop by Collection"
       }
     }
   },

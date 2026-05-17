@@ -1,14 +1,76 @@
 {{ 'pankui.css' | asset_url | stylesheet_tag }}
 
-<section class="pk pk-hero">
-  <div class="pk-hero__inner">
-    <p class="pk-eyebrow">{{ section.settings.eyebrow }}</p>
-    <h1 class="pk-hero__brand">{{ section.settings.brand }}</h1>
-    <span class="pk-hero__rule" aria-hidden="true"></span>
-    <p class="pk-hero__tagline">{{ section.settings.tagline }}</p>
-    {%- if section.settings.cta_label != blank -%}
-      <a class="pk-btn pk-btn--primary pk-hero__cta" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
-    {%- endif -%}
+<section class="pk pk-hero2">
+  <div class="pk-hero2__inner">
+    <div class="pk-hero2__text">
+      {%- if section.settings.pill != blank -%}
+        <span class="pk-hero2__pill">{{ section.settings.pill }}</span>
+      {%- endif -%}
+
+      <h1 class="pk-hero2__title">
+        {{ section.settings.headline_line1 }}<br>
+        {{ section.settings.headline_line2 }}<br>
+        <span>{{ section.settings.headline_accent }}</span>
+      </h1>
+
+      <div class="pk-hero2__rule" aria-hidden="true"></div>
+
+      <p class="pk-hero2__sub">{{ section.settings.sub }}</p>
+
+      <div class="pk-hero2__ctas">
+        {%- if section.settings.cta_primary_label != blank -%}
+          <a href="{{ section.settings.cta_primary_link | default: '#' }}" class="pk-btn pk-btn--primary">
+            {{ section.settings.cta_primary_label }} &nbsp;›
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta_secondary_label != blank -%}
+          <a href="{{ section.settings.cta_secondary_link | default: '#' }}" class="pk-btn pk-btn--ghost">
+            {{ section.settings.cta_secondary_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="pk-hero2__features">
+        {%- for block in section.blocks -%}
+          <div class="pk-hero2__feature" {{ block.shopify_attributes }}>
+            <div class="pk-hero2__feature-icon">
+              {%- case block.settings.icon -%}
+              {%- when 'leaf' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-7 0-13 5-13 12 0 2 1 4 2 4 6 0 12-6 12-13"/><path d="M7 20c1-6 5-10 11-13"/></svg>
+              {%- when 'lock' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              {%- when 'stack' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5z"/><path d="M2 13l10 5 10-5"/><path d="M2 18l10 5 10-5"/></svg>
+              {%- when 'shield' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/></svg>
+              {%- endcase -%}
+            </div>
+            <div class="pk-hero2__feature-title">{{ block.settings.title }}</div>
+            <div class="pk-hero2__feature-sub">{{ block.settings.sub }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="pk-hero2__media">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | default: 'Pankui hero' }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="eager">
+      {%- else -%}
+        <div class="pk-hero2__media-placeholder">Upload hero image via theme editor</div>
+      {%- endif -%}
+
+      {%- if section.settings.badge_text != blank -%}
+        <div class="pk-hero2__badge">
+          <div>
+            {{ section.settings.badge_pre }}
+            <strong>{{ section.settings.badge_text }}</strong>
+            <span class="pk-hero2__badge-heart" aria-hidden="true">♥</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </section>
 
@@ -16,12 +78,50 @@
 {
   "name": "Pankui hero",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "a small studio for the Indian kitchen" },
-    { "type": "text", "id": "brand", "label": "Brand", "default": "pankui" },
-    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Quiet order for everyday kitchens. Crafted containers designed in Bengaluru, built to last a lifetime." },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop the collection" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" }
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "pill", "label": "Pill text", "default": "SMART STORAGE FOR MODERN INDIAN KITCHENS" },
+    { "type": "text", "id": "headline_line1", "label": "Headline line 1", "default": "Organize Better." },
+    { "type": "text", "id": "headline_line2", "label": "Headline line 2", "default": "Store Fresher." },
+    { "type": "text", "id": "headline_accent", "label": "Headline accent (olive)", "default": "Live Smarter." },
+    { "type": "textarea", "id": "sub", "label": "Subheading", "default": "Premium airtight containers and kitchen organizers designed for everyday homes." },
+    { "type": "header", "content": "CTAs" },
+    { "type": "text", "id": "cta_primary_label", "label": "Primary CTA label", "default": "Shop Collection" },
+    { "type": "url", "id": "cta_primary_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary CTA label", "default": "Best Sellers" },
+    { "type": "url", "id": "cta_secondary_link", "label": "Secondary CTA link" },
+    { "type": "header", "content": "Hero image" },
+    { "type": "image_picker", "id": "image", "label": "Hero image (upload here)" },
+    { "type": "header", "content": "Badge" },
+    { "type": "text", "id": "badge_pre", "label": "Badge pretext", "default": "DESIGNED FOR EVERYDAY" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "INDIAN KITCHENS" }
   ],
-  "presets": [{ "name": "Pankui hero" }]
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "leaf", "label": "Leaf" },
+          { "value": "lock", "label": "Lock" },
+          { "value": "stack", "label": "Stack" },
+          { "value": "shield", "label": "Shield" }
+        ], "default": "leaf" },
+        { "type": "text", "id": "title", "label": "Title", "default": "BPA FREE" },
+        { "type": "text", "id": "sub", "label": "Subtitle", "default": "Safe for your family" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Pankui hero",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "leaf", "title": "BPA FREE", "sub": "Safe for your family" } },
+        { "type": "feature", "settings": { "icon": "lock", "title": "AIRTIGHT SEAL", "sub": "Keeps food fresh" } },
+        { "type": "feature", "settings": { "icon": "stack", "title": "SPACE SAVING", "sub": "Neat & organized" } },
+        { "type": "feature", "settings": { "icon": "shield", "title": "DURABLE", "sub": "Built to last" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

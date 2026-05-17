@@ -1,0 +1,43 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<header class="pk pk-topnav">
+  <div class="pk-topnav__row">
+    <div class="pk-topnav__left">
+      <button type="button" class="pk-topnav__icon" aria-label="Menu" onclick="document.body.classList.toggle('pk-menu-open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <a href="{{ section.settings.menu_link | default: '/collections/all' }}" class="pk-topnav__link">{{ section.settings.menu_label }}</a>
+    </div>
+
+    <a href="/" class="pk-topnav__center" aria-label="{{ shop.name }}">
+      <span class="pk-topnav__brand">{{ section.settings.brand }}</span>
+      <span class="pk-topnav__tagline">{{ section.settings.tagline }}</span>
+    </a>
+
+    <div class="pk-topnav__right">
+      <a href="/search" class="pk-topnav__icon" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+      <a href="{{ routes.account_url }}" class="pk-topnav__icon" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </a>
+      <a href="/cart" class="pk-topnav__icon pk-topnav__cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9H8z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        <span class="pk-topnav__cart-badge">{{ cart.item_count | default: 0 }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Pankui header",
+  "settings": [
+    { "type": "text", "id": "brand", "label": "Brand", "default": "pankui" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "A SMALL STUDIO FOR THE INDIAN KITCHEN" },
+    { "type": "text", "id": "menu_label", "label": "Left menu label", "default": "Shop" },
+    { "type": "url", "id": "menu_link", "label": "Left menu link" }
+  ],
+  "presets": [{ "name": "Pankui header" }]
+}
+{% endschema %}
