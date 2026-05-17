@@ -641,3 +641,17 @@ body.pk-drawer-open { overflow: hidden; }
   .pk-collections2__grid { grid-template-columns: repeat(2, 1fr); }
   .pk-collections2__title { font-size: 2rem; }
 }
+
+/* ----- Header: hamburger only on mobile, inline menu only on desktop ----- */
+@media (min-width: 901px) {
+  /* Desktop: hide hamburger button entirely */
+  [data-pk-drawer-open] { display: none; }
+}
+@media (max-width: 900px) {
+  /* Mobile: hide the inline horizontal menu row, hamburger drawer takes over */
+  .pk-topnav__menu { display: none; }
+  /* Tighten header padding on small screens */
+  .pk-topnav { padding-inline: 18px; }
+  .pk-topnav__brand { font-size: 1.5rem; }
+  .pk-topnav__tagline { font-size: 0.5625rem; }
+}

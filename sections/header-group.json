@@ -18,7 +18,7 @@
           "type": "item",
           "settings": {
             "icon": "truck",
-            "text": "Free shipping on orders above ₹999"
+            "text": "Free shipping above ₹999"
           }
         },
         "i2": {
@@ -46,12 +46,17 @@
     "header_section": {
       "type": "pankui-header",
       "blocks": {
-        "t3": { "type": "tab", "settings": { "label": "Home & Kitchen", "link": "/collections/all" } }
+        "t1": { "type": "tab", "settings": { "label": "Home", "link": "/" } },
+        "t2": { "type": "tab", "settings": { "label": "New Arrivals", "link": "/collections/new-arrivals" } },
+        "t3": { "type": "tab", "settings": { "label": "Home & Kitchen", "link": "/collections/home-kitchen" } },
+        "t4": { "type": "tab", "settings": { "label": "About Us", "link": "/pages/about-us" } },
+        "t5": { "type": "tab", "settings": { "label": "Contact Us", "link": "/pages/contact" } }
       },
-      "block_order": ["t3"],
+      "block_order": ["t1", "t2", "t3", "t4", "t5"],
       "settings": {
         "brand": "pankui",
-        "tagline": "A SMALL STUDIO FOR THE INDIAN KITCHEN"
+        "tagline": "A SMALL STUDIO FOR THE INDIAN KITCHEN",
+        "menu": "main-menu"
       }
     },
     "pankui_hero_zkymz9": {
