@@ -329,6 +329,45 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
+                    "accordion_row_details": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "DETAILS",
+                        "open_by_default": true,
+                        "icon": "none",
+                        "width": 20
+                      },
+                      "blocks": {
+                        "text_details": {
+                          "type": "text",
+                          "settings": {
+                            "text": "<ul><li>Dimensions: 10cm x 10cm x 14cm</li><li>Capacity: 850 ml</li><li>High quality ceramic body with airtight wooden lid</li><li>Food safe, easy to clean</li></ul>",
+                            "width": "100%",
+                            "max_width": "normal",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "text_details"
+                      ]
+                    },
                     "accordion_row_WyAjHK": {
                       "type": "_accordion-row",
                       "settings": {
@@ -409,6 +448,7 @@
                     }
                   },
                   "block_order": [
+                    "accordion_row_details",
                     "accordion_row_WyAjHK",
                     "accordion_row_xktep7"
                   ]

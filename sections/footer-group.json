@@ -61,7 +61,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>New arrivals, restocks, and the occasional shelf-styling tip. No spam, just kitchen things.</p>",
+            "text": "<p>New arrivals, restocks and the occasional shelf-styling tip.</p>",
             "width": "100%",
             "max_width": "narrow",
             "alignment": "center",
@@ -138,7 +138,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h5>Purchase guide</h5><p><a href=\"/pages/faq\">FAQ</a><br><a href=\"/account/orders\">Track order</a><br><a href=\"/policies/refund-policy\">Return policy</a><br><a href=\"/pages/care\">Care guides</a><br><a href=\"/policies/shipping-policy\">Shipping policy</a></p>",
+            "text": "<h5>Shop</h5><p><a href=\"/collections/all\">All Products</a><br><a href=\"/collections/bestsellers\">Bestsellers</a><br><a href=\"/collections/new-arrivals\">New Arrivals</a><br><a href=\"/collections/sale\">Sale</a></p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -164,7 +164,33 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h5>Company info</h5><p><a href=\"/pages/about\">About us</a><br><a href=\"/policies/terms-of-service\">Terms of service</a><br><a href=\"/policies/privacy-policy\">Privacy policy</a><br><a href=\"/blogs/news\">News</a><br><a href=\"/pages/contact\">Contact us</a></p>",
+            "text": "<h5>Company</h5><p><a href=\"/pages/about\">About us</a><br><a href=\"/pages/about\">Our story</a><br><a href=\"/pages/reviews\">Reviews</a><br><a href=\"/pages/careers\">Careers</a></p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.8125rem",
+            "line_height": "loose",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "col_help": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<h5>Help</h5><p><a href=\"/pages/faq\">FAQs</a><br><a href=\"/policies/shipping-policy\">Shipping policy</a><br><a href=\"/policies/refund-policy\">Return policy</a><br><a href=\"/pages/contact\">Contact us</a></p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -190,7 +216,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h5>Contact</h5><p>+91 63529 06701<br>hello@pankui.in<br>BTM Layout, Bengaluru<br>Karnataka, India</p>",
+            "text": "<h5>Contact</h5><p>hello@pankui.in<br>+91 63529 06701<br><br>BTM Layout, Bengaluru<br>Karnataka, India</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -282,9 +308,9 @@
               "settings": {
                 "facebook_url": "",
                 "instagram_url": "https://www.instagram.com",
-                "youtube_url": "",
+                "youtube_url": "https://www.youtube.com",
                 "tiktok_url": "",
-                "twitter_url": "",
+                "twitter_url": "https://www.twitter.com",
                 "threads_url": "",
                 "linkedin_url": "",
                 "bluesky_url": "",
@@ -300,7 +326,7 @@
           "block_order": ["follow_heading", "follow_social"]
         }
       },
-      "block_order": ["col_purchase_guide", "col_company_info", "col_contact", "col_follow"],
+      "block_order": ["col_purchase_guide", "col_company_info", "col_help", "col_contact", "col_follow"],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
