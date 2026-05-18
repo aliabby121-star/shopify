@@ -11,12 +11,6 @@
     assign page_title_fallback = page.title
   endif
   assign coll_title = coll.title | default: page_title_fallback | default: 'Home & Kitchen'
-
-  assign page_desc_fallback = ''
-  if page and page.content != blank
-    assign page_desc_fallback = page.content | strip_html | strip
-  endif
-  assign coll_desc = coll.description | default: page_desc_fallback | default: 'Premium airtight containers and kitchen organizers designed for everyday Indian homes.'
 -%}
 
 {%- assign placeholder_products = 'wide-jar|Air-Tight Storage Containers Set|499|799,wide-jar|Fridge Containers (6 Pack)|699|1199,canister|Modular Pantry Jars|349|499,spice-rack|Bamboo Chopping Board|349|549,canister|Ceramic Spice Jars|249|399,wide-jar|Modular Pantry Set|899|1299' | split: ',' -%}
@@ -26,168 +20,113 @@
 
 {%- if use_real -%}
   {%- assign total_count = coll.all_products_count -%}
-  {%- assign in_stock_count = 0 -%}
-  {%- for p in coll.products -%}
-    {%- if p.available -%}{%- assign in_stock_count = in_stock_count | plus: 1 -%}{%- endif -%}
-  {%- endfor -%}
 {%- else -%}
   {%- assign total_count = placeholder_products.size -%}
-  {%- assign in_stock_count = total_count -%}
 {%- endif -%}
 
 <section class="pk pk-page">
   <div class="pk-wrap">
-    <nav class="pk-breadcrumb">
-      <a href="/">Home</a> / {{ coll_title }}
-    </nav>
+    <h1 class="pk-na__title">{{ coll_title }}</h1>
 
-    <header class="pk-coll-head">
-      <h1>Collection: {{ coll_title }}</h1>
-      <p>{{ coll_desc }}</p>
-    </header>
+    <div class="pk-na__toolbar">
+      <div class="pk-na__group">
+        <span class="pk-na__label">Filter:</span>
+        <button type="button" class="pk-na__dropdown" aria-haspopup="listbox">Availability</button>
+        <button type="button" class="pk-na__dropdown" aria-haspopup="listbox">Price</button>
+      </div>
 
-    <div class="pk-coll-layout">
-      {%- comment -%} ===== Filter sidebar ===== {%- endcomment -%}
-      <aside class="pk-coll-filters">
-        <div class="pk-coll-filters__group">
-          <h4>Availability</h4>
-          <label>
-            <input type="checkbox" checked>
-            In stock <span class="pk-coll-filters__count">({{ in_stock_count }})</span>
-          </label>
-          <label>
-            <input type="checkbox">
-            Out of stock <span class="pk-coll-filters__count">({{ total_count | minus: in_stock_count }})</span>
-          </label>
-        </div>
+      <div class="pk-na__group">
+        <span class="pk-na__label">Sort by:</span>
+        {%- if use_real -%}
+          <select class="pk-na__select" onchange="window.location.search='?sort_by=' + this.value">
+            <option value="manual"{% if coll.sort_by == 'manual' %} selected{% endif %}>Featured</option>
+            <option value="best-selling"{% if coll.sort_by == 'best-selling' %} selected{% endif %}>Best selling</option>
+            <option value="title-ascending"{% if coll.sort_by == 'title-ascending' %} selected{% endif %}>Alphabetically, A–Z</option>
+            <option value="title-descending"{% if coll.sort_by == 'title-descending' %} selected{% endif %}>Alphabetically, Z–A</option>
+            <option value="price-ascending"{% if coll.sort_by == 'price-ascending' %} selected{% endif %}>Price, low to high</option>
+            <option value="price-descending"{% if coll.sort_by == 'price-descending' %} selected{% endif %}>Price, high to low</option>
+            <option value="created-ascending"{% if coll.sort_by == 'created-ascending' %} selected{% endif %}>Date, old to new</option>
+            <option value="created-descending"{% if coll.sort_by == 'created-descending' %} selected{% endif %}>Date, new to old</option>
+          </select>
+        {%- else -%}
+          <select class="pk-na__select">
+            <option>Date, new to old</option>
+            <option>Featured</option>
+            <option>Best selling</option>
+            <option>Alphabetically, A–Z</option>
+            <option>Alphabetically, Z–A</option>
+            <option>Price, low to high</option>
+            <option>Price, high to low</option>
+          </select>
+        {%- endif -%}
+        <span class="pk-na__count">{{ total_count }} product{% if total_count != 1 %}s{% endif %}</span>
+      </div>
+    </div>
 
-        <div class="pk-coll-filters__group">
-          <h4>Price</h4>
-          <input type="range" min="0" max="3100" value="3100" class="pk-coll-filters__range" id="pk-price-range">
-          <div class="pk-coll-filters__range-values">
-            <span>₹0</span>
-            <span id="pk-price-max">₹3,100</span>
-          </div>
-        </div>
+    <div class="pk-product-grid">
+      {%- if use_real -%}
+        {% paginate coll.products by 12 %}
+          {%- for product in coll.products -%}
+            <a href="{{ product.url }}" class="pk-product-card">
+              <div class="pk-placeholder" style="aspect-ratio: 1/1; padding: 0;">
+                {%- if product.featured_image -%}
+                  <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:cover">
+                {%- else -%}
+                  {%- render 'pankui-placeholder', shape: 'canister' -%}
+                {%- endif -%}
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="pk-pcard__badge">Sale</span>
+                {%- endif -%}
+              </div>
+              <span class="pk-product-card__title">{{ product.title }}</span>
+              <span class="pk-product-card__price">
+                {%- if product.compare_at_price > product.price -%}
+                  <strong>{{ product.price | money }}</strong>
+                  <span style="text-decoration:line-through; color:var(--pk-ink-soft); margin-left:6px;">{{ product.compare_at_price | money }}</span>
+                {%- else -%}
+                  {{ product.price | money }}
+                {%- endif -%}
+              </span>
+            </a>
+          {%- endfor -%}
 
-        <button type="button" class="pk-coll-filters__reset" onclick="this.closest('.pk-coll-filters').querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=true);document.getElementById('pk-price-range').value=3100;document.getElementById('pk-price-max').textContent='₹3,100';">Reset</button>
-      </aside>
-
-      {%- comment -%} ===== Main column ===== {%- endcomment -%}
-      <div>
-        <div class="pk-coll-toolbar2">
-          <span class="pk-coll-count">{{ total_count }} product{% if total_count != 1 %}s{% endif %}</span>
-
-          <div class="pk-coll-sort">
-            <label for="pk-sort">Sort by:</label>
-            {%- if use_real -%}
-              <select id="pk-sort" onchange="window.location.search='?sort_by=' + this.value">
-                <option value="manual"{% if coll.sort_by == 'manual' %} selected{% endif %}>Featured</option>
-                <option value="best-selling"{% if coll.sort_by == 'best-selling' %} selected{% endif %}>Best selling</option>
-                <option value="title-ascending"{% if coll.sort_by == 'title-ascending' %} selected{% endif %}>Alphabetically, A–Z</option>
-                <option value="title-descending"{% if coll.sort_by == 'title-descending' %} selected{% endif %}>Alphabetically, Z–A</option>
-                <option value="price-ascending"{% if coll.sort_by == 'price-ascending' %} selected{% endif %}>Price, low to high</option>
-                <option value="price-descending"{% if coll.sort_by == 'price-descending' %} selected{% endif %}>Price, high to low</option>
-                <option value="created-ascending"{% if coll.sort_by == 'created-ascending' %} selected{% endif %}>Date, old to new</option>
-                <option value="created-descending"{% if coll.sort_by == 'created-descending' %} selected{% endif %}>Date, new to old</option>
-              </select>
-            {%- else -%}
-              <select id="pk-sort">
-                <option>Featured</option>
-                <option>Best selling</option>
-                <option>Alphabetically, A–Z</option>
-                <option>Alphabetically, Z–A</option>
-                <option>Price, low to high</option>
-                <option>Price, high to low</option>
-              </select>
-            {%- endif -%}
-          </div>
-        </div>
-
-        <div class="pk-product-grid">
-          {%- if use_real -%}
-            {% paginate coll.products by 12 %}
-              {%- for product in coll.products -%}
-                <a href="{{ product.url }}" class="pk-product-card">
-                  <div class="pk-placeholder" style="aspect-ratio: 1/1; padding: 0;">
-                    {%- if product.featured_image -%}
-                      <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:cover">
-                    {%- else -%}
-                      {%- render 'pankui-placeholder', shape: 'canister' -%}
-                    {%- endif -%}
-                    {%- if product.compare_at_price > product.price -%}
-                      <span class="pk-pcard__badge">Sale</span>
-                    {%- endif -%}
-                  </div>
-                  <span class="pk-product-card__title">{{ product.title }}</span>
-                  <span class="pk-product-card__price">
-                    {%- if product.compare_at_price > product.price -%}
-                      <strong>{{ product.price | money }}</strong>
-                      <span style="text-decoration:line-through; color:var(--pk-ink-soft); margin-left:6px;">{{ product.compare_at_price | money }}</span>
-                    {%- else -%}
-                      {{ product.price | money }}
-                    {%- endif -%}
-                  </span>
-                </a>
+          {%- if paginate.pages > 1 -%}
+            <div class="pk-na__pagination" style="grid-column: 1 / -1;">
+              {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">‹</a>{%- endif -%}
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                {%- elsif part.title == paginate.current_page -%}
+                  <span class="is-current">{{ part.title }}</span>
+                {%- else -%}
+                  <span>{{ part.title }}</span>
+                {%- endif -%}
               {%- endfor -%}
-
-              {%- if paginate.pages > 1 -%}
-                <div class="pk-coll-pagination" style="grid-column: 1 / -1;">
-                  {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">‹</a>{%- endif -%}
-                  {%- for part in paginate.parts -%}
-                    {%- if part.is_link -%}
-                      <a href="{{ part.url }}">{{ part.title }}</a>
-                    {%- elsif part.title == paginate.current_page -%}
-                      <span class="is-current">{{ part.title }}</span>
-                    {%- else -%}
-                      <span>{{ part.title }}</span>
-                    {%- endif -%}
-                  {%- endfor -%}
-                  {%- if paginate.next -%}<a href="{{ paginate.next.url }}">›</a>{%- endif -%}
-                </div>
-              {%- endif -%}
-            {% endpaginate %}
-          {%- else -%}
-            {%- for entry in placeholder_products -%}
-              {%- assign parts = entry | split: '|' -%}
-              <a href="/collections/all" class="pk-product-card">
-                <div class="pk-placeholder" style="aspect-ratio: 1/1; padding: 0; position: relative;">
-                  {%- render 'pankui-placeholder', shape: parts[0] -%}
-                  {%- if parts[3] != blank -%}<span class="pk-pcard__badge">Sale</span>{%- endif -%}
-                </div>
-                <span class="pk-product-card__title">{{ parts[1] }}</span>
-                <span class="pk-product-card__price">
-                  <strong>₹{{ parts[2] }}</strong>
-                  {%- if parts[3] != blank -%}
-                    <span style="text-decoration:line-through; color:var(--pk-ink-soft); margin-left:6px;">₹{{ parts[3] }}</span>
-                  {%- endif -%}
-                </span>
-              </a>
-            {%- endfor -%}
-
-            {%- comment -%} Visual pagination for placeholder mode {%- endcomment -%}
-            <div class="pk-coll-pagination" style="grid-column: 1 / -1;">
-              <span class="is-current">1</span>
-              <a href="?page=2">2</a>
-              <a href="?page=2">›</a>
+              {%- if paginate.next -%}<a href="{{ paginate.next.url }}">›</a>{%- endif -%}
             </div>
           {%- endif -%}
-        </div>
-      </div>
+        {% endpaginate %}
+      {%- else -%}
+        {%- for entry in placeholder_products -%}
+          {%- assign parts = entry | split: '|' -%}
+          <a href="/collections/all" class="pk-product-card">
+            <div class="pk-placeholder" style="aspect-ratio: 1/1; padding: 0; position: relative;">
+              {%- render 'pankui-placeholder', shape: parts[0] -%}
+              {%- if parts[3] != blank -%}<span class="pk-pcard__badge">Sale</span>{%- endif -%}
+            </div>
+            <span class="pk-product-card__title">{{ parts[1] }}</span>
+            <span class="pk-product-card__price">
+              <strong>₹{{ parts[2] }}</strong>
+              {%- if parts[3] != blank -%}
+                <span style="text-decoration:line-through; color:var(--pk-ink-soft); margin-left:6px;">₹{{ parts[3] }}</span>
+              {%- endif -%}
+            </span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 </section>
-
-<script>
-  (function () {
-    var range = document.getElementById('pk-price-range');
-    var label = document.getElementById('pk-price-max');
-    if (!range || !label) return;
-    range.addEventListener('input', function () {
-      label.textContent = '₹' + Number(range.value).toLocaleString('en-IN');
-    });
-  })();
-</script>
 
 {% schema %}
 { "name": "Pankui collection", "settings": [], "presets": [{ "name": "Pankui collection" }] }
