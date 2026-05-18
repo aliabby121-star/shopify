@@ -80,56 +80,65 @@
       <button type="button" class="pk-pdp__btn pk-pdp__buy">{{ s.buy_now_label | default: 'Buy It Now' }}</button>
 
       <script>
-        (function () {
-          var thisScript = document.currentScript;
-          var pdp = thisScript && thisScript.parentElement; // .pk-pdp__info
-          if (!pdp) { console.error('[Pankui PDP] could not find .pk-pdp__info'); return; }
+        console.log('[Pankui PDP] script tag executing — if you see this, the section is rendering');
+        try {
+          (function () {
+            var pdp = document.querySelector('.pk-pdp__info');
+            if (!pdp) { console.error('[Pankui PDP] .pk-pdp__info not found'); return; }
 
-          var product = {
-            id: {{ section.id | json }},
-            title: {{ product_title | json }},
-            price: {{ s.price | default: '0' | json }},
-            compareAt: {{ s.compare_at_price | default: '' | json }},
-            image: {%- if s.image_1 != blank -%}{{ s.image_1 | image_url: width: 200 | json }}{%- else -%}""{%- endif -%}
-          };
+            var product = {
+              id: {{ section.id | json }},
+              title: {{ product_title | json }},
+              price: {{ s.price | default: '0' | json }},
+              compareAt: {{ s.compare_at_price | default: '' | json }},
+              image: {%- if s.image_1 != blank -%}{{ s.image_1 | image_url: width: 200 | json }}{%- else -%}""{%- endif -%}
+            };
+            console.log('[Pankui PDP] product data:', product);
 
-          function buildData() {
-            var p = {};
-            for (var k in product) p[k] = product[k];
-            var qi = pdp.querySelector('.pk-pdp__qty input');
-            var v  = pdp.querySelector('.pk-pdp__variant.is-active');
-            if (qi) p.qty = Math.max(1, parseInt(qi.value, 10) || 1);
-            if (v)  p.variant = v.textContent.trim();
-            return p;
-          }
+            function buildData() {
+              var p = {};
+              for (var k in product) p[k] = product[k];
+              var qi = pdp.querySelector('.pk-pdp__qty input');
+              var v  = pdp.querySelector('.pk-pdp__variant.is-active');
+              if (qi) p.qty = Math.max(1, parseInt(qi.value, 10) || 1);
+              if (v)  p.variant = v.textContent.trim();
+              return p;
+            }
 
-          function flashAdded(btn) {
-            var orig = btn.textContent;
-            btn.classList.add('is-added');
-            btn.textContent = 'Added';
-            setTimeout(function () { btn.classList.remove('is-added'); btn.textContent = orig; }, 900);
-          }
+            function flashAdded(btn) {
+              var orig = btn.textContent;
+              btn.classList.add('is-added');
+              btn.textContent = 'Added';
+              setTimeout(function () { btn.classList.remove('is-added'); btn.textContent = orig; }, 900);
+            }
 
-          var addBtn = pdp.querySelector('.pk-pdp__add');
-          var buyBtn = pdp.querySelector('.pk-pdp__buy');
-          console.log('[Pankui PDP] init — addBtn:', !!addBtn, 'buyBtn:', !!buyBtn);
+            var addBtn = pdp.querySelector('.pk-pdp__add');
+            var buyBtn = pdp.querySelector('.pk-pdp__buy');
+            console.log('[Pankui PDP] buttons found — addBtn:', !!addBtn, 'buyBtn:', !!buyBtn);
 
-          if (addBtn) {
-            addBtn.addEventListener('click', function () {
-              console.log('[Pankui PDP] Add to cart clicked');
-              flashAdded(addBtn);
-              if (window.pkAddToCart) window.pkAddToCart(buildData());
-              else alert('Cart code not loaded. Please refresh.');
-            });
-          }
-          if (buyBtn) {
-            buyBtn.addEventListener('click', function () {
-              console.log('[Pankui PDP] Buy now clicked');
-              if (window.pkAddToCart) window.pkAddToCart(buildData());
-              if (window.pkBuyNow) window.pkBuyNow();
-            });
-          }
-        })();
+            if (addBtn) {
+              addBtn.addEventListener('click', function () {
+                console.log('[Pankui PDP] Add to cart clicked');
+                flashAdded(addBtn);
+                if (window.pkAddToCart) window.pkAddToCart(buildData());
+                else alert('Cart code not loaded. Refresh the page.');
+              });
+            } else {
+              console.error('[Pankui PDP] .pk-pdp__add button not found in DOM');
+            }
+            if (buyBtn) {
+              buyBtn.addEventListener('click', function () {
+                console.log('[Pankui PDP] Buy now clicked');
+                if (window.pkAddToCart) window.pkAddToCart(buildData());
+                if (window.pkBuyNow) window.pkBuyNow();
+              });
+            } else {
+              console.error('[Pankui PDP] .pk-pdp__buy button not found in DOM');
+            }
+          })();
+        } catch (err) {
+          console.error('[Pankui PDP] script error:', err);
+        }
       </script>
 
       <div class="pk-pdp__badges">
