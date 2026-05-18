@@ -375,9 +375,10 @@
 .pk-topnav__center { display: flex; flex-direction: column; align-items: center; }
 .pk-topnav__brand { font-family: var(--pk-font-heading); font-style: italic; font-size: 2.25rem; line-height: 1; color: #fff; }
 .pk-topnav__tagline { font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-top: 6px; }
-.pk-topnav__icon { background: 0; border: 0; width: 36px; height: 36px; display: inline-grid; place-items: center; cursor: pointer; color: #fff; border-radius: 50%; transition: background .15s ease; padding: 0; text-decoration: none; }
-.pk-topnav__icon:hover { background: rgba(255,255,255,0.15); }
-.pk-topnav__icon svg { width: 20px; height: 20px; stroke: #fff; }
+.pk-topnav .pk-topnav__icon,
+.pk-topnav a.pk-topnav__icon { background: 0; border: 0; width: 36px; height: 36px; display: inline-grid; place-items: center; cursor: pointer; color: #fff !important; border-radius: 50%; transition: background .15s ease; padding: 0; text-decoration: none; }
+.pk-topnav .pk-topnav__icon:hover { background: rgba(255,255,255,0.15); }
+.pk-topnav .pk-topnav__icon svg { width: 20px; height: 20px; stroke: #fff; }
 .pk-topnav__link { font-size: 0.875rem; color: #fff; }
 .pk-topnav__cart { position: relative; }
 .pk-topnav__cart-badge {
@@ -389,14 +390,16 @@
 /* ----- Header nav-tabs row (second row, below logo) ----- */
 .pk-topnav__menu { background: #1a1a1a; padding: 18px 32px 22px; }
 .pk-topnav__menu-row { max-width: 1280px; margin: 0 auto; display: flex; justify-content: center; flex-wrap: wrap; gap: 36px; }
-.pk-topnav__tab {
-  font-size: 0.9375rem; color: #fff; padding: 8px 4px; text-decoration: none;
+/* Higher specificity (.pk-topnav__menu .pk-topnav__tab = 0,2,0) so it beats global .pk a rule (0,1,1) */
+.pk-topnav__menu .pk-topnav__tab,
+.pk-topnav__menu a.pk-topnav__tab {
+  font-size: 0.9375rem; color: #fff !important; padding: 8px 4px; text-decoration: none;
   position: relative; transition: opacity .15s ease;
   font-weight: 500;
 }
-.pk-topnav__tab:hover { color: #fff; text-decoration: none; opacity: 0.75; }
-.pk-topnav__tab.is-active { color: #fff; font-weight: 600; opacity: 1; }
-.pk-topnav__tab.is-active::after {
+.pk-topnav__menu .pk-topnav__tab:hover { color: #fff !important; text-decoration: none; opacity: 0.75; }
+.pk-topnav__menu .pk-topnav__tab.is-active { color: #fff !important; font-weight: 600; opacity: 1; }
+.pk-topnav__menu .pk-topnav__tab.is-active::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0;
   height: 2px; background: #fff;
 }
