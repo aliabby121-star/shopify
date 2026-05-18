@@ -1,6 +1,72 @@
 {
   "sections": {
-    "main": { "type": "pankui-collection", "settings": {} }
+    "main": {
+      "type": "pankui-collection",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "title": "Air-Tight Storage Container Set",
+            "description": "BPA-free, stackable",
+            "price": "499",
+            "compare_at": "799",
+            "link": ""
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "title": "Fridge Storage Containers (6 Pack)",
+            "description": "Crystal clear, leak-proof",
+            "price": "699",
+            "compare_at": "1199",
+            "link": ""
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "title": "Modular Pantry Jars",
+            "description": "Airtight bamboo lid",
+            "price": "349",
+            "compare_at": "499",
+            "link": ""
+          }
+        },
+        "p4": {
+          "type": "product",
+          "settings": {
+            "title": "Bamboo Chopping Board",
+            "description": "Food-safe, knife-friendly",
+            "price": "349",
+            "compare_at": "549",
+            "link": ""
+          }
+        },
+        "p5": {
+          "type": "product",
+          "settings": {
+            "title": "Ceramic Spice Jars",
+            "description": "Set of 6 with wooden tray",
+            "price": "249",
+            "compare_at": "399",
+            "link": ""
+          }
+        },
+        "p6": {
+          "type": "product",
+          "settings": {
+            "title": "Modular Pantry Set",
+            "description": "12-piece kitchen organizer",
+            "price": "899",
+            "compare_at": "1299",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "settings": {}
+    }
   },
   "order": ["main"]
 }
