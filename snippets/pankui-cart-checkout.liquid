@@ -259,6 +259,41 @@
     openBuyNow: openBuyNow
   };
 
+  // ===== Delegated click handlers (work site-wide, no timing issues) =====
+  function readProductData(btn) {
+    var data = {};
+    try { data = JSON.parse(btn.getAttribute('data-pk-product') || '{}'); } catch (e) {}
+    // Read live qty + variant from the PDP if present
+    var pdp = btn.closest('.pk-pdp__info') || document;
+    var qtyInput = pdp.querySelector('.pk-pdp__qty input');
+    var activeVariant = pdp.querySelector('.pk-pdp__variant.is-active');
+    if (qtyInput) data.qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+    if (activeVariant) data.variant = activeVariant.textContent.trim();
+    return data;
+  }
+
+  document.addEventListener('click', function (e) {
+    var addBtn = e.target.closest('[data-pk-add-to-cart]');
+    if (addBtn) {
+      e.preventDefault();
+      window.pkCart.add(readProductData(addBtn));
+      return;
+    }
+    var buyBtn = e.target.closest('[data-pk-buy-now]');
+    if (buyBtn) {
+      e.preventDefault();
+      window.pkCart.add(readProductData(buyBtn));
+      window.pkCart.openBuyNow();
+      return;
+    }
+    var cartIcon = e.target.closest('[data-pk-cart-open]');
+    if (cartIcon) {
+      e.preventDefault();
+      window.pkCart.open();
+      return;
+    }
+  });
+
   // Initialize cart badge on load
   render();
 })();
