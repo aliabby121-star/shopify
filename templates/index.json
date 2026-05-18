@@ -4,11 +4,19 @@
       "type": "pankui-featured-products",
       "blocks": {},
       "settings": {
-        "eyebrow": "MOST LOVED",
-        "heading": "Featured Products",
+        "eyebrow": "FEATURED COLLECTION",
+        "heading": "Featured Collection",
         "show_view_all": true,
         "view_all_label": "View all",
         "view_all_link": "shopify://collections/all"
+      }
+    },
+    "mission": {
+      "type": "pankui-mission",
+      "settings": {
+        "eyebrow": "OUR MISSION",
+        "heading": "Our Mission",
+        "body": "Pankui is a brand that offers a wide range of high-quality, innovative, and fun products for everyday use. We believe in making our products accessible and convenient for everyone, so they can live a happy and fulfilling life."
       }
     },
     "why": {
@@ -21,39 +29,15 @@
       },
       "block_order": ["w1", "w2", "w3", "w4"],
       "settings": {
-        "heading": "Why choose Pankui"
+        "heading": "Why Choose Pankui"
       }
     },
-    "mission": {
-      "type": "pankui-mission",
-      "settings": {
-        "eyebrow": "WHO WE ARE",
-        "heading": "Our Mission",
-        "body": "Pankui is a brand that offers a wide range of high-quality, innovative and beautifully crafted products for everyday use. We believe in making our products accessible and convenient for every Indian kitchen — so you can cook, store and live with quiet calm."
-      }
-    },
-    "collections": {
-      "type": "pankui-collection-cards",
-      "blocks": {
-        "c1": { "type": "card", "settings": { "title": "AIRTIGHT CONTAINERS", "shape": "canister", "link": "shopify://collections/airtight-containers" } },
-        "c2": { "type": "card", "settings": { "title": "FRIDGE CONTAINERS", "shape": "wide-jar", "link": "shopify://collections/fridge-containers" } },
-        "c3": { "type": "card", "settings": { "title": "STORAGE SETS", "shape": "canister", "link": "shopify://collections/storage-sets" } },
-        "c4": { "type": "card", "settings": { "title": "MODULAR CONTAINERS", "shape": "wide-jar", "link": "shopify://collections/modular-containers" } },
-        "c5": { "type": "card", "settings": { "title": "HOME & KITCHEN", "shape": "canister", "link": "shopify://collections/all" } },
-        "c6": { "type": "card", "settings": { "title": "KITCHEN ORGANIZERS", "shape": "spice-rack", "link": "shopify://collections/organisers" } }
-      },
-      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
-      "settings": {
-        "eyebrow": "EXPLORE OUR RANGE",
-        "heading": "Shop by Collection"
-      }
-    },
-    "bestsellers": {
+    "recommended": {
       "type": "pankui-bestsellers",
       "blocks": {},
       "settings": {
-        "eyebrow": "CUSTOMER FAVOURITES",
-        "heading": "Bestsellers"
+        "eyebrow": "FOR YOU",
+        "heading": "Recommended Products"
       }
     },
     "trust": {
@@ -61,10 +45,10 @@
       "settings": {
         "text_before": "Trusted by",
         "highlight": "90,000+",
-        "text_after": "Customers across India",
+        "text_after": "Customers",
         "show_heart": true
       }
     }
   },
-  "order": ["featured", "why", "mission", "collections", "bestsellers", "trust"]
+  "order": ["featured", "mission", "why", "recommended", "trust"]
 }
