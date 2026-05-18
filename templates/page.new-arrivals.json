@@ -10,7 +10,7 @@
             "description": "BPA-free, stackable",
             "price": "499",
             "compare_at": "799",
-            "link": ""
+            "link": "/pages/product"
           }
         },
         "p2": {
@@ -20,7 +20,7 @@
             "description": "Crystal clear, leak-proof",
             "price": "699",
             "compare_at": "1199",
-            "link": ""
+            "link": "/pages/product"
           }
         },
         "p3": {
@@ -30,7 +30,7 @@
             "description": "Airtight bamboo lid",
             "price": "349",
             "compare_at": "499",
-            "link": ""
+            "link": "/pages/product"
           }
         },
         "p4": {
@@ -40,7 +40,7 @@
             "description": "Food-safe, knife-friendly",
             "price": "349",
             "compare_at": "549",
-            "link": ""
+            "link": "/pages/product"
           }
         },
         "p5": {
@@ -50,7 +50,7 @@
             "description": "Set of 6 with wooden tray",
             "price": "249",
             "compare_at": "399",
-            "link": ""
+            "link": "/pages/product"
           }
         },
         "p6": {
@@ -60,7 +60,7 @@
             "description": "12-piece kitchen organizer",
             "price": "899",
             "compare_at": "1299",
-            "link": ""
+            "link": "/pages/product"
           }
         }
       },
