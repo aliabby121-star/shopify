@@ -1,9 +1,22 @@
 {{ 'pankui.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  comment
+  Works for both /collections/[handle] and /pages/[handle] routes.
+  Picks the most relevant title in this order: collection title → page title → fallback.
+  endcomment
   assign coll = collection
-  assign coll_title = coll.title | default: 'Home & Kitchen'
-  assign coll_desc = coll.description | default: 'Premium airtight containers and kitchen organizers designed for everyday Indian homes.'
+  assign page_title_fallback = ''
+  if page and page.title != blank
+    assign page_title_fallback = page.title
+  endif
+  assign coll_title = coll.title | default: page_title_fallback | default: 'Home & Kitchen'
+
+  assign page_desc_fallback = ''
+  if page and page.content != blank
+    assign page_desc_fallback = page.content | strip_html | strip
+  endif
+  assign coll_desc = coll.description | default: page_desc_fallback | default: 'Premium airtight containers and kitchen organizers designed for everyday Indian homes.'
 -%}
 
 {%- assign placeholder_products = 'wide-jar|Air-Tight Storage Containers Set|499|799,wide-jar|Fridge Containers (6 Pack)|699|1199,canister|Modular Pantry Jars|349|499,spice-rack|Bamboo Chopping Board|349|549,canister|Ceramic Spice Jars|249|399,wide-jar|Modular Pantry Set|899|1299' | split: ',' -%}
