@@ -147,7 +147,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h5>Shop</h5><p><a href=\"/collections/all\">All Products</a><br><a href=\"/collections/bestsellers\">Bestsellers</a><br><a href=\"/collections/new-arrivals\">New Arrivals</a><br><a href=\"/collections/sale\">Sale</a></p>",
+            "text": "<h5>Menu</h5><p><a href=\"/collections/all\">All Products</a><br><a href=\"/collections/bestsellers\">Bestsellers</a><br><a href=\"/collections/new-arrivals\">New Arrivals</a><br><a href=\"/collections/sale\">Sale</a></p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
