@@ -76,8 +76,8 @@
         <button type="button" data-step="1" aria-label="Increase">+</button>
       </div>
 
-      <a href="/cart" class="pk-pdp__btn">{{ s.add_to_cart_label | default: 'Add to Cart' }}</a>
-      <a href="/checkout" class="pk-pdp__btn">{{ s.buy_now_label | default: 'Buy It Now' }}</a>
+      <button type="button" class="pk-pdp__btn" data-pk-add-to-cart>{{ s.add_to_cart_label | default: 'Add to Cart' }}</button>
+      <button type="button" class="pk-pdp__btn" data-pk-buy-now>{{ s.buy_now_label | default: 'Buy It Now' }}</button>
 
       <div class="pk-pdp__badges">
         {%- comment -%} Three trust badges from settings {%- endcomment -%}
@@ -179,6 +179,34 @@
         if (mainImg) mainImg.src = thumb.dataset.pkPdpThumb;
         document.querySelectorAll('.pk-pdp__thumb').forEach(function (t) { t.classList.remove('is-active'); });
         thumb.classList.add('is-active');
+      });
+    });
+
+    // Add to Cart / Buy It Now — collect product data from settings and call window.pkCart
+    function getProduct() {
+      var qtyInput = document.querySelector('.pk-pdp__qty input');
+      var activeVariant = document.querySelector('.pk-pdp__variant.is-active');
+      return {
+        id: {{ section.id | json }},
+        title: {{ product_title | json }},
+        variant: activeVariant ? activeVariant.textContent.trim() : '',
+        price: {{ s.price | default: '0' | json }},
+        compareAt: {{ s.compare_at_price | default: '' | json }},
+        image: {%- if s.image_1 != blank -%}{{ s.image_1 | image_url: width: 200 | json }}{%- else -%}''{%- endif -%},
+        qty: qtyInput ? Math.max(1, parseInt(qtyInput.value, 10) || 1) : 1
+      };
+    }
+    document.querySelectorAll('[data-pk-add-to-cart]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (window.pkCart) window.pkCart.add(getProduct());
+      });
+    });
+    document.querySelectorAll('[data-pk-buy-now]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (window.pkCart) {
+          window.pkCart.add(getProduct());
+          window.pkCart.openBuyNow();
+        }
       });
     });
   })();

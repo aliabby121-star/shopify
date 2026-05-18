@@ -1,0 +1,265 @@
+{%- comment -%}
+  Pankui — site-wide slide-out cart drawer + Buy Now (GoKwik-style) modal.
+  Cart persists in localStorage (no real Shopify products needed).
+  Exposes JS API on window:
+    window.pkCart.add({ id, title, variant, price, compareAt, image })
+    window.pkCart.open()
+    window.pkCart.openBuyNow()
+{%- endcomment -%}
+
+<div id="pk-cd" class="pk-cd" role="dialog" aria-modal="true" aria-label="Your cart" aria-hidden="true">
+  <div class="pk-cd__overlay" data-pk-cd-close></div>
+  <aside class="pk-cd__panel">
+    <header class="pk-cd__head">
+      <h2>Your cart</h2>
+      <button type="button" class="pk-cd__close" aria-label="Close cart" data-pk-cd-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="pk-cd__cols"><span>Product</span><span>Total</span></div>
+
+    <div class="pk-cd__items" id="pk-cd-items">
+      <div class="pk-cd__empty">Your cart is empty.</div>
+    </div>
+
+    <footer class="pk-cd__foot">
+      <button type="button" class="pk-cd__notes-toggle" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        Order special instructions
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <textarea hidden style="width:100%; padding:10px; border:1px solid var(--pk-line-strong); border-radius:4px; margin-top:6px; font:inherit; font-size:0.8125rem; resize:vertical; min-height:60px;"></textarea>
+
+      <div class="pk-cd__subtotal">
+        <span>Subtotal</span>
+        <span id="pk-cd-subtotal">₹ 0.00</span>
+      </div>
+      <p class="pk-cd__tax-line">Tax included. Free Shipping with Cash on Delivery</p>
+      <button type="button" class="pk-cd__checkout" onclick="window.pkCart.openBuyNow()">Checkout</button>
+    </footer>
+  </aside>
+</div>
+
+<div id="pk-bn" class="pk-bn" role="dialog" aria-modal="true" aria-label="Checkout" aria-hidden="true">
+  <div class="pk-bn__overlay" data-pk-bn-close></div>
+  <div class="pk-bn__panel">
+    <div class="pk-bn__head">
+      <button type="button" class="pk-bn__back" data-pk-bn-close>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <span class="pk-bn__brand">pankui</span>
+      <span class="pk-bn__secure">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        100% Secured Payment
+      </span>
+    </div>
+
+    <div class="pk-bn__discount-banner">Extra Discount Available at Payment Step</div>
+
+    <div class="pk-bn__body">
+      <div class="pk-bn__summary">
+        <div class="pk-bn__summary-left">
+          <div class="pk-bn__summary-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h15l-1.5 9H7z"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          </div>
+          <div>
+            <div class="pk-bn__summary-title">Order Summary</div>
+            <div class="pk-bn__summary-saved"><strong id="pk-bn-saved">₹0</strong> saved so far</div>
+          </div>
+        </div>
+        <div class="pk-bn__summary-right">
+          <div><span id="pk-bn-items">0 items</span></div>
+          <div>
+            <span class="strike" id="pk-bn-compare">₹0</span>
+            <span class="price" id="pk-bn-total">₹0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pk-bn__coupon">
+        <input type="text" placeholder="Enter coupon code">
+        <div class="pk-bn__coupon-row">
+          <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:-2px; margin-right:4px;"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> 10 coupons available</span>
+          <a href="#">View All</a>
+        </div>
+      </div>
+
+      <div class="pk-bn__field-card">
+        <p class="pk-bn__field-title">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          Login to continue
+        </p>
+        <div class="pk-bn__phone">
+          <span>+91</span>
+          <input type="tel" id="pk-bn-phone" placeholder="Enter Mobile Number" maxlength="10" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="pk-bn__trust">
+        <div class="pk-bn__powered">
+          Powered by
+          <strong>🛡️ GoKwik</strong>
+        </div>
+        <div class="pk-bn__trust-line">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Trusted by 1 million+ shoppers daily
+        </div>
+        <div class="pk-bn__badges">
+          <span>🛡️ PCI DSS<br>Certified</span>
+          <span>🔒 Secured<br>Payments</span>
+          <span>✅ Verified<br>Merchant</span>
+        </div>
+      </div>
+    </div>
+
+    <label class="pk-bn__consent">
+      <input type="checkbox">
+      Send me order updates &amp; offers - (no spam)
+    </label>
+
+    <button type="button" class="pk-bn__continue" id="pk-bn-continue" disabled>Continue</button>
+    <p class="pk-bn__legal">By proceeding, I agree to Gokwik's <a href="#">Privacy Policy</a> and <a href="#">T&amp;C</a>.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'pankui:cart';
+  function load() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) { return []; } }
+  function save(items) { localStorage.setItem(KEY, JSON.stringify(items)); }
+  function money(n) { return '₹ ' + (Math.round(n * 100) / 100).toFixed(2); }
+
+  var drawer = document.getElementById('pk-cd');
+  var modal  = document.getElementById('pk-bn');
+  var itemsEl = document.getElementById('pk-cd-items');
+  var subEl   = document.getElementById('pk-cd-subtotal');
+
+  function render() {
+    var items = load();
+    if (!items.length) {
+      itemsEl.innerHTML = '<div class="pk-cd__empty">Your cart is empty.</div>';
+      subEl.textContent = money(0);
+      updateCartBadge(0);
+      return;
+    }
+    var subtotal = 0, totalCompare = 0, totalQty = 0;
+    var html = items.map(function (it, i) {
+      var line = (parseFloat(it.price) || 0) * (it.qty || 1);
+      subtotal += line;
+      totalCompare += (parseFloat(it.compareAt) || parseFloat(it.price) || 0) * (it.qty || 1);
+      totalQty += (it.qty || 1);
+      return ''+
+        '<div class="pk-cd__item">'+
+          '<div class="pk-cd__item-img">'+
+            (it.image ? '<img src="'+it.image+'" alt="">' : '')+
+          '</div>'+
+          '<div class="pk-cd__item-body">'+
+            '<div class="pk-cd__item-title">'+escapeHtml(it.title || 'Product')+'</div>'+
+            (it.variant ? '<div class="pk-cd__item-variant">'+escapeHtml(it.variant)+'</div>' : '')+
+            '<div class="pk-cd__item-price">₹ '+(parseFloat(it.price) || 0).toFixed(2)+'</div>'+
+            '<div class="pk-cd__item-qty" data-i="'+i+'">'+
+              '<button type="button" data-step="-1">−</button>'+
+              '<input type="text" value="'+(it.qty || 1)+'" inputmode="numeric" readonly>'+
+              '<button type="button" data-step="1">+</button>'+
+            '</div>'+
+          '</div>'+
+          '<div class="pk-cd__item-right">'+
+            '<span class="pk-cd__item-total">₹ '+line.toFixed(2)+'</span>'+
+            '<button type="button" class="pk-cd__item-remove" data-remove="'+i+'" aria-label="Remove">🗑</button>'+
+          '</div>'+
+        '</div>';
+    }).join('');
+    itemsEl.innerHTML = html;
+    subEl.textContent = money(subtotal);
+    updateCartBadge(totalQty);
+    updateBuyNowSummary(items, subtotal, totalCompare, totalQty);
+  }
+
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
+
+  function updateCartBadge(count) {
+    document.querySelectorAll('.pk-topnav__cart-badge').forEach(function(b){ b.textContent = count; });
+  }
+  function updateBuyNowSummary(items, subtotal, compare, qty) {
+    var saved = Math.max(0, compare - subtotal);
+    var s = document.getElementById('pk-bn-saved'); if (s) s.textContent = '₹' + Math.round(saved);
+    var c = document.getElementById('pk-bn-compare'); if (c) c.textContent = '₹' + Math.round(compare);
+    var t = document.getElementById('pk-bn-total'); if (t) t.textContent = '₹' + Math.round(subtotal);
+    var n = document.getElementById('pk-bn-items'); if (n) n.textContent = qty + ' item' + (qty === 1 ? '' : 's');
+  }
+
+  // Cart drawer open/close
+  function openCart() { drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.classList.add('pk-cd-open'); render(); }
+  function closeCart() { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.classList.remove('pk-cd-open'); }
+  function openBuyNow() {
+    var items = load();
+    if (!items.length) return;
+    var subtotal = items.reduce(function(s,it){ return s + (parseFloat(it.price)||0)*(it.qty||1); }, 0);
+    var compare  = items.reduce(function(s,it){ return s + (parseFloat(it.compareAt)||parseFloat(it.price)||0)*(it.qty||1); }, 0);
+    var qty      = items.reduce(function(s,it){ return s + (it.qty||1); }, 0);
+    updateBuyNowSummary(items, subtotal, compare, qty);
+    modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('pk-bn-open');
+  }
+  function closeBuyNow() { modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('pk-bn-open'); }
+
+  // Event delegation
+  drawer.querySelectorAll('[data-pk-cd-close]').forEach(function(b){ b.addEventListener('click', closeCart); });
+  modal.querySelectorAll('[data-pk-bn-close]').forEach(function(b){ b.addEventListener('click', closeBuyNow); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      if (modal.classList.contains('is-open')) closeBuyNow();
+      else if (drawer.classList.contains('is-open')) closeCart();
+    }
+  });
+
+  itemsEl.addEventListener('click', function (e) {
+    var rem = e.target.closest('[data-remove]');
+    if (rem) {
+      var items = load();
+      items.splice(parseInt(rem.dataset.remove,10), 1);
+      save(items); render(); return;
+    }
+    var step = e.target.closest('[data-step]');
+    if (step) {
+      var wrap = step.closest('[data-i]');
+      var i = parseInt(wrap.dataset.i, 10);
+      var items = load();
+      items[i].qty = Math.max(1, (items[i].qty || 1) + parseInt(step.dataset.step, 10));
+      save(items); render(); return;
+    }
+  });
+
+  // Phone number → Continue button activation
+  var phone = document.getElementById('pk-bn-phone');
+  var cont  = document.getElementById('pk-bn-continue');
+  if (phone && cont) {
+    phone.addEventListener('input', function () {
+      phone.value = phone.value.replace(/\D/g,'').slice(0,10);
+      if (phone.value.length === 10) { cont.classList.add('is-active'); cont.disabled = false; }
+      else { cont.classList.remove('is-active'); cont.disabled = true; }
+    });
+    cont.addEventListener('click', function () {
+      if (cont.disabled) return;
+      alert('OTP sent to +91 ' + phone.value + '. (Demo — connect to your payment provider to complete checkout.)');
+    });
+  }
+
+  // Public API
+  window.pkCart = {
+    add: function (p) {
+      var items = load();
+      var key = (p.id || p.title) + '|' + (p.variant || '');
+      var found = items.find(function(i){ return ((i.id||i.title) + '|' + (i.variant||'')) === key; });
+      if (found) found.qty = (found.qty || 1) + (p.qty || 1);
+      else items.push({ id:p.id, title:p.title, variant:p.variant||'', price:p.price, compareAt:p.compareAt||'', image:p.image||'', qty:p.qty||1 });
+      save(items); openCart();
+    },
+    open: openCart,
+    close: closeCart,
+    openBuyNow: openBuyNow
+  };
+
+  // Initialize cart badge on load
+  render();
+})();
+</script>
