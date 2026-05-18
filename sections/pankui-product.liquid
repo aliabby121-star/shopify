@@ -1,66 +1,159 @@
 {{ 'pankui.css' | asset_url | stylesheet_tag }}
 
-<section class="pk pk-page">
-  <div class="pk-wrap">
-    <nav class="pk-breadcrumb">
-      <a href="/">Home</a> / <a href="/collections/all">Home &amp; Kitchen</a> / Air-Tight Storage Container
-    </nav>
+{%- liquid
+  assign s = section.settings
+  comment Title falls back to page.title so creating a Page named e.g. "Masala Box" auto-fills it. endcomment
+  assign product_title = s.title | default: page.title | default: 'Product name'
+-%}
 
-    <div class="pk-product">
-      <div class="pk-product__media">
-        {%- render 'pankui-placeholder', shape: 'wide-jar' -%}
+<section class="pk pk-pdp">
+  <div class="pk-pdp__layout">
+
+    {%- comment -%} ===== Image gallery ===== {%- endcomment -%}
+    <div class="pk-pdp__gallery">
+      <div class="pk-pdp__main" id="pk-pdp-main">
+        {%- if s.image_1 != blank -%}
+          <img src="{{ s.image_1 | image_url: width: 900 }}" alt="{{ product_title }}" id="pk-pdp-main-img">
+        {%- else -%}
+          <div style="aspect-ratio:1/1; display:grid; place-items:center; color: var(--pk-ink-soft); font-size:0.75rem;">Upload main image in theme editor</div>
+        {%- endif -%}
+      </div>
+      <div class="pk-pdp__thumbs">
+        {%- assign thumbs = '' | split: '|' -%}
+        {%- for i in (1..5) -%}
+          {%- assign key = 'image_' | append: i -%}
+          {%- assign img = s[key] -%}
+          {%- if img != blank -%}
+            <div class="pk-pdp__thumb {% if forloop.first %}is-active{% endif %}" data-pk-pdp-thumb="{{ img | image_url: width: 900 }}">
+              <img src="{{ img | image_url: width: 200 }}" alt="">
+            </div>
+          {%- else -%}
+            <div class="pk-pdp__thumb" style="background:var(--pk-bg-card); opacity:0.5;"></div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} ===== Info column ===== {%- endcomment -%}
+    <div class="pk-pdp__info">
+      <h1 class="pk-pdp__title">{{ product_title }}</h1>
+
+      <div class="pk-pdp__prices">
+        {%- if s.compare_at_price != blank -%}
+          <span class="pk-pdp__price-compare">₹{{ s.compare_at_price }}</span>
+        {%- endif -%}
+        <span class="pk-pdp__price">₹{{ s.price | default: '0' }}</span>
+        {%- if s.show_sale_badge and s.compare_at_price != blank -%}
+          <span class="pk-pdp__sale-badge">Sale</span>
+        {%- endif -%}
       </div>
 
-      <div class="pk-product__details">
-        <h1 class="pk-product__title">Air-Tight Storage Container</h1>
-        <p class="pk-product__price">₹499 <span style="color:var(--pk-ink-soft);text-decoration:line-through;font-size:0.875rem;font-weight:400;margin-left:8px;">₹799</span></p>
-        <p class="pk-product__rating"><span class="pk-stars">★★★★☆</span> 4.0 (16) reviews</p>
+      {%- if s.tax_line != blank -%}
+        <p class="pk-pdp__tax-line">{{ s.tax_line }}</p>
+      {%- endif -%}
 
-        <p class="pk-product__desc">Minimal, airtight and beautifully designed to keep your pantry essentials fresher for longer &mdash; easy to clean, easy to love.</p>
+      <div class="pk-pdp__divider"></div>
 
-        <ul class="pk-product__bullets">
-          <li>High quality ceramic</li>
-          <li>Airtight wooden lid</li>
-          <li>Food safe</li>
-          <li>Easy to clean</li>
-        </ul>
-
-        <div class="pk-product__qty" role="group" aria-label="Quantity">
-          <button type="button" data-step="-1" aria-label="Decrease">−</button>
-          <input type="text" value="1" inputmode="numeric" aria-label="Quantity">
-          <button type="button" data-step="1" aria-label="Increase">+</button>
+      {%- if s.variant_1_label != blank or s.variant_2_label != blank -%}
+        <p class="pk-pdp__combo-label">{{ s.combo_label | default: 'Combo Offer:' }}</p>
+        <div class="pk-pdp__variants" data-pk-variants>
+          {%- if s.variant_1_label != blank -%}
+            <button type="button" class="pk-pdp__variant is-active" data-pk-variant>{{ s.variant_1_label }}</button>
+          {%- endif -%}
+          {%- if s.variant_2_label != blank -%}
+            <button type="button" class="pk-pdp__variant" data-pk-variant>{{ s.variant_2_label }}</button>
+          {%- endif -%}
+          {%- if s.variant_3_label != blank -%}
+            <button type="button" class="pk-pdp__variant" data-pk-variant>{{ s.variant_3_label }}</button>
+          {%- endif -%}
         </div>
+      {%- endif -%}
 
-        <div class="pk-product__buttons">
-          <button type="button" class="pk-btn pk-btn--tan pk-btn--block">Add to cart</button>
-          <button type="button" class="pk-btn pk-btn--primary pk-btn--block">Buy now</button>
+      <p class="pk-pdp__qty-label">Quantity:</p>
+      <div class="pk-pdp__qty">
+        <button type="button" data-step="-1" aria-label="Decrease">−</button>
+        <input type="text" value="1" inputmode="numeric" aria-label="Quantity">
+        <button type="button" data-step="1" aria-label="Increase">+</button>
+      </div>
+
+      <a href="/cart" class="pk-pdp__btn">{{ s.add_to_cart_label | default: 'Add to Cart' }}</a>
+      <a href="/checkout" class="pk-pdp__btn">{{ s.buy_now_label | default: 'Buy It Now' }}</a>
+
+      <div class="pk-pdp__badges">
+        {%- comment -%} Three trust badges from settings {%- endcomment -%}
+        <div class="pk-pdp__badge">
+          <div class="pk-pdp__badge-icon" style="background: #fff3e0;">
+            {%- if s.badge_1_image != blank -%}
+              <img src="{{ s.badge_1_image | image_url: width: 80 }}" alt="">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="#f57c00"><path d="M12 2l3 7 7 .5-5 5 1.5 7L12 17.8 5.5 21.5 7 14.5l-5-5L9 9z"/></svg>
+            {%- endif -%}
+          </div>
+          {{ s.badge_1_label | default: 'Proudly Made in India' }}
         </div>
-
-        <div class="pk-product__tabs">
-          <div class="pk-product__tabs-nav" role="tablist">
-            <button class="is-active" type="button" data-tab="details">Details</button>
-            <button type="button" data-tab="care">Care</button>
-            <button type="button" data-tab="shipping">Shipping &amp; Returns</button>
+        <div class="pk-pdp__badge">
+          <div class="pk-pdp__badge-icon" style="background: #e3f2fd;">
+            {%- if s.badge_2_image != blank -%}
+              <img src="{{ s.badge_2_image | image_url: width: 80 }}" alt="">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="#1e88e5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {%- endif -%}
           </div>
-          <div class="pk-product__tab-body" data-tab-body="details">
-            <p>• Dimensions: 10cm x 10cm x 14cm</p>
-            <p>• Capacity: 850 ml</p>
+          {{ s.badge_2_label | default: 'Trusted by 90,000+ Families' }}
+        </div>
+        <div class="pk-pdp__badge">
+          <div class="pk-pdp__badge-icon" style="background: #e8f5e9;">
+            {%- if s.badge_3_image != blank -%}
+              <img src="{{ s.badge_3_image | image_url: width: 80 }}" alt="">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="#43a047"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="18" cy="14" r="2.5" fill="#fff"/></svg>
+            {%- endif -%}
           </div>
-          <div class="pk-product__tab-body" data-tab-body="care" hidden>
-            <p>Hand wash with a soft cloth and mild soap. Dry the wooden lid separately; avoid prolonged soaking.</p>
-          </div>
-          <div class="pk-product__tab-body" data-tab-body="shipping" hidden>
-            <p>Ships free across India in 3–5 business days. Easy 14-day returns on unopened pieces.</p>
-          </div>
+          {{ s.badge_3_label | default: '100% Safe Payments' }}
         </div>
       </div>
+
+      {%- if s.codes_text != blank -%}
+        <div class="pk-pdp__codes">
+          <p class="pk-pdp__codes-title">{{ s.codes_title | default: 'Unlock Extra Savings at Checkout!' }}</p>
+          <ul>
+            {%- assign code_lines = s.codes_text | newline_to_br | split: '<br />' -%}
+            {%- for line in code_lines -%}
+              {%- assign cleaned = line | strip_html | strip -%}
+              {%- if cleaned != blank -%}<li>{{ cleaned }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} ===== Marketing blocks (heading + image + body) ===== {%- endcomment -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="pk-pdp__marketing">
+          {%- for block in section.blocks -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <p class="pk-pdp__marketing-heading">{{ block.settings.heading }}</p>
+              {%- endif -%}
+              {%- if block.settings.image != blank -%}
+                <div class="pk-pdp__marketing-image" style="margin-top:14px;">
+                  <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.heading }}" loading="lazy">
+                </div>
+              {%- endif -%}
+              {%- if block.settings.body != blank -%}
+                <p class="pk-pdp__marketing-body" style="margin-top:14px;">{{ block.settings.body }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
 
 <script>
   (function () {
-    document.querySelectorAll('.pk-product__qty').forEach(function (group) {
+    // Quantity
+    document.querySelectorAll('.pk-pdp__qty').forEach(function (group) {
       var input = group.querySelector('input');
       group.querySelectorAll('button').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -70,20 +163,79 @@
         });
       });
     });
-    document.querySelectorAll('.pk-product__tabs').forEach(function (tabs) {
-      var nav = tabs.querySelectorAll('.pk-product__tabs-nav button');
-      var bodies = tabs.querySelectorAll('[data-tab-body]');
-      nav.forEach(function (btn) {
+    // Variants
+    document.querySelectorAll('[data-pk-variants]').forEach(function (group) {
+      group.querySelectorAll('[data-pk-variant]').forEach(function (btn) {
         btn.addEventListener('click', function () {
-          nav.forEach(function (n) { n.classList.remove('is-active'); });
+          group.querySelectorAll('[data-pk-variant]').forEach(function (b) { b.classList.remove('is-active'); });
           btn.classList.add('is-active');
-          bodies.forEach(function (body) { body.hidden = body.dataset.tabBody !== btn.dataset.tab; });
         });
+      });
+    });
+    // Thumbnail swap
+    var mainImg = document.getElementById('pk-pdp-main-img');
+    document.querySelectorAll('[data-pk-pdp-thumb]').forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        if (mainImg) mainImg.src = thumb.dataset.pkPdpThumb;
+        document.querySelectorAll('.pk-pdp__thumb').forEach(function (t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
       });
     });
   })();
 </script>
 
 {% schema %}
-{ "name": "Pankui product", "settings": [], "presets": [{ "name": "Pankui product" }] }
+{
+  "name": "Pankui product detail",
+  "settings": [
+    { "type": "header", "content": "Product info" },
+    { "type": "text", "id": "title", "label": "Product name", "info": "Leave blank to use the page title" },
+    { "type": "text", "id": "price", "label": "Sale price (₹)", "default": "1699" },
+    { "type": "text", "id": "compare_at_price", "label": "Original price (₹) — optional", "default": "3299" },
+    { "type": "checkbox", "id": "show_sale_badge", "label": "Show Sale badge", "default": true },
+    { "type": "text", "id": "tax_line", "label": "Tax / shipping line", "default": "Tax included. Free Shipping with Cash on Delivery." },
+
+    { "type": "header", "content": "Product images (5 thumbnails — first one is the main image)" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1 (main)" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+    { "type": "image_picker", "id": "image_5", "label": "Image 5" },
+
+    { "type": "header", "content": "Variants / combo offer" },
+    { "type": "text", "id": "combo_label", "label": "Variants label", "default": "Combo Offer:" },
+    { "type": "text", "id": "variant_1_label", "label": "Variant 1", "default": "Pack of 1" },
+    { "type": "text", "id": "variant_2_label", "label": "Variant 2", "default": "Pack of 2" },
+    { "type": "text", "id": "variant_3_label", "label": "Variant 3 (optional)" },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "add_to_cart_label", "label": "Add to cart label", "default": "Add to Cart" },
+    { "type": "text", "id": "buy_now_label", "label": "Buy now label", "default": "Buy It Now" },
+
+    { "type": "header", "content": "Trust badges (3 badges)" },
+    { "type": "image_picker", "id": "badge_1_image", "label": "Badge 1 image (optional, uses default icon if blank)" },
+    { "type": "text", "id": "badge_1_label", "label": "Badge 1 label", "default": "Proudly Made in India" },
+    { "type": "image_picker", "id": "badge_2_image", "label": "Badge 2 image" },
+    { "type": "text", "id": "badge_2_label", "label": "Badge 2 label", "default": "Trusted by 90,000+ Families" },
+    { "type": "image_picker", "id": "badge_3_image", "label": "Badge 3 image" },
+    { "type": "text", "id": "badge_3_label", "label": "Badge 3 label", "default": "100% Safe Payments" },
+
+    { "type": "header", "content": "Discount codes panel" },
+    { "type": "text", "id": "codes_title", "label": "Title", "default": "Unlock Extra Savings at Checkout!" },
+    { "type": "textarea", "id": "codes_text", "label": "Codes (one per line)", "default": "Code: SAVE5 – Get 5% off on orders above ₹1999\nCode: SAVE10 – Get 10% off on orders above ₹4999" }
+  ],
+  "blocks": [
+    {
+      "type": "marketing",
+      "name": "Marketing block",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "TRANSFORM YOUR KITCHEN" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "textarea", "id": "body", "label": "Description", "default": "Add a short paragraph about this product feature here." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Pankui product detail" }]
+}
 {% endschema %}

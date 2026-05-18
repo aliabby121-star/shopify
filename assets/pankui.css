@@ -646,6 +646,105 @@ body.pk-drawer-open { overflow: hidden; }
   .pk-collections2__title { font-size: 2rem; }
 }
 
+/* ============================================================
+   Product Detail Page (PDP) — Activlife-style
+   ============================================================ */
+.pk-pdp { padding-block: 32px 64px; }
+.pk-pdp__layout {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px;
+  max-width: 1180px; margin: 0 auto; padding-inline: 24px;
+}
+.pk-pdp__gallery { display: flex; flex-direction: column; gap: 14px; }
+.pk-pdp__main {
+  aspect-ratio: 1 / 1; background: var(--pk-bg-soft); border-radius: 6px; overflow: hidden;
+}
+.pk-pdp__main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pk-pdp__thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.pk-pdp__thumb {
+  aspect-ratio: 1 / 1; background: var(--pk-bg-soft); border-radius: 4px; overflow: hidden;
+  cursor: pointer; transition: opacity .15s ease; border: 2px solid transparent;
+}
+.pk-pdp__thumb.is-active { border-color: var(--pk-ink); }
+.pk-pdp__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pk-pdp__thumb:hover { opacity: 0.85; }
+
+.pk-pdp__info { display: flex; flex-direction: column; gap: 14px; }
+.pk-pdp__title {
+  font-family: var(--pk-font-body); font-size: 1.625rem; font-weight: 700;
+  line-height: 1.25; color: var(--pk-ink); margin: 0;
+}
+.pk-pdp__prices { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.pk-pdp__price-compare {
+  font-size: 0.9375rem; color: var(--pk-ink-soft); text-decoration: line-through;
+}
+.pk-pdp__price { font-size: 1.25rem; font-weight: 600; color: var(--pk-ink); }
+.pk-pdp__sale-badge {
+  background: #6b3fa0; color: #fff; font-size: 0.75rem; font-weight: 600;
+  padding: 4px 12px; border-radius: 999px; letter-spacing: 0.04em;
+}
+.pk-pdp__tax-line { font-size: 0.75rem; color: var(--pk-ink-soft); margin-top: -2px; }
+.pk-pdp__divider { height: 1px; background: var(--pk-line); margin: 6px 0; }
+.pk-pdp__combo-label { font-size: 0.875rem; font-weight: 500; color: var(--pk-ink); }
+.pk-pdp__variants { display: flex; gap: 10px; flex-wrap: wrap; }
+.pk-pdp__variant {
+  padding: 8px 18px; border-radius: 999px; border: 1px solid var(--pk-line-strong);
+  background: transparent; color: var(--pk-ink); font: inherit; font-size: 0.8125rem;
+  cursor: pointer; transition: background .15s ease, color .15s ease;
+}
+.pk-pdp__variant.is-active { background: var(--pk-ink); color: var(--pk-white); border-color: var(--pk-ink); }
+.pk-pdp__qty-label { font-size: 0.875rem; font-weight: 500; color: var(--pk-ink); margin-top: 6px; }
+.pk-pdp__qty {
+  display: inline-flex; align-items: center; border: 1px solid var(--pk-line-strong);
+  border-radius: var(--pk-radius); overflow: hidden; width: fit-content;
+}
+.pk-pdp__qty button { background: 0; border: 0; width: 38px; height: 40px; cursor: pointer; font-size: 1.125rem; }
+.pk-pdp__qty input { border: 0; width: 48px; height: 40px; text-align: center; font: inherit; background: transparent; }
+.pk-pdp__btn {
+  display: block; width: 100%; padding: 14px 20px;
+  background: var(--pk-ink); color: var(--pk-white); border: 0; border-radius: var(--pk-radius);
+  font: inherit; font-size: 0.9375rem; font-weight: 500; cursor: pointer; text-align: center;
+  text-decoration: none; transition: opacity .15s ease;
+}
+.pk-pdp__btn:hover { opacity: 0.85; text-decoration: none; color: var(--pk-white); }
+.pk-pdp__btn + .pk-pdp__btn { margin-top: 8px; }
+
+.pk-pdp__badges {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  padding: 16px 0; margin: 6px 0; border-top: 1px solid var(--pk-line); border-bottom: 1px solid var(--pk-line);
+}
+.pk-pdp__badge { text-align: center; font-size: 0.6875rem; color: var(--pk-ink-soft); line-height: 1.4; }
+.pk-pdp__badge-icon {
+  width: 56px; height: 56px; margin: 0 auto 6px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--pk-bg-soft);
+}
+.pk-pdp__badge-icon img { max-width: 100%; max-height: 100%; }
+.pk-pdp__badge-icon svg { width: 32px; height: 32px; }
+
+.pk-pdp__codes {
+  background: var(--pk-bg-soft); border-radius: 6px; padding: 16px 18px;
+}
+.pk-pdp__codes-title { font-size: 0.875rem; font-weight: 600; margin: 0 0 8px; color: var(--pk-ink); }
+.pk-pdp__codes ul { margin: 0; padding-left: 18px; font-size: 0.8125rem; color: var(--pk-ink-soft); line-height: 1.7; }
+
+.pk-pdp__marketing { margin-top: 40px; display: flex; flex-direction: column; gap: 28px; }
+.pk-pdp__marketing-heading {
+  text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--pk-ink); margin: 0;
+}
+.pk-pdp__marketing-image {
+  aspect-ratio: 16 / 10; background: var(--pk-bg-soft); border-radius: 6px; overflow: hidden;
+}
+.pk-pdp__marketing-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pk-pdp__marketing-body { font-size: 0.875rem; color: var(--pk-ink-soft); line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .pk-pdp__layout { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 600px) {
+  .pk-pdp__title { font-size: 1.375rem; }
+  .pk-pdp__thumbs { grid-template-columns: repeat(4, 1fr); }
+}
+
 /* ----- About Us narrative + mission ----- */
 .pk-about__story { font-size: 1rem; line-height: 1.8; color: var(--pk-ink); }
 .pk-about__story p { margin: 0 0 18px; }

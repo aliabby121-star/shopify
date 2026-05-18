@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "main": {
+      "type": "pankui-product",
+      "blocks": {
+        "m1": {
+          "type": "marketing",
+          "settings": {
+            "heading": "TRANSFORM YOUR KITCHEN WITH THE ULTIMATE SPICE ORGANIZER",
+            "body": "Introducing the 12 in 1 Stainless Steel Masala Box – your perfect kitchen companion for keeping all your essential spices fresh, organized, and easily accessible. Say goodbye to clutter and hello to convenience."
+          }
+        },
+        "m2": {
+          "type": "marketing",
+          "settings": {
+            "heading": "WHY YOU'LL LOVE IT ❤",
+            "body": "Annoyed by spices mixing together and altering the intended flavor of your dishes? Our masala box comes with 9 inner containers, each with its own individual lid, preventing any unwanted mixing of spices and keeping flavors distinct."
+          }
+        }
+      },
+      "block_order": ["m1", "m2"],
+      "settings": {
+        "title": "",
+        "price": "1699",
+        "compare_at_price": "3299",
+        "show_sale_badge": true,
+        "tax_line": "Tax included. Free Shipping with Cash on Delivery.",
+        "combo_label": "Combo Offer:",
+        "variant_1_label": "Pack of 1",
+        "variant_2_label": "Pack of 2",
+        "add_to_cart_label": "Add to Cart",
+        "buy_now_label": "Buy It Now",
+        "badge_1_label": "Proudly Made in India",
+        "badge_2_label": "Trusted by 90,000+ Families",
+        "badge_3_label": "100% Safe Payments",
+        "codes_title": "Unlock Extra Savings at Checkout!",
+        "codes_text": "Code: SAVE5 – Get 5% off on orders above ₹1999\nCode: SAVE10 – Get 10% off on orders above ₹4999"
+      }
+    }
+  },
+  "order": ["main"]
+}
