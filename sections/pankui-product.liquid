@@ -76,43 +76,61 @@
         <button type="button" data-step="1" aria-label="Increase">+</button>
       </div>
 
-      {%- comment -%} Build product data as a JS variable in a script tag to avoid attribute escaping issues {%- endcomment -%}
+      <button type="button" class="pk-pdp__btn pk-pdp__add">{{ s.add_to_cart_label | default: 'Add to Cart' }}</button>
+      <button type="button" class="pk-pdp__btn pk-pdp__buy">{{ s.buy_now_label | default: 'Buy It Now' }}</button>
+
       <script>
-        window.__pkProduct = window.__pkProduct || {};
-        window.__pkProduct[{{ section.id | json }}] = {
-          id: {{ section.id | json }},
-          title: {{ product_title | json }},
-          price: {{ s.price | default: '0' | json }},
-          compareAt: {{ s.compare_at_price | default: '' | json }},
-          image: {%- if s.image_1 != blank -%}{{ s.image_1 | image_url: width: 200 | json }}{%- else -%}""{%- endif -%}
-        };
+        (function () {
+          var thisScript = document.currentScript;
+          var pdp = thisScript && thisScript.parentElement; // .pk-pdp__info
+          if (!pdp) { console.error('[Pankui PDP] could not find .pk-pdp__info'); return; }
+
+          var product = {
+            id: {{ section.id | json }},
+            title: {{ product_title | json }},
+            price: {{ s.price | default: '0' | json }},
+            compareAt: {{ s.compare_at_price | default: '' | json }},
+            image: {%- if s.image_1 != blank -%}{{ s.image_1 | image_url: width: 200 | json }}{%- else -%}""{%- endif -%}
+          };
+
+          function buildData() {
+            var p = {};
+            for (var k in product) p[k] = product[k];
+            var qi = pdp.querySelector('.pk-pdp__qty input');
+            var v  = pdp.querySelector('.pk-pdp__variant.is-active');
+            if (qi) p.qty = Math.max(1, parseInt(qi.value, 10) || 1);
+            if (v)  p.variant = v.textContent.trim();
+            return p;
+          }
+
+          function flashAdded(btn) {
+            var orig = btn.textContent;
+            btn.classList.add('is-added');
+            btn.textContent = 'Added';
+            setTimeout(function () { btn.classList.remove('is-added'); btn.textContent = orig; }, 900);
+          }
+
+          var addBtn = pdp.querySelector('.pk-pdp__add');
+          var buyBtn = pdp.querySelector('.pk-pdp__buy');
+          console.log('[Pankui PDP] init — addBtn:', !!addBtn, 'buyBtn:', !!buyBtn);
+
+          if (addBtn) {
+            addBtn.addEventListener('click', function () {
+              console.log('[Pankui PDP] Add to cart clicked');
+              flashAdded(addBtn);
+              if (window.pkAddToCart) window.pkAddToCart(buildData());
+              else alert('Cart code not loaded. Please refresh.');
+            });
+          }
+          if (buyBtn) {
+            buyBtn.addEventListener('click', function () {
+              console.log('[Pankui PDP] Buy now clicked');
+              if (window.pkAddToCart) window.pkAddToCart(buildData());
+              if (window.pkBuyNow) window.pkBuyNow();
+            });
+          }
+        })();
       </script>
-
-      <button type="button" class="pk-pdp__btn"
-        onclick="
-          var p = window.__pkProduct && window.__pkProduct[{{ section.id | json }}] ? Object.assign({}, window.__pkProduct[{{ section.id | json }}]) : {};
-          var qi = this.closest('.pk-pdp__info').querySelector('.pk-pdp__qty input');
-          var v  = this.closest('.pk-pdp__info').querySelector('.pk-pdp__variant.is-active');
-          if (qi) p.qty = Math.max(1, parseInt(qi.value, 10) || 1);
-          if (v)  p.variant = v.textContent.trim();
-          var btn = this; var orig = btn.textContent;
-          btn.classList.add('is-added'); btn.textContent = 'Added';
-          setTimeout(function(){ btn.classList.remove('is-added'); btn.textContent = orig; }, 900);
-          if (window.pkAddToCart) window.pkAddToCart(p);
-          else alert('Cart not loaded yet. Please refresh the page.');
-        ">{{ s.add_to_cart_label | default: 'Add to Cart' }}</button>
-
-      <button type="button" class="pk-pdp__btn"
-        onclick="
-          var p = window.__pkProduct && window.__pkProduct[{{ section.id | json }}] ? Object.assign({}, window.__pkProduct[{{ section.id | json }}]) : {};
-          var qi = this.closest('.pk-pdp__info').querySelector('.pk-pdp__qty input');
-          var v  = this.closest('.pk-pdp__info').querySelector('.pk-pdp__variant.is-active');
-          if (qi) p.qty = Math.max(1, parseInt(qi.value, 10) || 1);
-          if (v)  p.variant = v.textContent.trim();
-          if (window.pkAddToCart) window.pkAddToCart(p);
-          if (window.pkBuyNow) window.pkBuyNow();
-          else alert('Checkout not loaded yet. Please refresh the page.');
-        ">{{ s.buy_now_label | default: 'Buy It Now' }}</button>
 
       <div class="pk-pdp__badges">
         {%- comment -%} Three trust badges from settings {%- endcomment -%}
