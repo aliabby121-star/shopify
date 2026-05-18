@@ -284,6 +284,57 @@
       }
     });
 
+    // ===== Direct wire of PDP Add/Buy buttons (more reliable than section's inline script) =====
+    function wirePdpButtons() {
+      var addBtns = document.querySelectorAll('.pk-pdp__add');
+      var buyBtns = document.querySelectorAll('.pk-pdp__buy');
+      console.log('[Pankui] wiring PDP buttons — add:', addBtns.length, 'buy:', buyBtns.length);
+
+      function readPdpProduct(btn) {
+        var pdp = btn.closest('.pk-pdp__info') || document.querySelector('.pk-pdp__info') || document;
+        var titleEl = pdp.querySelector('.pk-pdp__title');
+        var priceEl = pdp.querySelector('.pk-pdp__price');
+        var compareEl = pdp.querySelector('.pk-pdp__price-compare');
+        var imgEl = document.querySelector('.pk-pdp__main img');
+        var qi = pdp.querySelector('.pk-pdp__qty input');
+        var v  = pdp.querySelector('.pk-pdp__variant.is-active');
+        return {
+          id: location.pathname,
+          title: titleEl ? titleEl.textContent.trim() : 'Product',
+          price: priceEl ? (priceEl.textContent.match(/[\d,.]+/) || ['0'])[0].replace(/,/g, '') : '0',
+          compareAt: compareEl ? (compareEl.textContent.match(/[\d,.]+/) || [''])[0].replace(/,/g, '') : '',
+          image: imgEl ? imgEl.src : '',
+          qty: qi ? Math.max(1, parseInt(qi.value, 10) || 1) : 1,
+          variant: v ? v.textContent.trim() : ''
+        };
+      }
+      function flash(btn) {
+        var o = btn.textContent;
+        btn.classList.add('is-added'); btn.textContent = 'Added';
+        setTimeout(function(){ btn.classList.remove('is-added'); btn.textContent = o; }, 900);
+      }
+
+      addBtns.forEach(function (btn) {
+        if (btn.__pkWired) return;
+        btn.__pkWired = true;
+        btn.addEventListener('click', function () {
+          console.log('[Pankui] PDP Add to cart clicked');
+          flash(btn);
+          window.pkAddToCart(readPdpProduct(btn));
+        });
+      });
+      buyBtns.forEach(function (btn) {
+        if (btn.__pkWired) return;
+        btn.__pkWired = true;
+        btn.addEventListener('click', function () {
+          console.log('[Pankui] PDP Buy now clicked');
+          window.pkAddToCart(readPdpProduct(btn));
+          window.pkBuyNow();
+        });
+      });
+    }
+    wirePdpButtons();
+
     // Refresh badge on init
     render();
     console.log('[Pankui] cart/checkout ready ✓');
