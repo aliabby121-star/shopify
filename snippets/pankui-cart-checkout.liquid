@@ -259,13 +259,24 @@
       var openCart = e.target.closest('[data-pk-cart-open]');
       if (add || buy) {
         e.preventDefault();
+        var btn = add || buy;
         var data = {};
-        try { data = JSON.parse((add || buy).getAttribute('data-pk-product') || '{}'); } catch (err) { console.error('[Pankui] bad product JSON', err); }
-        var pdp = (add || buy).closest('.pk-pdp__info') || document;
+        try { data = JSON.parse(btn.getAttribute('data-pk-product') || '{}'); } catch (err) { console.error('[Pankui] bad product JSON', err); }
+        var pdp = btn.closest('.pk-pdp__info') || document;
         var q = pdp.querySelector('.pk-pdp__qty input');
         var v = pdp.querySelector('.pk-pdp__variant.is-active');
         if (q) data.qty = Math.max(1, parseInt(q.value, 10) || 1);
         if (v) data.variant = v.textContent.trim();
+
+        // Animation: flash "✓ Added" for 900ms before opening drawer
+        var originalText = btn.textContent;
+        btn.classList.add('is-added');
+        btn.textContent = 'Added';
+        setTimeout(function () {
+          btn.classList.remove('is-added');
+          btn.textContent = originalText;
+        }, 900);
+
         window.pkAddToCart(data);
         if (buy) window.pkBuyNow();
       } else if (openCart) {

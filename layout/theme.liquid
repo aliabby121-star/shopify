@@ -26,6 +26,16 @@
     {% endif %}
 
     {%- render 'meta-tags' -%}
+
+    {%- comment -%} Pankui SEO additions {%- endcomment -%}
+    <meta name="theme-color" content="#1a1a1a">
+    {%- if template == 'index' and shop.description == blank -%}
+      <meta name="description" content="Pankui — a small studio for the Indian kitchen. Premium airtight containers and kitchen organizers designed for everyday homes.">
+    {%- endif -%}
+    {%- if settings.share_image != blank -%}
+      <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+    {%- endif -%}
+
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}

@@ -13,7 +13,7 @@
     <div class="pk-pdp__gallery">
       <div class="pk-pdp__main" id="pk-pdp-main">
         {%- if s.image_1 != blank -%}
-          <img src="{{ s.image_1 | image_url: width: 900 }}" alt="{{ product_title }}" id="pk-pdp-main-img">
+          <img src="{{ s.image_1 | image_url: width: 900 }}" alt="{{ product_title }}" id="pk-pdp-main-img" loading="eager" fetchpriority="high">
         {%- else -%}
           <div style="aspect-ratio:1/1; display:grid; place-items:center; color: var(--pk-ink-soft); font-size:0.75rem;">Upload main image in theme editor</div>
         {%- endif -%}
@@ -25,7 +25,7 @@
           {%- assign img = s[key] -%}
           {%- if img != blank -%}
             <div class="pk-pdp__thumb {% if forloop.first %}is-active{% endif %}" data-pk-pdp-thumb="{{ img | image_url: width: 900 }}">
-              <img src="{{ img | image_url: width: 200 }}" alt="">
+              <img src="{{ img | image_url: width: 200 }}" alt="" loading="lazy">
             </div>
           {%- else -%}
             <div class="pk-pdp__thumb" style="background:var(--pk-bg-card); opacity:0.5;"></div>
@@ -87,7 +87,7 @@
         <div class="pk-pdp__badge">
           <div class="pk-pdp__badge-icon" style="background: #fff3e0;">
             {%- if s.badge_1_image != blank -%}
-              <img src="{{ s.badge_1_image | image_url: width: 80 }}" alt="">
+              <img src="{{ s.badge_1_image | image_url: width: 80 }}" alt="" loading="lazy">
             {%- else -%}
               <svg viewBox="0 0 24 24" fill="#f57c00"><path d="M12 2l3 7 7 .5-5 5 1.5 7L12 17.8 5.5 21.5 7 14.5l-5-5L9 9z"/></svg>
             {%- endif -%}
@@ -97,7 +97,7 @@
         <div class="pk-pdp__badge">
           <div class="pk-pdp__badge-icon" style="background: #e3f2fd;">
             {%- if s.badge_2_image != blank -%}
-              <img src="{{ s.badge_2_image | image_url: width: 80 }}" alt="">
+              <img src="{{ s.badge_2_image | image_url: width: 80 }}" alt="" loading="lazy">
             {%- else -%}
               <svg viewBox="0 0 24 24" fill="#1e88e5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             {%- endif -%}
@@ -107,7 +107,7 @@
         <div class="pk-pdp__badge">
           <div class="pk-pdp__badge-icon" style="background: #e8f5e9;">
             {%- if s.badge_3_image != blank -%}
-              <img src="{{ s.badge_3_image | image_url: width: 80 }}" alt="">
+              <img src="{{ s.badge_3_image | image_url: width: 80 }}" alt="" loading="lazy">
             {%- else -%}
               <svg viewBox="0 0 24 24" fill="#43a047"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="18" cy="14" r="2.5" fill="#fff"/></svg>
             {%- endif -%}

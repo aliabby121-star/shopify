@@ -1,54 +1,28 @@
 {
   "sections": {
-    "featured": {
+    "hero": {
+      "type": "pankui-hero",
+      "settings": {
+        "pill": "",
+        "headline_line1": "",
+        "headline_line2": "Shop the Best",
+        "headline_accent": "Products.",
+        "sub": "Premium kitchen essentials, delivered to your door.",
+        "cta_primary_label": "Shop Now",
+        "cta_primary_link": "shopify://collections/all",
+        "cta_secondary_label": "",
+        "cta_secondary_link": "",
+        "badge_pre": "",
+        "badge_text": ""
+      }
+    },
+    "products": {
       "type": "pankui-featured-products",
-      "blocks": {},
       "settings": {
-        "eyebrow": "FEATURED COLLECTION",
-        "heading": "Featured Collection",
-        "show_view_all": true,
-        "view_all_label": "View all",
-        "view_all_link": "shopify://collections/all"
-      }
-    },
-    "mission": {
-      "type": "pankui-mission",
-      "settings": {
-        "eyebrow": "OUR MISSION",
-        "heading": "Our Mission",
-        "body": "Pankui is a brand that offers a wide range of high-quality, innovative, and fun products for everyday use. We believe in making our products accessible and convenient for everyone, so they can live a happy and fulfilling life."
-      }
-    },
-    "why": {
-      "type": "pankui-why-choose",
-      "blocks": {
-        "w1": { "type": "card", "settings": { "icon": "happy", "name": "100% Satisfaction", "desc": "Love it or your money back." } },
-        "w2": { "type": "card", "settings": { "icon": "cash", "name": "Cash on Delivery", "desc": "Pay when it arrives at your door." } },
-        "w3": { "type": "card", "settings": { "icon": "truck", "name": "Fast Shipping", "desc": "Dispatched within 24 hours across India." } },
-        "w4": { "type": "card", "settings": { "icon": "headset", "name": "Live Support", "desc": "Real humans, Mon–Sat 10am–6pm." } }
-      },
-      "block_order": ["w1", "w2", "w3", "w4"],
-      "settings": {
-        "heading": "Why Choose Pankui"
-      }
-    },
-    "recommended": {
-      "type": "pankui-bestsellers",
-      "blocks": {},
-      "settings": {
-        "eyebrow": "FOR YOU",
-        "heading": "Recommended Products"
-      }
-    },
-    "trust": {
-      "type": "pankui-trust",
-      "settings": {
-        "text_before": "Trusted by",
-        "highlight": "90,000+",
-        "text_after": "Customers",
-        "show_heart": true
+        "eyebrow": "",
+        "heading": ""
       }
     }
   },
-  "order": ["featured", "mission", "why", "recommended", "trust"]
+  "order": ["hero", "products"]
 }

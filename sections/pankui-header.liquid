@@ -40,10 +40,8 @@
 <nav class="pk pk-topnav__menu" aria-label="Primary">
   <div class="pk-topnav__menu-row">
     <a href="/" class="pk-topnav__tab{% if current_path == '/' %} is-active{% endif %}">Home</a>
-    <a href="/pages/new-arrivals" class="pk-topnav__tab{% if current_path contains '/pages/new-arrivals' %} is-active{% endif %}">New Arrivals</a>
-    <a href="/pages/home-and-kitchen" class="pk-topnav__tab{% if current_path contains '/pages/home-and-kitchen' %} is-active{% endif %}">Home &amp; Kitchen</a>
-    <a href="/pages/about-us" class="pk-topnav__tab{% if current_path contains '/pages/about' %} is-active{% endif %}">About Us</a>
-    <a href="/pages/contact" class="pk-topnav__tab{% if current_path contains '/pages/contact' %} is-active{% endif %}">Contact Us</a>
+    <a href="/collections/all" class="pk-topnav__tab{% if current_path contains '/collections' %} is-active{% endif %}">Shop</a>
+    <a href="/pages/contact" class="pk-topnav__tab{% if current_path contains '/pages/contact' %} is-active{% endif %}">Contact</a>
   </div>
 </nav>
 
@@ -60,13 +58,11 @@
 
     <ul class="pk-drawer__nav">
       <li><a href="/" class="{% if current_path == '/' %}is-active{% endif %}">Home</a></li>
-      <li><a href="/pages/new-arrivals" class="{% if current_path contains '/pages/new-arrivals' %}is-active{% endif %}">New Arrivals</a></li>
-      <li><a href="/pages/home-and-kitchen" class="{% if current_path contains '/pages/home-and-kitchen' %}is-active{% endif %}">Home &amp; Kitchen</a></li>
-      <li><a href="/pages/about-us" class="{% if current_path contains '/pages/about' %}is-active{% endif %}">About Us</a></li>
-      <li><a href="/pages/contact" class="{% if current_path contains '/pages/contact' %}is-active{% endif %}">Contact Us</a></li>
+      <li><a href="/collections/all" class="{% if current_path contains '/collections' %}is-active{% endif %}">Shop</a></li>
+      <li><a href="/pages/contact" class="{% if current_path contains '/pages/contact' %}is-active{% endif %}">Contact</a></li>
       <li style="border-top:1px solid rgba(255,255,255,0.08); margin-top:8px; padding-top:8px;"><a href="/search">🔍 Search</a></li>
       <li><a href="{{ routes.account_url }}">My Account</a></li>
-      <li><a href="/cart">Cart</a></li>
+      <li><a href="/cart" data-pk-cart-open>Cart</a></li>
     </ul>
 
     <div class="pk-drawer__foot">

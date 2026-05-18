@@ -1,0 +1,15 @@
+{{ 'pankui.css' | asset_url | stylesheet_tag }}
+
+<section class="pk pk-404">
+  <div>
+    <h1>404</h1>
+    <p>The page you're looking for has moved or never existed.</p>
+    <a href="/" class="pk-btn pk-btn--primary">Back to home</a>
+    &nbsp;&nbsp;
+    <a href="/collections/all" class="pk-btn pk-btn--ghost">Shop all</a>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Pankui 404", "settings": [], "presets": [{ "name": "Pankui 404" }] }
+{% endschema %}

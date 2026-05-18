@@ -1,231 +1,41 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "footer",
   "name": "t:names.footer",
   "sections": {
-    "newsletter_cta": {
-      "type": "section",
-      "blocks": {
-        "newsletter_eyebrow": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<h5>Stay close</h5>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.6875rem",
-            "line_height": "loose",
-            "letter_spacing": "loose",
-            "case": "uppercase",
-            "wrap": "pretty",
-            "color": "var(--color-primary)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "newsletter_heading": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<h3>Join the Pankui list</h3>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "1.5rem",
-            "line_height": "tight",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "balance",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "newsletter_subhead": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>New arrivals, restocks and the occasional shelf-styling tip.</p>",
-            "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "0.8125rem",
-            "line_height": "loose",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "newsletter_signup": {
-          "type": "email-signup",
-          "name": "t:names.email_signup",
-          "settings": {
-            "width": "custom",
-            "custom_width": 30,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "heading": "",
-            "heading_preset": "h5",
-            "border_style": "all",
-            "border_width": 1,
-            "border_radius": 0,
-            "input_type_preset": "paragraph",
-            "style_class": "button",
-            "display_type": "text",
-            "label": "Subscribe",
-            "integrated_button": true,
-            "button_type_preset": "h5",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": ["newsletter_eyebrow", "newsletter_heading", "newsletter_subhead", "newsletter_signup"],
-      "name": "Newsletter",
-      "settings": {
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 14,
-        "section_width": "page-width",
-        "section_height_custom": 40,
-        "color_scheme": "scheme-4",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 60,
-        "padding-block-end": 60
-      }
-    },
     "footer": {
       "type": "footer",
       "blocks": {
-        "col_purchase_guide": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<h5>Menu</h5><p><a href=\"/collections/all\">All Products</a><br><a href=\"/collections/bestsellers\">Bestsellers</a><br><a href=\"/collections/new-arrivals\">New Arrivals</a><br><a href=\"/collections/sale\">Sale</a></p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "0.8125rem",
-            "line_height": "loose",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "col_company_info": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<h5>Company</h5><p><a href=\"/pages/about\">About us</a><br><a href=\"/pages/about\">Our story</a><br><a href=\"/pages/reviews\">Reviews</a><br><a href=\"/pages/careers\">Careers</a></p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "0.8125rem",
-            "line_height": "loose",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "col_help": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<h5>Help</h5><p><a href=\"/pages/faq\">FAQs</a><br><a href=\"/policies/shipping-policy\">Shipping policy</a><br><a href=\"/policies/refund-policy\">Return policy</a><br><a href=\"/pages/contact\">Contact us</a></p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "0.8125rem",
-            "line_height": "loose",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "col_contact": {
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h5>Need Help?</h5><p><strong>WhatsApp:</strong> <a href=\"https://wa.me/918826456887\">+91 88264 56887</a> (no calls)<br><strong>Email:</strong> <a href=\"mailto:hello@pankui.in\">hello@pankui.in</a><br><strong>Hours:</strong> Mon – Sat, 10AM to 6PM<br><br>BTM Layout, Bengaluru<br>Karnataka 560076, India</p>",
+            "text": "<h5>Contact Us</h5><p>Email: <a href=\"mailto:hello@pankui.in\">hello@pankui.in</a><br>Phone: <a href=\"tel:+918826456887\">+91 88264 56887</a></p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.8125rem",
+            "line_height": "loose",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "col_policies": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<h5>Shipping &amp; Returns</h5><p><a href=\"/policies/shipping-policy\">Shipping Policy</a><br><a href=\"/policies/refund-policy\">Return Policy</a></p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -289,7 +99,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h5>Follow</h5>",
+                "text": "<h5>Follow Us</h5>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -315,16 +125,16 @@
               "type": "social-links",
               "name": "t:names.social_media_links",
               "settings": {
-                "facebook_url": "",
+                "facebook_url": "https://www.facebook.com",
                 "instagram_url": "https://www.instagram.com",
-                "youtube_url": "https://www.youtube.com",
+                "youtube_url": "",
                 "tiktok_url": "",
-                "twitter_url": "https://www.twitter.com",
+                "twitter_url": "",
                 "threads_url": "",
                 "linkedin_url": "",
                 "bluesky_url": "",
                 "snapchat_url": "",
-                "pinterest_url": "https://www.pinterest.com",
+                "pinterest_url": "",
                 "tumblr_url": "",
                 "vimeo_url": "",
                 "custom_url": ""
@@ -335,7 +145,7 @@
           "block_order": ["follow_heading", "follow_social"]
         }
       },
-      "block_order": ["col_purchase_guide", "col_company_info", "col_help", "col_contact", "col_follow"],
+      "block_order": ["col_contact", "col_policies", "col_follow"],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
@@ -357,18 +167,9 @@
             "case": "none"
           },
           "blocks": {}
-        },
-        "policy_list": {
-          "type": "footer-policy-list",
-          "name": "t:names.policy_list",
-          "settings": {
-            "font_size": "0.6875rem",
-            "case": "none"
-          },
-          "blocks": {}
         }
       },
-      "block_order": ["copyright", "policy_list"],
+      "block_order": ["copyright"],
       "settings": {
         "section_width": "page-width",
         "gap": 24,
@@ -379,5 +180,5 @@
       }
     }
   },
-  "order": ["newsletter_cta", "footer", "utilities"]
+  "order": ["footer", "utilities"]
 }
