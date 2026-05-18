@@ -7,7 +7,12 @@
 <header class="pk pk-topnav">
   <div class="pk-topnav__row">
     <div class="pk-topnav__left">
-      <a href="/search" class="pk-topnav__icon" aria-label="Search">
+      {%- comment -%} Mobile-only hamburger (CSS hides on desktop) {%- endcomment -%}
+      <button type="button" class="pk-topnav__icon pk-topnav__hamburger" aria-label="Open menu" aria-controls="pk-drawer" data-pk-drawer-open>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      {%- comment -%} Desktop-only search icon (CSS hides on mobile) {%- endcomment -%}
+      <a href="/search" class="pk-topnav__icon pk-topnav__search" aria-label="Search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </a>
     </div>
@@ -31,10 +36,7 @@
   </div>
 </header>
 
-{%- comment -%}
-  Hardcoded 5 nav tabs — always render the exact links from the Activlife reference.
-  Active state computed by matching current_path.
-{%- endcomment -%}
+{%- comment -%} Desktop nav row (CSS hides on mobile) {%- endcomment -%}
 <nav class="pk pk-topnav__menu" aria-label="Primary">
   <div class="pk-topnav__menu-row">
     <a href="/" class="pk-topnav__tab{% if current_path == '/' %} is-active{% endif %}">Home</a>
@@ -44,6 +46,60 @@
     <a href="/pages/contact" class="pk-topnav__tab{% if current_path contains '/pages/contact' %} is-active{% endif %}">Contact Us</a>
   </div>
 </nav>
+
+{%- comment -%} Mobile drawer (off-canvas) — triggered by hamburger {%- endcomment -%}
+<div id="pk-drawer" class="pk-drawer pk" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
+  <div class="pk-drawer__overlay" data-pk-drawer-close></div>
+  <aside class="pk-drawer__panel">
+    <div class="pk-drawer__head">
+      <span class="pk-drawer__brand">{{ section.settings.brand }}</span>
+      <button type="button" class="pk-drawer__close" aria-label="Close menu" data-pk-drawer-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <ul class="pk-drawer__nav">
+      <li><a href="/" class="{% if current_path == '/' %}is-active{% endif %}">Home</a></li>
+      <li><a href="/pages/new-arrivals" class="{% if current_path contains '/pages/new-arrivals' %}is-active{% endif %}">New Arrivals</a></li>
+      <li><a href="/pages/home-and-kitchen" class="{% if current_path contains '/pages/home-and-kitchen' %}is-active{% endif %}">Home &amp; Kitchen</a></li>
+      <li><a href="/pages/about-us" class="{% if current_path contains '/pages/about' %}is-active{% endif %}">About Us</a></li>
+      <li><a href="/pages/contact" class="{% if current_path contains '/pages/contact' %}is-active{% endif %}">Contact Us</a></li>
+      <li style="border-top:1px solid rgba(255,255,255,0.08); margin-top:8px; padding-top:8px;"><a href="/search">🔍 Search</a></li>
+      <li><a href="{{ routes.account_url }}">My Account</a></li>
+      <li><a href="/cart">Cart</a></li>
+    </ul>
+
+    <div class="pk-drawer__foot">
+      Need help? <a href="mailto:hello@pankui.in">hello@pankui.in</a>
+    </div>
+  </aside>
+</div>
+
+<script>
+  (function () {
+    var drawer = document.getElementById('pk-drawer');
+    if (!drawer) return;
+    var openBtns = document.querySelectorAll('[data-pk-drawer-open]');
+    var closeEls = drawer.querySelectorAll('[data-pk-drawer-close]');
+
+    function openDrawer() {
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('pk-drawer-open');
+    }
+    function closeDrawer() {
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('pk-drawer-open');
+    }
+
+    openBtns.forEach(function (b) { b.addEventListener('click', openDrawer); });
+    closeEls.forEach(function (b) { b.addEventListener('click', closeDrawer); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+    });
+  })();
+</script>
 
 {% schema %}
 {

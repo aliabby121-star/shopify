@@ -454,14 +454,14 @@
 .pk-drawer__close svg { width: 20px; height: 20px; }
 .pk-drawer__nav { list-style: none; padding: 12px 0; margin: 0; flex: 1; overflow-y: auto; }
 .pk-drawer__nav li { margin: 0; }
-.pk-drawer__nav a {
+.pk-drawer .pk-drawer__nav a {
   display: block; padding: 14px 22px; font-size: 0.9375rem;
-  color: #f5efe3; text-decoration: none;
+  color: #fff !important; text-decoration: none;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   transition: background .15s ease;
 }
-.pk-drawer__nav a:hover { background: rgba(255,255,255,0.06); text-decoration: none; }
-.pk-drawer__nav a.is-active { color: #fff; background: rgba(255,255,255,0.05); font-weight: 600; }
+.pk-drawer .pk-drawer__nav a:hover { background: rgba(255,255,255,0.06); text-decoration: none; color: #fff !important; }
+.pk-drawer .pk-drawer__nav a.is-active { color: #fff !important; background: rgba(255,255,255,0.08); font-weight: 600; }
 .pk-drawer__foot {
   padding: 18px 22px;
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -738,21 +738,16 @@ body.pk-drawer-open { overflow: hidden; }
   .pk-na__group { width: 100%; justify-content: space-between; }
 }
 
-/* ----- Header: nav always visible (no hamburger), horizontal scroll on small screens ----- */
+/* ----- Header responsive: hamburger ↔ inline nav swap ----- */
+/* Desktop (>= 901px): hide hamburger, show inline nav + search */
+@media (min-width: 901px) {
+  .pk-topnav__hamburger { display: none !important; }
+}
+/* Mobile (<= 900px): hide inline nav + search, show hamburger */
 @media (max-width: 900px) {
   .pk-topnav { padding-inline: 18px; }
   .pk-topnav__brand { font-size: 1.5rem; }
   .pk-topnav__tagline { font-size: 0.5625rem; }
-  .pk-topnav__menu { padding: 12px 16px 16px; }
-  .pk-topnav__menu-row {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: flex-start;
-    gap: 24px;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .pk-topnav__menu-row::-webkit-scrollbar { display: none; }
-  .pk-topnav__tab { white-space: nowrap; font-size: 0.875rem; flex-shrink: 0; }
+  .pk-topnav__search { display: none !important; }
+  .pk-topnav__menu { display: none !important; }
 }
